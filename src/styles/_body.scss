@@ -1,0 +1,13 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+}
+body {
+  width: 100vw;
+  margin: 0 auto;
+  font-family: $poppins;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 22px;
+  color: $text-color;
+}
