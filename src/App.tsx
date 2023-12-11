@@ -2,12 +2,14 @@ import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 
 import Header from "./components/Header/Header";
 import Footer from "./components/Footer/Footer";
-import Login from "./components/Login/Login";
-import Registration from "./components/Registration/Registration";
-import Training from "./components/Training/Training";
-import JoinUs from "./components/JoinUs/JoinUs";
-import MyAccount from "./components/MyAccount/MyAccount";
-import ChangePassword from "./components/ChangePassword/ChangePassword";
+import Registration from "./pages/Registration/Registration";
+import Training from "./pages/Training/Training";
+import JoinUs from "./pages/JoinUs/JoinUs";
+import MyAccount from "./pages/MyAccount/MyAccount";
+import ChangePassword from "./pages/ChangePassword/ChangePassword";
+import RegistrationVerification from "./pages/RegistrationVerification/RegistrationVerification";
+import LoginPage from "./pages/LoginPage/LoginPage";
+import HomePage from "./pages/HomePage/HomePage";
 
 const App: React.FC = () => {
   return (
@@ -15,13 +17,18 @@ const App: React.FC = () => {
       <BrowserRouter>
         <Header />
         <Routes>
-          <Route path="/login" element={<Login />} />
-          <Route path="*" element={<Navigate to="/login" />} />
+          <Route path="/login" element={<LoginPage />} />
+          <Route path="/home" element={<HomePage />} />
+          <Route path="*" element={<Navigate to="/home" />} />
           <Route path="/registration" element={<Registration />} />
           <Route path="/training" element={<Training />} />
           <Route path="/join-us" element={<JoinUs />} />
           <Route path="/my-account" element={<MyAccount />} />
           <Route path="/change-password" element={<ChangePassword />} />
+          <Route
+            path="/registration-verification"
+            element={<RegistrationVerification />}
+          />
         </Routes>
         <Footer />
       </BrowserRouter>
