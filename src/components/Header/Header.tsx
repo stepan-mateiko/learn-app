@@ -1,17 +1,25 @@
-import { Link } from "react-router-dom";
+import Logo from "../Logo/Logo";
+import Navigation from "../Navigation/Navigation";
+import Button from "../Button/Button";
 
 const Header: React.FC = () => {
+  const navigationLinks = [
+    { to: "/home", label: "Home" },
+    { to: "/login", label: "Login" },
+    { to: "/registration", label: "Registration" },
+    { to: "/training", label: "Training" },
+    { to: "/join-us", label: "Join Us" },
+    { to: "/my-account", label: "My Account" },
+    { to: "/change-password", label: "Change Password" },
+    { to: "/registration-verification", label: "Registration Verification" },
+  ];
   return (
-    <header>
-      <h1>Header</h1>
-      <nav>
-        <Link to="/login">Login</Link>
-        <Link to="/registration">Registration</Link>
-        <Link to="/training">Training</Link>
-        <Link to="/join-us">Join Us</Link>
-        <Link to="/my-account">My Account</Link>
-        <Link to="/change-password">Change Password</Link>
-      </nav>
+    <header style={{ display: "flex" }}>
+      <Logo />
+      <Navigation links={navigationLinks} />
+      <div>
+        <Button buttonText="Sign In" /> <Button buttonText="Join Us" />
+      </div>
     </header>
   );
 };
