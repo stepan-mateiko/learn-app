@@ -11,7 +11,7 @@ const Header: React.FC = () => {
     { to: "/join-us", label: "Join Us" },
     { to: "/my-account", label: "My Account" },
     { to: "/change-password", label: "Change Password" },
-    { to: "/registration-verification", label: "Registration Verification" },
+    { to: "/registration/verification", label: "Registration Verification" },
   ];
   return (
     <header style={{ display: "flex", marginBottom: 200 }}>

@@ -10,6 +10,7 @@ import ChangePassword from "./pages/ChangePassword/ChangePassword";
 import RegistrationVerification from "./pages/RegistrationVerification/RegistrationVerification";
 import LoginPage from "./pages/LoginPage/LoginPage";
 import HomePage from "./pages/HomePage/HomePage";
+import ChangePasswordSuccess from "./pages/ChangePasswordSuccess/ChangePasswordSuccess";
 
 const App: React.FC = () => {
   return (
@@ -26,7 +27,11 @@ const App: React.FC = () => {
           <Route path="/my-account" element={<MyAccount />} />
           <Route path="/change-password" element={<ChangePassword />} />
           <Route
-            path="/registration-verification"
+            path="/change-password/success"
+            element={<ChangePasswordSuccess />}
+          />
+          <Route
+            path="/registration/verification"
             element={<RegistrationVerification />}
           />
         </Routes>
