@@ -47,3 +47,24 @@ export const YouTubeIcon: React.FC = () => {
     </svg>
   );
 };
+
+export const RegistrationSuccess: React.FC = () => {
+  return (
+    <svg
+      width="74"
+      height="74"
+      viewBox="0 0 74 74"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <rect width="74" height="74" rx="37" fill="#36B584" />
+      <path
+        d="M19.7578 37.0001L31.8268 49.0691L54.2406 26.6553"
+        stroke="white"
+        strokeWidth="2.06897"
+        strokeMiterlimit="10"
+        strokeLinecap="square"
+      />
+    </svg>
+  );
+};

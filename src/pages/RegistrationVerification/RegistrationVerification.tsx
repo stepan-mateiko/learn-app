@@ -1,5 +1,26 @@
+import { RegistrationSuccess } from "../../components/Icon/Icon";
+import Button from "../../components/Button/Button";
+
 const RegistrationVerification: React.FC = () => {
-  return <div>Registration Verificied</div>;
+  const userName = "uchihayankee";
+  const userPassword = "admin123";
+  return (
+    <div style={{ textAlign: "center" }}>
+      <h2>Registration</h2>
+      <div>
+        <RegistrationSuccess />
+      </div>
+      <p>
+        Congratulations, you have successfully registered with Learn Platform!
+        Here is your credentials that you can change in your account
+      </p>
+      <h4>User Name</h4>
+      <p>{userName}</p>
+      <h4>Password</h4>
+      <p>{userPassword}</p>
+      <Button buttonText="My account" isLink={true} path="my-account" />
+    </div>
+  );
 };
 
 export default RegistrationVerification;
