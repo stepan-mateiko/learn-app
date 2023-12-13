@@ -8,6 +8,7 @@ interface InputProps {
   placeholder?: string;
   pattern?: string;
   title?: string;
+  options?: string[];
 }
 
 const Input: React.FC<InputProps> = ({
@@ -18,9 +19,12 @@ const Input: React.FC<InputProps> = ({
   placeholder,
   pattern,
   title,
+  options,
 }) => {
   const handleChange = (
-    event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+    event: ChangeEvent<
+      HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
+    >
   ) => {
     onChange(event.target.value);
   };
@@ -33,6 +37,16 @@ const Input: React.FC<InputProps> = ({
         placeholder={placeholder}
         required
       />
+    ) : type === "select" && options ? (
+      <select value={value} onChange={handleChange} required>
+        {options.map((option) => (
+          <option key={option} value={option}>
+            {option}
+          </option>
+        ))}
+      </select>
+    ) : type === "date" ? (
+      <input type={type} value={value} onChange={handleChange} />
     ) : (
       <input
         type={type}

@@ -21,7 +21,7 @@ const Footer: React.FC = () => {
     { to: "/terms", label: "Terms" },
   ];
   return (
-    <footer>
+    <footer style={{ marginTop: 200 }}>
       <div style={{ display: "flex" }}>
         <Logo />
         <div>

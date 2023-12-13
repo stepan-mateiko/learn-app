@@ -14,7 +14,7 @@ const Header: React.FC = () => {
     { to: "/registration-verification", label: "Registration Verification" },
   ];
   return (
-    <header style={{ display: "flex" }}>
+    <header style={{ display: "flex", marginBottom: 200 }}>
       <Logo />
       <Navigation links={navigationLinks} />
       <div>
