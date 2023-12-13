@@ -10,14 +10,12 @@ interface Training {
 }
 
 export const trainingsHeadings: string[] = [
-  "ID",
-  "Duration",
-  "Trainer",
-  "Type",
   "Date",
   "Name",
-  "Description",
+  "Type",
+  "Trainer",
   "Students",
+  "Duration",
 ];
 
 export const trainingsData: Training[] = [
