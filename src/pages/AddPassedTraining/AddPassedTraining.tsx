@@ -2,12 +2,12 @@ import Input from "../../components/Input/Input";
 import Button from "../../components/Button/Button";
 import { trainersData } from "../../helpers/mockedTrainers";
 import Breadcrumb from "../../components/Breadcrumbs/Breadcrumbs";
+import Toaster from "../../components/Toaster/Toaster";
 
 const AddPassedTraining: React.FC = () => {
   const formattedData = trainersData
     .map((trainer) => [`${trainer.firstName} ${trainer.lastName}`])
     .map((item) => item[0]);
-  console.log(formattedData);
   return (
     <div>
       <Breadcrumb
@@ -62,6 +62,7 @@ const AddPassedTraining: React.FC = () => {
         <div>
           <Button buttonText="Cancel" />{" "}
           <Button buttonText="Add" isSubmit={true} />
+          <Toaster />
         </div>
       </form>
     </div>
