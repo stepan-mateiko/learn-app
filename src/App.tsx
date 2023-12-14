@@ -11,7 +11,8 @@ import RegistrationVerification from "./pages/RegistrationVerification/Registrat
 import LoginPage from "./pages/LoginPage/LoginPage";
 import HomePage from "./pages/HomePage/HomePage";
 import ChangePasswordSuccess from "./pages/ChangePasswordSuccess/ChangePasswordSuccess";
-import EditProfile from "./components/EditProfile/EditProfile";
+import EditProfile from "./pages/EditProfile/EditProfile";
+import AddTrainer from "./pages/AddTrainer/AddTrainer";
 
 const App: React.FC = () => {
   return (
@@ -26,7 +27,8 @@ const App: React.FC = () => {
           <Route path="/training" element={<Training />} />
           <Route path="/join-us" element={<JoinUs />} />
           <Route path="/my-account" element={<MyAccount />} />
-          <Route path="/edit" element={<EditProfile />} />
+          <Route path="/my-account/edit" element={<EditProfile />} />
+          <Route path="/my-account/add-trainer" element={<AddTrainer />} />
           <Route path="/change-password" element={<ChangePassword />} />
           <Route
             path="/change-password/success"

@@ -1,7 +1,5 @@
-// studentsData.ts
-
 interface Student {
-  id: number;
+  id: string;
   username: string;
   lastName: string;
   firstName: string;
@@ -12,21 +10,9 @@ interface Student {
   trainers: string[];
 }
 
-export const studentsHeadings: string[] = [
-  "ID",
-  "Username",
-  "Last Name",
-  "First Name",
-  "DOB",
-  "Address",
-  "Photo",
-  "Active",
-  "Trainers",
-];
-
 export const studentsData: Student[] = [
   {
-    id: 1,
+    id: "001",
     username: "student1",
     lastName: "Doe",
     firstName: "John",
@@ -37,7 +23,7 @@ export const studentsData: Student[] = [
     trainers: ["trainer1", "trainer2"],
   },
   {
-    id: 2,
+    id: "002",
     username: "student2",
     lastName: "Smith",
     firstName: "Jane",
@@ -47,5 +33,4 @@ export const studentsData: Student[] = [
     isActive: false,
     trainers: ["trainer2", "trainer3"],
   },
-  // Add more student data
 ];

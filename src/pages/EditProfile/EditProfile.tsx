@@ -1,5 +1,5 @@
-import Input from "../Input/Input";
-import Button from "../Button/Button";
+import Input from "../../components/Input/Input";
+import Button from "../../components/Button/Button";
 import studentImg from "../../assets/images/student-profile-img.png";
 
 const EditProfile: React.FC = () => {
