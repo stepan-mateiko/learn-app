@@ -13,6 +13,7 @@ import HomePage from "./pages/HomePage/HomePage";
 import ChangePasswordSuccess from "./pages/ChangePasswordSuccess/ChangePasswordSuccess";
 import EditProfile from "./pages/EditProfile/EditProfile";
 import AddTrainer from "./pages/AddTrainer/AddTrainer";
+import AddPassedTraining from "./pages/AddPassedTraining/AddPassedTraining";
 
 const App: React.FC = () => {
   return (
@@ -24,11 +25,15 @@ const App: React.FC = () => {
           <Route path="/home" element={<HomePage />} />
           <Route path="*" element={<Navigate to="/home" />} />
           <Route path="/registration" element={<Registration />} />
-          <Route path="/training" element={<Training />} />
           <Route path="/join-us" element={<JoinUs />} />
           <Route path="/my-account" element={<MyAccount />} />
           <Route path="/my-account/edit" element={<EditProfile />} />
           <Route path="/my-account/add-trainer" element={<AddTrainer />} />
+          <Route path="/my-account/trainings" element={<Training />} />
+          <Route
+            path="/my-account/trainings/add-passed-training"
+            element={<AddPassedTraining />}
+          />
           <Route path="/change-password" element={<ChangePassword />} />
           <Route
             path="/change-password/success"

@@ -1,6 +1,7 @@
 import Table from "../../components/Table/Table";
 import Button from "../../components/Button/Button";
 import { trainersData } from "../../helpers/mockedTrainers";
+import Breadcrumb from "../../components/Breadcrumbs/Breadcrumbs";
 
 const AddTrainer: React.FC = () => {
   const formattedData = trainersData.map((trainer) => [
@@ -14,6 +15,10 @@ const AddTrainer: React.FC = () => {
   const headings = ["Name", "Specialization"];
   return (
     <div>
+      <Breadcrumb
+        links={["/my-account", "/my-account/add-trainer"]}
+        labels={["My Account", "Add Trainer"]}
+      />
       <h2>Add Trainer</h2>
       <div>
         <p>Please select trainers for adding them into your trainers list</p>

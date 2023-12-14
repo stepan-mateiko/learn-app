@@ -7,7 +7,7 @@ const Header: React.FC = () => {
     { to: "/home", label: "Home" },
     { to: "/login", label: "Login" },
     { to: "/registration", label: "Registration" },
-    { to: "/training", label: "Training" },
+    { to: "/my-account/trainings", label: "Training" },
     { to: "/join-us", label: "Join Us" },
     { to: "/my-account", label: "My Account" },
     { to: "/change-password", label: "Change Password" },

@@ -6,6 +6,7 @@ import {
   trainingsHeadings,
   trainingsData,
 } from "../../helpers/mockedTrainings";
+import Breadcrumb from "../../components/Breadcrumbs/Breadcrumbs";
 
 const Training: React.FC = () => {
   const formattedHeading = trainingsHeadings.filter(
@@ -20,6 +21,10 @@ const Training: React.FC = () => {
   ]);
   return (
     <div>
+      <Breadcrumb
+        links={["/my-account", "/my-account/trainings"]}
+        labels={["My Account", "Trainings"]}
+      />
       <h2>Trainings</h2>
       <Button buttonText="Add training" />
       <div style={{ display: "flex" }}>
