@@ -1,6 +1,7 @@
 import Button from "../../components/Button/Button";
 import Table from "../../components/Table/Table";
 import MyDatePicker from "../../components/DatePicker/DatePicker";
+import Search from "../../components/Search/Search";
 import {
   trainingsHeadings,
   trainingsData,
@@ -22,7 +23,9 @@ const Training: React.FC = () => {
       <h2>Trainings</h2>
       <Button buttonText="Add training" />
       <div style={{ display: "flex" }}>
-        <div>Search</div>
+        <div>
+          <Search />
+        </div>
         <div>
           <MyDatePicker />
         </div>

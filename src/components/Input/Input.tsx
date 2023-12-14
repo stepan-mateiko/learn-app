@@ -3,8 +3,8 @@ import React, { ChangeEvent } from "react";
 interface InputProps {
   type: string;
   label: string;
-  value: string | number;
-  onChange: (value: string) => void;
+  value: string | number | boolean;
+  onChange: (value: string | boolean) => void;
   placeholder?: string;
   pattern?: string;
   title?: string;
@@ -23,22 +23,28 @@ const Input: React.FC<InputProps> = ({
 }) => {
   const handleChange = (
     event: ChangeEvent<
-      HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
+      | HTMLInputElement
+      | HTMLTextAreaElement
+      | HTMLSelectElement
+      | HTMLInputElement
     >
   ) => {
-    onChange(event.target.value);
+    if (type === "checkbox") {
+      onChange((event.target as HTMLInputElement).checked);
+    } else {
+      onChange(event.target.value);
+    }
   };
-
   const inputElement =
     type === "textarea" ? (
       <textarea
-        value={value}
+        value={value as string}
         onChange={handleChange}
         placeholder={placeholder}
         required
       />
     ) : type === "select" && options ? (
-      <select value={value} onChange={handleChange} required>
+      <select value={value as string} onChange={handleChange} required>
         {options.map((option) => (
           <option key={option} value={option}>
             {option}
@@ -46,11 +52,13 @@ const Input: React.FC<InputProps> = ({
         ))}
       </select>
     ) : type === "date" ? (
-      <input type={type} value={value} onChange={handleChange} />
+      <input type={type} value={value as string} onChange={handleChange} />
+    ) : type === "checkbox" ? (
+      <input type={type} checked={value as boolean} onChange={handleChange} />
     ) : (
       <input
         type={type}
-        value={value}
+        value={value as string}
         onChange={handleChange}
         placeholder={placeholder}
         pattern={pattern}
