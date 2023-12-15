@@ -10,7 +10,11 @@ const AccountBox: React.FC = () => {
         progress. All our courses are flexible and adaptable to your schedule
         and learning speed.
       </p>
-      <Button buttonText="View trainings" isLink={true} path="training" />
+      <Button
+        buttonText="View trainings"
+        isLink={true}
+        path="my-account/trainings"
+      />
     </div>
   );
 };

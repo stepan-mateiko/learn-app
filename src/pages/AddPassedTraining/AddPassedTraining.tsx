@@ -1,13 +1,24 @@
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { useNavigate } from "react-router-dom";
+
 import Input from "../../components/Input/Input";
 import Button from "../../components/Button/Button";
 import { trainersData } from "../../helpers/mockedTrainers";
 import Breadcrumb from "../../components/Breadcrumbs/Breadcrumbs";
-import Toaster from "../../components/Toaster/Toaster";
 
 const AddPassedTraining: React.FC = () => {
+  const navigate = useNavigate();
+  const notify = () => toast.success("Training added!");
+
   const formattedData = trainersData
     .map((trainer) => [`${trainer.firstName} ${trainer.lastName}`])
     .map((item) => item[0]);
+
+  const handleSubmit = () => {
+    notify();
+    setTimeout(() => navigate("/my-account/trainings"), 3000);
+  };
   return (
     <div>
       <Breadcrumb
@@ -61,8 +72,19 @@ const AddPassedTraining: React.FC = () => {
         />
         <div>
           <Button buttonText="Cancel" />{" "}
-          <Button buttonText="Add" isSubmit={true} />
-          <Toaster />
+          <Button buttonText="Add" onClick={handleSubmit} />
+          <ToastContainer
+            position="top-right"
+            autoClose={3000}
+            hideProgressBar={false}
+            newestOnTop={false}
+            closeOnClick
+            rtl={false}
+            pauseOnFocusLoss
+            draggable
+            pauseOnHover
+            theme="colored"
+          />
         </div>
       </form>
     </div>
