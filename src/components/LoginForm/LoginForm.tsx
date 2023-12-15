@@ -24,13 +24,15 @@ const LoginForm: React.FC = () => {
     }
   }, [navigate]);
 
-  const handlePostRequest = async () => {
+  const handlePostRequest = () => {
     const userToken = (Math.random() * 10).toString();
     localStorage.setItem("token", userToken);
     const loggedUser = {
       userName: userName,
       token: userToken,
+      role: "student",
     };
+    localStorage.setItem("user", JSON.stringify(loggedUser));
     dispatch({
       type: UserActionTypes.LOGIN,
       payload: loggedUser,

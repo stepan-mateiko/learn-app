@@ -1,12 +1,12 @@
+import { useParams } from "react-router-dom";
+
 import RegistrationForm from "../../components/RegistrationForm/RegistrationForm";
-import registrationTrainerImg from "../../assets/images/registration-trainer.png";
-import registrationStudentImg from "../../assets/images/registration-student.png";
 
 const Registration: React.FC = () => {
+  const { role } = useParams<{ role: string }>();
   return (
     <div>
-      <RegistrationForm role="trainer" imgSrc={registrationTrainerImg} />
-      <RegistrationForm role="student" imgSrc={registrationStudentImg} />
+      <RegistrationForm role={role} />
     </div>
   );
 };

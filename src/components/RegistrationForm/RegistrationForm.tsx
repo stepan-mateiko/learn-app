@@ -1,57 +1,96 @@
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+
 import Button from "../Button/Button";
 import Input from "../Input/Input";
+import registrationTrainerImg from "../../assets/images/registration-trainer.png";
+import registrationStudentImg from "../../assets/images/registration-student.png";
 
 interface RegistrationFormProps {
-  role: string;
-  imgSrc: string;
+  role: string | undefined;
 }
-const RegistrationForm: React.FC<RegistrationFormProps> = ({
-  role,
-  imgSrc,
-}) => {
+const RegistrationForm: React.FC<RegistrationFormProps> = ({ role }) => {
+  const [userFirstName, setUserFirstName] = useState<string>("");
+  const [userLastName, setUserLastName] = useState<string>("");
+  const [userEmail, setUserEmail] = useState<string>("");
+  const [userDOB, setUserDOB] = useState<string>("");
+  const [userAddress, setUserAddress] = useState<string>("");
+  const [userSpecialization, setUserSpecialization] = useState<string>("");
+  const navigate = useNavigate();
+
+  const handleInputChange =
+    (setter: React.Dispatch<React.SetStateAction<string>>) =>
+    (newValue: string) => {
+      setter(newValue);
+    };
+
+  const handlePostRequest = () => {
+    const { v4: uuidv4 } = require("uuid");
+    const userName = `${userFirstName}-${userLastName}`.toLowerCase();
+    let newUser = {
+      id: uuidv4(),
+      userName: userName,
+      firstName: userFirstName,
+      lastName: userLastName,
+      email: userEmail,
+      dob: userDOB,
+      address: userAddress,
+      role: role,
+      isActive: true,
+      specialization: role === "trainer" ? userSpecialization : "student",
+    };
+
+    console.log(newUser);
+  };
+
+  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    handlePostRequest();
+    navigate("/registration/verification");
+  };
+
   return (
     <div style={{ display: "flex" }}>
       <div>
         <h2>Registration</h2>
         <p>{role}</p>
         <div>
-          <img src={imgSrc} alt={`registration as ${role}`} />
+          <img
+            src={
+              role === "student"
+                ? registrationStudentImg
+                : registrationTrainerImg
+            }
+            alt={`registration as ${role}`}
+          />
         </div>
       </div>
-      <form action="#" method="POST">
+      <form action="#" method="POST" onSubmit={handleSubmit}>
         <Input
           type="text"
           label="First name"
-          value=""
-          onChange={(e) => {
-            console.log(e);
-          }}
+          value={userFirstName}
+          onChange={handleInputChange(setUserFirstName)}
         />
         <Input
           type="text"
           label="Last name"
-          value=""
-          onChange={(e) => {
-            console.log(e);
-          }}
+          value={userLastName}
+          onChange={handleInputChange(setUserLastName)}
         />
         <Input
           type="email"
           label="Email"
-          value=""
-          onChange={(e) => {
-            console.log(e);
-          }}
+          value={userEmail}
+          onChange={handleInputChange(setUserEmail)}
         />
 
         {role === "trainer" && (
           <Input
             type="select"
             label="specialization"
-            value=""
-            onChange={(e) => {
-              console.log(e);
-            }}
+            value={userSpecialization}
+            onChange={handleInputChange(setUserSpecialization)}
             options={["Front-end", "UI/UX Design", "QA"]}
           />
         )}
@@ -59,20 +98,16 @@ const RegistrationForm: React.FC<RegistrationFormProps> = ({
           <Input
             type="date"
             label="Date of birth (Optional)"
-            value=""
-            onChange={(e) => {
-              console.log(e);
-            }}
+            value={userDOB}
+            onChange={handleInputChange(setUserDOB)}
           />
         )}
         {role === "student" && (
           <Input
             type="text"
             label="Address (Optional)"
-            value=""
-            onChange={(e) => {
-              console.log(e);
-            }}
+            value={userAddress}
+            onChange={handleInputChange(setUserAddress)}
           />
         )}
         <Button buttonText="Submit" isSubmit={true} />

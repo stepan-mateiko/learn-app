@@ -1,10 +1,11 @@
 import Button from "../Button/Button";
+import JoinUsImage1 from "../../assets/images/join-us-img-1.png";
+import JoinUsImage2 from "../../assets/images/join-us-img-2.png";
 
 interface JoinUsBoxProps {
   role: string;
-  imgSrc: string;
 }
-const JoinUsBox: React.FC<JoinUsBoxProps> = ({ role, imgSrc }) => {
+const JoinUsBox: React.FC<JoinUsBoxProps> = ({ role }) => {
   return (
     <div style={{ display: "flex" }}>
       <div>
@@ -13,10 +14,17 @@ const JoinUsBox: React.FC<JoinUsBoxProps> = ({ role, imgSrc }) => {
           Do consectetur proident proident id eiusmod deserunt consequat
           pariatur ad ex velit do Lorem reprehenderit.
         </p>
-        <Button buttonText="Join Us" isLink={true} path="registration" />
+        <Button
+          buttonText="Join Us"
+          isLink={true}
+          path={`registration/${role}`}
+        />
       </div>
       <div>
-        <img src={imgSrc} alt="join us" />
+        <img
+          src={role === "trainer" ? JoinUsImage1 : JoinUsImage2}
+          alt="join us"
+        />
       </div>
     </div>
   );
