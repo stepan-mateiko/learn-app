@@ -2,8 +2,7 @@ import { RegistrationSuccess } from "../../components/Icon/Icon";
 import Button from "../../components/Button/Button";
 
 const RegistrationVerification: React.FC = () => {
-  const userName = "uchihayankee";
-  const userPassword = "admin123";
+  const user = JSON.parse(localStorage.getItem("users") || "{}");
   return (
     <div style={{ textAlign: "center" }}>
       <h2>Registration</h2>
@@ -15,9 +14,9 @@ const RegistrationVerification: React.FC = () => {
         Here is your credentials that you can change in your account
       </p>
       <h4>User Name</h4>
-      <p>{userName}</p>
+      <p>{user.userName}</p>
       <h4>Password</h4>
-      <p>{userPassword}</p>
+      <p>{user.userPassword}</p>
       <Button buttonText="My account" isLink={true} path="my-account" />
     </div>
   );

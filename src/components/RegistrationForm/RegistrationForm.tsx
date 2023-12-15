@@ -27,6 +27,14 @@ const RegistrationForm: React.FC<RegistrationFormProps> = ({ role }) => {
   const handlePostRequest = () => {
     const { v4: uuidv4 } = require("uuid");
     const userName = `${userFirstName}-${userLastName}`.toLowerCase();
+    const generateRandomPassword = (length: number): string => {
+      const charset =
+        "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+      return Array.from(
+        { length },
+        () => charset[Math.floor(Math.random() * charset.length)]
+      ).join("");
+    };
     let newUser = {
       id: uuidv4(),
       userName: userName,
@@ -38,8 +46,9 @@ const RegistrationForm: React.FC<RegistrationFormProps> = ({ role }) => {
       role: role,
       isActive: true,
       specialization: role === "trainer" ? userSpecialization : "student",
+      userPassword: generateRandomPassword(5),
     };
-
+    localStorage.setItem("users", JSON.stringify(newUser));
     console.log(newUser);
   };
 
