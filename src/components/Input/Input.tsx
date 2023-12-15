@@ -4,7 +4,7 @@ interface InputProps {
   type: string;
   label: string;
   value: string | number | boolean;
-  onChange: (value: string | boolean) => void;
+  onChange: (value: string) => void;
   placeholder?: string;
   pattern?: string;
   title?: string;
@@ -23,17 +23,10 @@ const Input: React.FC<InputProps> = ({
 }) => {
   const handleChange = (
     event: ChangeEvent<
-      | HTMLInputElement
-      | HTMLTextAreaElement
-      | HTMLSelectElement
-      | HTMLInputElement
+      HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
     >
   ) => {
-    if (type === "checkbox") {
-      onChange((event.target as HTMLInputElement).checked);
-    } else {
-      onChange(event.target.value);
-    }
+    onChange(event.target.value);
   };
   const inputElement =
     type === "textarea" ? (
