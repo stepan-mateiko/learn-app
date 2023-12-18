@@ -7,6 +7,7 @@ import studentImg from "../../assets/images/student-profile-img.png";
 const EditProfile: React.FC = () => {
   const navigate = useNavigate();
   const user = JSON.parse(localStorage.getItem("users") || "null");
+  const { role } = user;
   const [userFirstName, setUserFirstName] = useState<string>(user.firstName);
   const [userLastName, setUserLastName] = useState<string>(user.lastName);
   const [userEmail, setUserEmail] = useState<string>(user.email);
@@ -14,6 +15,8 @@ const EditProfile: React.FC = () => {
   const [userAddress, setUserAddress] = useState<string>(user.address);
   const [userUserName, setUserUserName] = useState<string>(user.userName);
   const [userIsActive, setUserIsActive] = useState<boolean>(user.isActive);
+  const [trainerSpecialization, setTrainerSpecialization] =
+    useState<string>("");
   const handleInputChange =
     (setter: React.Dispatch<React.SetStateAction<string>>) =>
     (newValue: string) => {
@@ -37,9 +40,9 @@ const EditProfile: React.FC = () => {
       dob: userDOB,
       address: userAddress,
       isActive: userIsActive,
+      specialization: role === "trainer" ? trainerSpecialization : "student",
     };
     localStorage.setItem("users", JSON.stringify(updatedUser));
-    console.log(updatedUser);
   };
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
@@ -74,18 +77,22 @@ const EditProfile: React.FC = () => {
           value={userUserName}
           onChange={handleInputChange(setUserUserName)}
         />
-        <Input
-          type="date"
-          label="Date of birth"
-          value={userDOB}
-          onChange={handleInputChange(setUserDOB)}
-        />
-        <Input
-          type="text"
-          label="Address"
-          value={userAddress}
-          onChange={handleInputChange(setUserAddress)}
-        />
+        {role === "student" && (
+          <Input
+            type="date"
+            label="Date of birth"
+            value={userDOB}
+            onChange={handleInputChange(setUserDOB)}
+          />
+        )}
+        {role === "student" && (
+          <Input
+            type="text"
+            label="Address"
+            value={userAddress}
+            onChange={handleInputChange(setUserAddress)}
+          />
+        )}
         <Input
           type="email"
           label="Email"
@@ -99,6 +106,15 @@ const EditProfile: React.FC = () => {
           value={userIsActive}
           onChange={handleCheckboxChange}
         />
+        {role === "trainer" && (
+          <Input
+            type="select"
+            label="My specialization"
+            value={trainerSpecialization}
+            onChange={handleInputChange(setTrainerSpecialization)}
+            options={["PHP", "JavaScript", "React", "Angular"]}
+          />
+        )}
         <div>
           <Button buttonText="Cancel" />
           <Button buttonText="Save changes" isSubmit={true} />

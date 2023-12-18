@@ -13,7 +13,7 @@ export interface Student {
 
 export const studentsData: Student[] = [
   {
-    id: "6cbff08f-9875-4a60-bb0a-b2ee26081ca9",
+    id: "7da347a2-12f3-4f7e-b824-bd44a3885290",
     userName: "stepan-mateiko",
     firstName: "Stepan",
     lastName: "Mateiko",
