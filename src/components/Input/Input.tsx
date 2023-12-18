@@ -3,12 +3,13 @@ import React, { ChangeEvent } from "react";
 interface InputProps {
   type: string;
   label: string;
-  value: string | number | boolean;
+  value?: string | number | boolean;
   onChange: (value: string) => void;
   placeholder?: string;
   pattern?: string;
   title?: string;
   options?: string[];
+  checked?: boolean;
 }
 
 const Input: React.FC<InputProps> = ({
