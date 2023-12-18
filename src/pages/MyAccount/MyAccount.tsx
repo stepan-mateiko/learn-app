@@ -4,23 +4,57 @@ import AccountBox from "../../components/AccountBox/AccountBox";
 import MyAccountList from "../../components/MyAccountList/MyAccountList";
 import Table from "../../components/Table/Table";
 import Breadcrumb from "../../components/Breadcrumbs/Breadcrumbs";
-import { trainersData } from "../../helpers/mockedTrainers";
+import { trainersData, Trainer } from "../../helpers/mockedTrainers";
 import Button from "../../components/Button/Button";
 import ModalBox from "../../components/ModalBox/ModalBox";
-import { studentsData } from "../../helpers/mockedStudents";
+import { studentsData, Student } from "../../helpers/mockedStudents";
 
 const MyAccount: React.FC = () => {
   const user = JSON.parse(localStorage.getItem("users") || "null");
-  const myData = studentsData.filter((student) => student.id === user.id)[0];
-  const tableTitle = "My Trainers";
-  const formattedData = trainersData
-    .filter((item) => myData.trainers.includes(item.id))
-    .map((trainer) => [
-      `${trainer.firstName} ${trainer.lastName}`,
-      trainer.specialization,
-    ]);
-  const headings = ["Name", "Specialization"];
   const [isModalOpen, setModalOpen] = useState(false);
+  const { role } = user;
+  const tableTitle = role === "student" ? "My Trainers" : "My students";
+  const headings =
+    role === "student" ? ["Name", "Specialization"] : ["Name", "Status"];
+  const myData =
+    role === "student"
+      ? (studentsData.filter((student) => student.id === user.id)[0] as Student)
+      : (trainersData.filter(
+          (trainer) => trainer.id === user.id
+        )[0] as Trainer);
+
+  let formattedData: string[][] = [];
+
+  switch (role) {
+    case "student":
+      formattedData = (myData as Student).trainers
+        .map((trainerId) => {
+          const trainer = trainersData.find((t) => t.id === trainerId);
+          return trainer
+            ? [
+                `${trainer.firstName} ${trainer.lastName}`,
+                trainer.specialization,
+              ]
+            : [];
+        })
+        .filter(Boolean);
+      break;
+    case "trainer":
+      formattedData = (myData as Trainer).students
+        .map((studentId) => {
+          const student = studentsData.find((s) => s.id === studentId);
+          return student
+            ? [
+                `${student.firstName} ${student.lastName}`,
+                student.isActive ? "Active" : "Not active",
+              ]
+            : [];
+        })
+        .filter(Boolean);
+      break;
+    default:
+      break;
+  }
 
   const handleModalOpen = () => {
     setModalOpen(true);
@@ -34,14 +68,16 @@ const MyAccount: React.FC = () => {
       <div style={{ display: "flex" }}>
         <MyAccountList user={user} />
         <Table title={tableTitle} headings={headings} data={formattedData} />
-        <div>
-          <Button buttonText="Delete account" onClick={handleModalOpen} />
-          <Button
-            buttonText="Add trainer"
-            isLink={true}
-            path="my-account/add-trainer"
-          />
-        </div>
+        {role === "student" && (
+          <div>
+            <Button buttonText="Delete account" onClick={handleModalOpen} />
+            <Button
+              buttonText="Add trainer"
+              isLink={true}
+              path="my-account/add-trainer"
+            />
+          </div>
+        )}
       </div>
       <AccountBox />
       {isModalOpen && (

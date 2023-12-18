@@ -1,6 +1,6 @@
-interface Trainer {
+export interface Trainer {
   id: string;
-  username: string;
+  userName: string;
   lastName: string;
   firstName: string;
   dob: string;
@@ -13,8 +13,20 @@ interface Trainer {
 
 export const trainersData: Trainer[] = [
   {
+    id: "6cbff08f-9875-4a60-bb0a-b2ee26081ca9",
+    userName: "stepan-mateiko",
+    firstName: "Stepan",
+    lastName: "Mateiko",
+    dob: "2023-12-12",
+    address: "Lviv, Muzyky 34",
+    photo: "photo1.jpg",
+    students: ["003", "007", "004"],
+    trainings: ["002", "005", "010"],
+    specialization: "JavaScript",
+  },
+  {
     id: "001",
-    username: "trainer1",
+    userName: "trainer1",
     lastName: "Johnson",
     firstName: "Michael",
     dob: "1985-05-20",
@@ -26,7 +38,7 @@ export const trainersData: Trainer[] = [
   },
   {
     id: "002",
-    username: "trainer2",
+    userName: "trainer2",
     lastName: "Anderson",
     firstName: "Laura",
     dob: "1988-07-10",
@@ -38,7 +50,7 @@ export const trainersData: Trainer[] = [
   },
   {
     id: "003",
-    username: "trainer3",
+    userName: "trainer3",
     lastName: "Williams",
     firstName: "Jessica",
     dob: "1991-09-15",
@@ -50,7 +62,7 @@ export const trainersData: Trainer[] = [
   },
   {
     id: "004",
-    username: "trainer4",
+    userName: "trainer4",
     lastName: "Davis",
     firstName: "Ryan",
     dob: "1987-12-03",
@@ -62,7 +74,7 @@ export const trainersData: Trainer[] = [
   },
   {
     id: "005",
-    username: "trainer5",
+    userName: "trainer5",
     lastName: "Garcia",
     firstName: "Mia",
     dob: "1993-04-18",
@@ -74,7 +86,7 @@ export const trainersData: Trainer[] = [
   },
   {
     id: "006",
-    username: "trainer6",
+    userName: "trainer6",
     lastName: "Martinez",
     firstName: "James",
     dob: "1990-08-11",
@@ -86,7 +98,7 @@ export const trainersData: Trainer[] = [
   },
   {
     id: "007",
-    username: "trainer7",
+    userName: "trainer7",
     lastName: "Clark",
     firstName: "Sophie",
     dob: "1989-06-28",
@@ -98,7 +110,7 @@ export const trainersData: Trainer[] = [
   },
   {
     id: "008",
-    username: "trainer8",
+    userName: "trainer8",
     lastName: "Miller",
     firstName: "David",
     dob: "1994-02-14",
@@ -110,7 +122,7 @@ export const trainersData: Trainer[] = [
   },
   {
     id: "009",
-    username: "trainer9",
+    userName: "trainer9",
     lastName: "Anderson",
     firstName: "Emma",
     dob: "1985-11-22",
@@ -122,7 +134,7 @@ export const trainersData: Trainer[] = [
   },
   {
     id: "010",
-    username: "trainer10",
+    userName: "trainer10",
     lastName: "Johnson",
     firstName: "Daniel",
     dob: "1992-06-15",
