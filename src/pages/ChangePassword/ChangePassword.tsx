@@ -1,8 +1,50 @@
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import Input from "../../components/Input/Input";
 import Button from "../../components/Button/Button";
 import { Lock } from "../../components/Icon/Icon";
 
+interface User {
+  id: string;
+  userPassword: string;
+}
+
 const ChangePassword: React.FC = () => {
+  const navigate = useNavigate();
+  const user: User = JSON.parse(localStorage.getItem("users") || "null");
+  const [currentPassword, setCurrentPassword] = useState<string>("");
+  const [newPassword, setNewPassword] = useState<string>("");
+  const [confirmPassword, setConfirmPassword] = useState<string>("");
+
+  const handleInputChange =
+    (setter: React.Dispatch<React.SetStateAction<string>>) =>
+    (newValue: string) => {
+      setter(newValue);
+    };
+
+  const handlePostRequest = () => {
+    if (
+      user.userPassword === currentPassword &&
+      newPassword === confirmPassword
+    ) {
+      const updatedUser: User = {
+        ...user,
+        userPassword: newPassword,
+      };
+      localStorage.setItem("users", JSON.stringify(updatedUser));
+      navigate("/change-password/success");
+    } else {
+      setConfirmPassword("");
+      setNewPassword("");
+      setCurrentPassword("");
+    }
+  };
+
+  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    handlePostRequest();
+  };
+
   return (
     <div>
       <h3>Security</h3>
@@ -10,33 +52,27 @@ const ChangePassword: React.FC = () => {
         <div>
           <Lock /> Change password
         </div>
-        <form action="#" method="post">
+        <form action="#" method="post" onSubmit={handleSubmit}>
           <Input
             type="password"
-            value=""
+            value={currentPassword}
             label="Current password"
-            onChange={(e) => {
-              console.log(e);
-            }}
+            onChange={handleInputChange(setCurrentPassword)}
           />
           <Input
             type="password"
-            value=""
+            value={newPassword}
             label="New password"
-            onChange={(e) => {
-              console.log(e);
-            }}
+            onChange={handleInputChange(setNewPassword)}
           />
           <Input
             type="password"
-            value=""
+            value={confirmPassword}
             label="Confirm new password"
-            onChange={(e) => {
-              console.log(e);
-            }}
+            onChange={handleInputChange(setConfirmPassword)}
           />
           <div>
-            <Button buttonText="Cancel" />
+            <Button buttonText="Cancel" isLink={true} path="my-account" />
             <Button buttonText="Change password" isSubmit={true} />
           </div>
         </form>
