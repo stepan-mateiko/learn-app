@@ -6,11 +6,9 @@ import Button from "../Button/Button";
 
 const Header: React.FC = () => {
   const navigationLinks = [
-    { to: "/registration", label: "Registration" },
     { to: "/my-account/trainings", label: "Training" },
     { to: "/my-account", label: "My Account" },
     { to: "/change-password", label: "Change Password" },
-    { to: "/registration/verification", label: "Registration Verification" },
   ];
   return (
     <header style={{ display: "flex", marginBottom: 200 }}>
