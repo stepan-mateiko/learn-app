@@ -6,24 +6,63 @@ import {
   trainingsHeadings,
   trainingsData,
 } from "../../helpers/mockedTrainings";
-import { studentsData } from "../../helpers/mockedStudents";
+import { studentsData, Student } from "../../helpers/mockedStudents";
 import Breadcrumb from "../../components/Breadcrumbs/Breadcrumbs";
+import { trainersData, Trainer } from "../../helpers/mockedTrainers";
 
 const Training: React.FC = () => {
   const user = JSON.parse(localStorage.getItem("users") || "null");
-  const myData = studentsData.filter((student) => student.id === user.id)[0];
-  const formattedHeading = trainingsHeadings.filter(
-    (training) => training !== "Students"
-  );
-  const formattedData = trainingsData
-    .filter((item) => myData.trainers.includes(item.id))
-    .map((training) => [
-      training.date,
-      training.name,
-      training.type,
-      training.trainer,
-      training.duration,
-    ]);
+  const { role } = user;
+  const myData =
+    role === "student"
+      ? (studentsData.filter((student) => student.id === user.id)[0] as Student)
+      : (trainersData.filter(
+          (trainer) => trainer.id === user.id
+        )[0] as Trainer);
+
+  const formattedHeading =
+    role === "student"
+      ? trainingsHeadings.filter((training) => training !== "Students")
+      : trainingsHeadings.filter((training) => training !== "Trainer");
+
+  let formattedData: any[][] = [];
+
+  switch (role) {
+    case "student":
+      formattedData = trainingsData
+        .filter((item) => (myData as Student).trainers.includes(item.id))
+        .map((training) => [
+          training.date,
+          training.name,
+          training.type,
+          `${
+            trainersData.find((item) => item.id === training.trainer)?.firstName
+          } ${
+            trainersData.find((item) => item.id === training.trainer)?.lastName
+          }`,
+          training.trainer,
+          training.duration,
+        ]);
+      break;
+    case "trainer":
+      formattedData = trainingsData
+        .filter((item) => (myData as Trainer).students.includes(item.id))
+        .map((training) => [
+          training.date,
+          training.name,
+          training.type,
+          training.students.map(
+            (item) =>
+              `${studentsData.find((e) => e.id === item)?.firstName}  ${
+                studentsData.find((e) => e.id === item)?.lastName
+              }`
+          ),
+          training.duration,
+        ]);
+      break;
+    default:
+      break;
+  }
   return (
     <div>
       <Breadcrumb
@@ -45,7 +84,7 @@ const Training: React.FC = () => {
         </div>
       </div>
       <Table
-        title="My passed trainings"
+        title={role === "student" ? "My passed trainings" : "Results"}
         headings={formattedHeading}
         data={formattedData}
       />
