@@ -104,7 +104,11 @@ const AddPassedTraining: React.FC = () => {
           options={formattedData}
         />
         <div>
-          <Button buttonText="Cancel" />{" "}
+          <Button
+            buttonText="Cancel"
+            isLink={true}
+            path="my-account/trainings"
+          />
           <Button buttonText="Add" onClick={handleSubmit} />
           <ToastContainer
             position="top-right"
