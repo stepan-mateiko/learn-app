@@ -1,6 +1,7 @@
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useNavigate } from "react-router-dom";
+import { useState } from "react";
 
 import Input from "../../components/Input/Input";
 import Button from "../../components/Button/Button";
@@ -8,14 +9,46 @@ import { trainersData } from "../../helpers/mockedTrainers";
 import Breadcrumb from "../../components/Breadcrumbs/Breadcrumbs";
 
 const AddPassedTraining: React.FC = () => {
+  const user = JSON.parse(localStorage.getItem("users") || "null");
   const navigate = useNavigate();
   const notify = () => toast.success("Training added!");
+  const [trainingName, setTrainingName] = useState<string>("");
+  const [trainingsDate, setTrainingsDate] = useState<string>("");
+  const [trainingDuration, setTrainingDuration] = useState<number>(0);
+  const [trainingType, setTrainingType] = useState<string>("");
+  const [trainingDescription, setTrainingDescription] = useState<string>("");
+  const [trainingTrainer, setTrainingTrainer] = useState<string>("");
 
   const formattedData = trainersData
     .map((trainer) => [`${trainer.firstName} ${trainer.lastName}`])
     .map((item) => item[0]);
 
+  const handleInputChange =
+    <T extends string | number>(
+      setter: React.Dispatch<React.SetStateAction<T>>
+    ) =>
+    (newValue: T) => {
+      setter(newValue);
+    };
+
+  const handlePostRequest = () => {
+    const { v4: uuidv4 } = require("uuid");
+    let newTraining = {
+      id: uuidv4(),
+      duration: trainingDuration,
+      trainer: trainingTrainer,
+      type: trainingType,
+      date: trainingsDate,
+      name: trainingName,
+      description: trainingDescription,
+      students: [user.id],
+    };
+    localStorage.setItem("trainings", JSON.stringify(newTraining));
+    console.log(newTraining);
+  };
+
   const handleSubmit = () => {
+    handlePostRequest();
     notify();
     setTimeout(() => navigate("/my-account/trainings"), 3000);
   };
@@ -34,40 +67,40 @@ const AddPassedTraining: React.FC = () => {
         <h3>Training</h3>
         <Input
           type="text"
-          value=""
+          value={trainingName}
           label="Name"
-          onChange={(e) => console.log(e)}
+          onChange={handleInputChange(setTrainingName)}
         />
         <Input
           type="date"
-          value=""
+          value={trainingsDate}
           label="Training start date"
-          onChange={(e) => console.log(e)}
+          onChange={handleInputChange(setTrainingsDate)}
         />
         <Input
-          type="text"
-          value=""
+          type="number"
+          value={trainingDuration}
           label="Duration"
-          onChange={(e) => console.log(e)}
+          onChange={handleInputChange(setTrainingDuration)}
         />
         <Input
           type="select"
-          value=""
+          value={trainingType}
           label="Type"
-          onChange={(e) => console.log(e)}
-          options={["Webinar", "Full course"]}
+          onChange={handleInputChange(setTrainingType)}
+          options={["Webinar", "Full course", "Bootcamp"]}
         />
         <Input
           type="textarea"
-          value=""
+          value={trainingDescription}
           label="Description"
-          onChange={(e) => console.log(e)}
+          onChange={handleInputChange(setTrainingDescription)}
         />
         <Input
           type="select"
-          value=""
+          value={trainingTrainer}
           label="Add trainers"
-          onChange={(e) => console.log(e)}
+          onChange={handleInputChange(setTrainingTrainer)}
           options={formattedData}
         />
         <div>

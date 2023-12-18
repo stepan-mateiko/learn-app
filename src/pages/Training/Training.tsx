@@ -6,19 +6,24 @@ import {
   trainingsHeadings,
   trainingsData,
 } from "../../helpers/mockedTrainings";
+import { studentsData } from "../../helpers/mockedStudents";
 import Breadcrumb from "../../components/Breadcrumbs/Breadcrumbs";
 
 const Training: React.FC = () => {
+  const user = JSON.parse(localStorage.getItem("users") || "null");
+  const myData = studentsData.filter((student) => student.id === user.id)[0];
   const formattedHeading = trainingsHeadings.filter(
     (training) => training !== "Students"
   );
-  const formattedData = trainingsData.map((training) => [
-    training.date,
-    training.name,
-    training.type,
-    training.trainer,
-    training.duration,
-  ]);
+  const formattedData = trainingsData
+    .filter((item) => myData.trainers.includes(item.id))
+    .map((training) => [
+      training.date,
+      training.name,
+      training.type,
+      training.trainer,
+      training.duration,
+    ]);
   return (
     <div>
       <Breadcrumb
