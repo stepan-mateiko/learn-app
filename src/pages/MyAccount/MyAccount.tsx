@@ -7,13 +7,18 @@ import Breadcrumb from "../../components/Breadcrumbs/Breadcrumbs";
 import { trainersData } from "../../helpers/mockedTrainers";
 import Button from "../../components/Button/Button";
 import ModalBox from "../../components/ModalBox/ModalBox";
+import { studentsData } from "../../helpers/mockedStudents";
 
 const MyAccount: React.FC = () => {
+  const user = JSON.parse(localStorage.getItem("users") || "null");
+  const myData = studentsData.filter((student) => student.id === user.id)[0];
   const tableTitle = "My Trainers";
-  const formattedData = trainersData.map((trainer) => [
-    `${trainer.firstName} ${trainer.lastName}`,
-    trainer.specialization,
-  ]);
+  const formattedData = trainersData
+    .filter((item) => myData.trainers.includes(item.id))
+    .map((trainer) => [
+      `${trainer.firstName} ${trainer.lastName}`,
+      trainer.specialization,
+    ]);
   const headings = ["Name", "Specialization"];
   const [isModalOpen, setModalOpen] = useState(false);
 
@@ -27,7 +32,7 @@ const MyAccount: React.FC = () => {
     <div>
       <Breadcrumb links={["/my-account"]} labels={["My Account"]} />
       <div style={{ display: "flex" }}>
-        <MyAccountList />
+        <MyAccountList user={user} />
         <Table title={tableTitle} headings={headings} data={formattedData} />
         <Button buttonText="Delete account" onClick={handleModalOpen} />
       </div>

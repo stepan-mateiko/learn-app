@@ -1,29 +1,48 @@
 import Button from "../Button/Button";
 import studentImg from "../../assets/images/student-profile-img.png";
 
-const MyAccountList: React.FC = () => {
+interface MyAccountListProps {
+  id: string;
+  userName: string;
+  firstName: string;
+  lastName: string;
+  dob: string;
+  address: string;
+  email: string;
+  role: string;
+  specialization: string;
+  isActive: boolean;
+  userPassword: string;
+}
+
+const MyAccountList: React.FC<{ user: MyAccountListProps }> = ({ user }) => {
+  const { firstName, lastName, dob, address, email, userName, isActive } = user;
   return (
     <div>
       <h3>My Profile</h3>
       <div style={{ display: "flex" }}>
-        <img src={studentImg} alt="" />
+        <img src={studentImg} alt="" width={100} />
         <h4>Status</h4>
-        <p>Active</p>
+        <p>{isActive ? "Active" : "Not active"}</p>
       </div>
-      <h4>First Name</h4>
-      <p>name</p>
+      <h4>First name</h4>
+      <p>{firstName}</p>
       <h4>Last name</h4>
-      <p>name</p>
+      <p>{lastName}</p>
       <h4>User name</h4>
-      <p> name</p>
+      <p> {userName}</p>
       <h4>Date of birth</h4>
-      <p>date</p>
+      <p>{dob}</p>
       <h4>Address</h4>
-      <p>address</p>
+      <p>{address}</p>
       <h4>Email</h4>
-      <p>email</p>
+      <p>{email}</p>
       <div>
-        <Button buttonText="Edit profile" />
+        <Button
+          buttonText="Edit profile"
+          isLink={true}
+          path="my-account/edit"
+        />
         <Button
           buttonText="Change password"
           isLink={true}

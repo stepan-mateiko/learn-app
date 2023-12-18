@@ -1,6 +1,6 @@
 interface Student {
   id: string;
-  username: string;
+  userName: string;
   lastName: string;
   firstName: string;
   dob: string;
@@ -13,8 +13,20 @@ interface Student {
 
 export const studentsData: Student[] = [
   {
+    id: "6cbff08f-9875-4a60-bb0a-b2ee26081ca9",
+    userName: "stepan-mateiko",
+    firstName: "Stepan",
+    lastName: "Mateiko",
+    dob: "2023-12-12",
+    address: "Lviv, Muzyky 34",
+    photo: "photo1.jpg",
+    isActive: true,
+    trainers: ["003", "007", "004"],
+    trainings: ["002", "005", "010"],
+  },
+  {
     id: "001",
-    username: "student1",
+    userName: "student1",
     lastName: "Doe",
     firstName: "John",
     dob: "1990-01-01",
@@ -26,7 +38,7 @@ export const studentsData: Student[] = [
   },
   {
     id: "002",
-    username: "student2",
+    userName: "student2",
     lastName: "Smith",
     firstName: "Jane",
     dob: "1992-03-15",
@@ -38,7 +50,7 @@ export const studentsData: Student[] = [
   },
   {
     id: "003",
-    username: "student3",
+    userName: "student3",
     lastName: "Johnson",
     firstName: "Robert",
     dob: "1988-05-20",
@@ -50,7 +62,7 @@ export const studentsData: Student[] = [
   },
   {
     id: "004",
-    username: "student4",
+    userName: "student4",
     lastName: "Williams",
     firstName: "Emily",
     dob: "1991-07-10",
@@ -62,7 +74,7 @@ export const studentsData: Student[] = [
   },
   {
     id: "005",
-    username: "student5",
+    userName: "student5",
     lastName: "Brown",
     firstName: "Daniel",
     dob: "1987-09-25",
@@ -74,7 +86,7 @@ export const studentsData: Student[] = [
   },
   {
     id: "006",
-    username: "student6",
+    userName: "student6",
     lastName: "Davis",
     firstName: "Olivia",
     dob: "1993-12-03",
@@ -86,7 +98,7 @@ export const studentsData: Student[] = [
   },
   {
     id: "007",
-    username: "student7",
+    userName: "student7",
     lastName: "Miller",
     firstName: "Michael",
     dob: "1985-04-18",
@@ -98,7 +110,7 @@ export const studentsData: Student[] = [
   },
   {
     id: "008",
-    username: "student8",
+    userName: "student8",
     lastName: "Garcia",
     firstName: "Sophia",
     dob: "1990-08-11",
@@ -110,7 +122,7 @@ export const studentsData: Student[] = [
   },
   {
     id: "009",
-    username: "student9",
+    userName: "student9",
     lastName: "Martinez",
     firstName: "David",
     dob: "1989-06-28",
@@ -122,7 +134,7 @@ export const studentsData: Student[] = [
   },
   {
     id: "010",
-    username: "student10",
+    userName: "student10",
     lastName: "Clark",
     firstName: "Emma",
     dob: "1994-02-14",
