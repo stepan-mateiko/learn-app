@@ -34,7 +34,14 @@ const MyAccount: React.FC = () => {
       <div style={{ display: "flex" }}>
         <MyAccountList user={user} />
         <Table title={tableTitle} headings={headings} data={formattedData} />
-        <Button buttonText="Delete account" onClick={handleModalOpen} />
+        <div>
+          <Button buttonText="Delete account" onClick={handleModalOpen} />
+          <Button
+            buttonText="Add trainer"
+            isLink={true}
+            path="my-account/add-trainer"
+          />
+        </div>
       </div>
       <AccountBox />
       {isModalOpen && (
