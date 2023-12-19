@@ -10,8 +10,15 @@ import { studentsData, Student } from "../../helpers/mockedStudents";
 import Breadcrumb from "../../components/Breadcrumbs/Breadcrumbs";
 import { trainersData, Trainer } from "../../helpers/mockedTrainers";
 
+interface User {
+  userName: string;
+  email: string;
+  userPassword: string;
+  role: string;
+  id: string;
+}
 const Training: React.FC = () => {
-  const user = JSON.parse(localStorage.getItem("users") || "null");
+  const user = JSON.parse(localStorage.getItem("users") || "null") as User;
   const { role } = user;
   const myData =
     role === "student"

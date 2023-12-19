@@ -1,8 +1,13 @@
 import { RegistrationSuccess } from "../../components/Icon/Icon";
 import Button from "../../components/Button/Button";
 
+interface User {
+  userName: string;
+  email: string;
+  userPassword: string;
+}
 const RegistrationVerification: React.FC = () => {
-  const user = JSON.parse(localStorage.getItem("users") || "{}");
+  const user = JSON.parse(localStorage.getItem("users") || "{}") as User;
   return (
     <div style={{ textAlign: "center" }}>
       <h2>Registration</h2>
