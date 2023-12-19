@@ -1,15 +1,24 @@
 import React, { ChangeEvent } from "react";
 
 interface InputProps {
-  type: string;
+  type:
+    | "text"
+    | "textarea"
+    | "select"
+    | "date"
+    | "checkbox"
+    | "email"
+    | "password"
+    | "number";
   label: string;
   value?: string | number | boolean;
-  onChange: (value: any) => void;
+  onChange: (value: string | number | boolean) => void;
   placeholder?: string;
   pattern?: string;
   title?: string;
-  options?: string[];
+  options?: string[] | number[];
   checked?: boolean;
+  error?: string;
 }
 
 const Input: React.FC<InputProps> = ({
@@ -21,6 +30,8 @@ const Input: React.FC<InputProps> = ({
   pattern,
   title,
   options,
+  checked,
+  error,
 }) => {
   const handleChange = (
     event: ChangeEvent<
@@ -29,6 +40,7 @@ const Input: React.FC<InputProps> = ({
   ) => {
     onChange(event.target.value);
   };
+
   const inputElement =
     type === "textarea" ? (
       <textarea
@@ -48,7 +60,11 @@ const Input: React.FC<InputProps> = ({
     ) : type === "date" ? (
       <input type={type} value={value as string} onChange={handleChange} />
     ) : type === "checkbox" ? (
-      <input type={type} checked={value as boolean} onChange={handleChange} />
+      <input
+        type={type}
+        checked={checked}
+        onChange={() => onChange(!checked)}
+      />
     ) : (
       <input
         type={type}
@@ -65,7 +81,9 @@ const Input: React.FC<InputProps> = ({
     <div className="input-block">
       <label>{label}</label>
       {inputElement}
-      <div className="error-message" id="name-error"></div>
+      <div className="error-message" id={`${label.toLowerCase()}-error`}>
+        {error}
+      </div>
     </div>
   );
 };

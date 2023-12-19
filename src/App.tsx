@@ -26,6 +26,7 @@ const App: React.FC = () => {
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="*" element={<Navigate to="/" />} />
+
           <Route path="/" element={<NonAuthRoute />}>
             <Route path="/login" element={<LoginPage />} />
             <Route path="/join-us" element={<JoinUs />} />

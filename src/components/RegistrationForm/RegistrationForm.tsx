@@ -20,8 +20,10 @@ const RegistrationForm: React.FC<RegistrationFormProps> = ({ role }) => {
 
   const handleInputChange =
     (setter: React.Dispatch<React.SetStateAction<string>>) =>
-    (newValue: string) => {
-      setter(newValue);
+    (newValue: string | number | boolean) => {
+      if (typeof newValue === "string") {
+        setter(newValue);
+      }
     };
 
   const handlePostRequest = () => {

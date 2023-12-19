@@ -17,11 +17,15 @@ const EditProfile: React.FC = () => {
   const [userIsActive, setUserIsActive] = useState<boolean>(user.isActive);
   const [trainerSpecialization, setTrainerSpecialization] =
     useState<string>("");
+
   const handleInputChange =
     (setter: React.Dispatch<React.SetStateAction<string>>) =>
-    (newValue: string) => {
-      setter(newValue);
+    (newValue: string | number | boolean) => {
+      if (typeof newValue === "string") {
+        setter(newValue);
+      }
     };
+
   const handleCheckboxChange = () => {
     if (userIsActive) {
       setUserIsActive(false);

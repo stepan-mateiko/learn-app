@@ -14,7 +14,7 @@ const AddPassedTraining: React.FC = () => {
   const notify = () => toast.success("Training added!");
   const [trainingName, setTrainingName] = useState<string>("");
   const [trainingsDate, setTrainingsDate] = useState<string>("");
-  const [trainingDuration, setTrainingDuration] = useState<number>(0);
+  const [trainingDuration, setTrainingDuration] = useState<string>("0");
   const [trainingType, setTrainingType] = useState<string>("");
   const [trainingDescription, setTrainingDescription] = useState<string>("");
   const [trainingTrainer, setTrainingTrainer] = useState<string>("");
@@ -24,11 +24,11 @@ const AddPassedTraining: React.FC = () => {
     .map((item) => item[0]);
 
   const handleInputChange =
-    <T extends string | number>(
-      setter: React.Dispatch<React.SetStateAction<T>>
-    ) =>
-    (newValue: T) => {
-      setter(newValue);
+    (setter: React.Dispatch<React.SetStateAction<string>>) =>
+    (newValue: string | number | boolean) => {
+      if (typeof newValue === "string") {
+        setter(newValue);
+      }
     };
 
   const handlePostRequest = () => {

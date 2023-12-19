@@ -7,8 +7,13 @@ import Button from "../Button/Button";
 import MiniProfile from "../MiniProfile/MiniProfile";
 import ProfilePic from "../../assets/images/student-profile-img.png";
 
+interface User {
+  userName: string;
+  email: string;
+}
+
 const Header: React.FC = () => {
-  const user = JSON.parse(localStorage.getItem("user") || "null");
+  const storedUser = JSON.parse(localStorage.getItem("user") || "{}") as User;
   const [isMiniProfile, setIsMiniProfile] = useState<boolean>(false);
   const navigationLinks = [
     { to: "/my-account/trainings", label: "Training" },
@@ -23,12 +28,13 @@ const Header: React.FC = () => {
   const showMiniProfile = () => {
     setIsMiniProfile(true);
   };
+
   const hideMiniProfile = () => {
     setIsMiniProfile(false);
   };
 
   return (
-    <header style={{ display: "flex", marginBottom: 200 }}>
+    <header className="header">
       <Link to={"/home"}>
         <Logo />
       </Link>
@@ -42,13 +48,18 @@ const Header: React.FC = () => {
       )}
       {!isMiniProfile && storedToken && (
         <div onClick={showMiniProfile}>
-          {user.userName} <img src={ProfilePic} alt="profile" width={50} />
+          {storedUser.userName}{" "}
+          <img
+            src={ProfilePic}
+            alt={`${storedUser.userName}'s profile`}
+            width={50}
+          />
         </div>
       )}
       {isMiniProfile && (
         <MiniProfile
-          name={user.userName}
-          email={user.email}
+          name={storedUser.userName}
+          email={storedUser.email}
           isMiniProfile={isMiniProfile}
           hideMiniProfile={hideMiniProfile}
         />

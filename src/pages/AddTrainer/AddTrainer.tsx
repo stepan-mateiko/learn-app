@@ -78,6 +78,7 @@ const AddTrainer: React.FC = () => {
       <div style={{ display: "flex" }}>
         <form action="#" method="post" onSubmit={handleSubmit}>
           <Table title="All trainers" headings={headings} data={allTrainers} />
+          <Button buttonText="Cancel" isLink={true} path="my-account" />
           <Button buttonText="Add" isSubmit={true} />
         </form>
 
