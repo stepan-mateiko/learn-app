@@ -116,7 +116,7 @@ const EditProfile: React.FC = () => {
           />
         )}
         <div>
-          <Button buttonText="Cancel" />
+          <Button buttonText="Cancel" isLink={true} path="my-account" />
           <Button buttonText="Save changes" isSubmit={true} />
         </div>
       </form>

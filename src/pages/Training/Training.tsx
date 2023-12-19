@@ -70,11 +70,13 @@ const Training: React.FC = () => {
         labels={["My Account", "Trainings"]}
       />
       <h2>Trainings</h2>
-      <Button
-        buttonText="Add training"
-        isLink={true}
-        path="my-account/trainings/add-passed-training"
-      />
+      {role === "student" && (
+        <Button
+          buttonText="Add training"
+          isLink={true}
+          path="my-account/trainings/add-passed-training"
+        />
+      )}
       <div style={{ display: "flex" }}>
         <div>
           <Search />

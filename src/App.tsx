@@ -16,6 +16,7 @@ import AddTrainer from "./pages/AddTrainer/AddTrainer";
 import AddPassedTraining from "./pages/AddPassedTraining/AddPassedTraining";
 import AuthRoute from "./components/AuthRoute/AuthRoute";
 import NonAuthRoute from "./components/NonAuthRoute/NonAuthRoute";
+import StudentRoute from "./components/StudentRoute/StudentRoute";
 
 const App: React.FC = () => {
   return (
@@ -34,13 +35,8 @@ const App: React.FC = () => {
           <Route path="/" element={<AuthRoute />}>
             <Route path="/my-account" element={<MyAccount />} />
             <Route path="/my-account/edit" element={<EditProfile />} />
-            <Route path="/my-account/add-trainer" element={<AddTrainer />} />
-            <Route path="/my-account/trainings" element={<Training />} />
-            <Route
-              path="/my-account/trainings/add-passed-training"
-              element={<AddPassedTraining />}
-            />
             <Route path="/change-password" element={<ChangePassword />} />
+            <Route path="/my-account/trainings" element={<Training />} />
             <Route
               path="/change-password/success"
               element={<ChangePasswordSuccess />}
@@ -49,6 +45,14 @@ const App: React.FC = () => {
               path="/registration/verification"
               element={<RegistrationVerification />}
             />
+            <Route path="/my-account" element={<StudentRoute />}>
+              <Route path="/my-account/add-trainer" element={<AddTrainer />} />
+
+              <Route
+                path="/my-account/trainings/add-passed-training"
+                element={<AddPassedTraining />}
+              />
+            </Route>
           </Route>
         </Routes>
         <Footer />
