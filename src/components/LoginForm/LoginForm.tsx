@@ -67,7 +67,7 @@ const LoginForm: React.FC = () => {
       </form>
       <p>OR</p>
       <p>
-        Don't have account? <Link to="/registration">Sign in</Link>
+        Don't have account? <Link to="/join-us">Sign up</Link>
       </p>
     </div>
   );

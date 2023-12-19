@@ -8,12 +8,13 @@ import homeImg from "../../assets/images/home-img.png";
 
 const HomePage: React.FC = () => {
   const user = JSON.parse(localStorage.getItem("users") || "null");
+  const token = JSON.parse(localStorage.getItem("token") || "null");
 
   const renderWelcomeSection = () => {
     return (
       <div>
-        {!user && <h1>Let's start learning</h1>}
-        {user && <h1>{`Hi, ${user.firstName}`}</h1>}
+        {!token && <h1>Let's start learning</h1>}
+        {token && <h1>{`Hi, ${user.firstName}`}</h1>}
         <p>
           Welcome to Learn Platform - where every day is a day to learn. Dive
           into the vast ocean of knowledge and empower yourself with the tools
@@ -64,13 +65,13 @@ const HomePage: React.FC = () => {
   return (
     <div>
       {renderWelcomeSection()}
-      {!user && (
+      {!token && (
         <div>
           <img src={homeImg} alt="home" />
         </div>
       )}
-      {!user && renderJoinUsSection()}
-      {user && renderWhatsNewSection()}
+      {!token && renderJoinUsSection()}
+      {token && renderWhatsNewSection()}
     </div>
   );
 };

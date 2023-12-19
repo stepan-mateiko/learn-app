@@ -13,7 +13,7 @@ export interface Trainer {
 
 export const trainersData: Trainer[] = [
   {
-    id: "7da347a2-12f3-4f7e-b824-bd44a3885290",
+    id: "2f1763a3-bbe8-4573-af65-bc88d9871911",
     userName: "stepan-mateiko",
     firstName: "Stepan",
     lastName: "Mateiko",

@@ -1,4 +1,4 @@
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
 
 import Logo from "../Logo/Logo";
@@ -8,8 +8,7 @@ import MiniProfile from "../MiniProfile/MiniProfile";
 import ProfilePic from "../../assets/images/student-profile-img.png";
 
 const Header: React.FC = () => {
-  const navigate = useNavigate();
-  const user = JSON.parse(localStorage.getItem("users") || "null");
+  const user = JSON.parse(localStorage.getItem("user") || "null");
   const [isMiniProfile, setIsMiniProfile] = useState<boolean>(false);
   const navigationLinks = [
     { to: "/my-account/trainings", label: "Training" },
@@ -19,11 +18,7 @@ const Header: React.FC = () => {
 
   useEffect(() => {
     setStoredToken(localStorage.getItem("token") || "");
-
-    if (!storedToken && window.location.pathname !== "/registration") {
-      navigate("/login");
-    }
-  }, [navigate, storedToken]);
+  }, [storedToken]);
 
   const showMiniProfile = () => {
     setIsMiniProfile(true);
