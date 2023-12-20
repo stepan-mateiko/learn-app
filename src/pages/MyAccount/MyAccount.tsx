@@ -13,7 +13,7 @@ import { studentsData, Student } from "../../helpers/mockedStudents";
 
 const MyAccount: React.FC = () => {
   const user = JSON.parse(localStorage.getItem("users") || "null");
-  const [isModalOpen, setModalOpen] = useState(false);
+  const [isModalOpen, setModalOpen] = useState<boolean>(false);
   const { role } = user;
   const tableTitle = role === "student" ? "My Trainers" : "My students";
   const headings =

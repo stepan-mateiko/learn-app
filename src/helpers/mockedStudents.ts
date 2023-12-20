@@ -3,10 +3,10 @@ export interface Student {
   userName: string;
   lastName: string;
   firstName: string;
-  dob: string;
-  address: string;
-  photo: string;
   isActive: boolean;
+  specialization: string;
+  dob?: string;
+  address?: string;
   trainers: string[];
   trainings: string[];
 }
@@ -19,7 +19,7 @@ export const studentsData: Student[] = [
     lastName: "Mateiko",
     dob: "2023-12-12",
     address: "Lviv, Muzyky 34",
-    photo: "photo1.jpg",
+    specialization: "student",
     isActive: true,
     trainers: ["003", "007", "004"],
     trainings: ["002", "005", "010"],
@@ -31,7 +31,7 @@ export const studentsData: Student[] = [
     firstName: "John",
     dob: "1990-01-01",
     address: "123 Main St",
-    photo: "photo1.jpg",
+    specialization: "student",
     isActive: true,
     trainers: ["003", "005"],
     trainings: ["001", "002"],
@@ -43,7 +43,7 @@ export const studentsData: Student[] = [
     firstName: "Jane",
     dob: "1992-03-15",
     address: "456 Oak St",
-    photo: "photo2.jpg",
+    specialization: "student",
     isActive: false,
     trainers: ["002", "001", "003"],
     trainings: ["002", "003"],
@@ -55,7 +55,7 @@ export const studentsData: Student[] = [
     firstName: "Robert",
     dob: "1988-05-20",
     address: "789 Elm St",
-    photo: "photo3.jpg",
+    specialization: "student",
     isActive: true,
     trainers: ["001", "004", "002"],
     trainings: ["003", "004"],
@@ -67,7 +67,7 @@ export const studentsData: Student[] = [
     firstName: "Emily",
     dob: "1991-07-10",
     address: "101 Pine St",
-    photo: "photo4.jpg",
+    specialization: "student",
     isActive: false,
     trainers: ["002", "003"],
     trainings: ["001"],
@@ -79,7 +79,7 @@ export const studentsData: Student[] = [
     firstName: "Daniel",
     dob: "1987-09-25",
     address: "222 Maple St",
-    photo: "photo5.jpg",
+    specialization: "student",
     isActive: true,
     trainers: ["004", "001"],
     trainings: ["002", "005"],
@@ -91,7 +91,7 @@ export const studentsData: Student[] = [
     firstName: "Olivia",
     dob: "1993-12-03",
     address: "333 Oak St",
-    photo: "photo6.jpg",
+    specialization: "student",
     isActive: false,
     trainers: ["005", "002"],
     trainings: ["003"],
@@ -103,7 +103,7 @@ export const studentsData: Student[] = [
     firstName: "Michael",
     dob: "1985-04-18",
     address: "444 Birch St",
-    photo: "photo7.jpg",
+    specialization: "student",
     isActive: true,
     trainers: ["003", "001"],
     trainings: ["001", "004"],
@@ -115,7 +115,7 @@ export const studentsData: Student[] = [
     firstName: "Sophia",
     dob: "1990-08-11",
     address: "555 Pine St",
-    photo: "photo8.jpg",
+    specialization: "student",
     isActive: false,
     trainers: ["004", "005", "002"],
     trainings: ["005"],
@@ -127,7 +127,7 @@ export const studentsData: Student[] = [
     firstName: "David",
     dob: "1989-06-28",
     address: "666 Elm St",
-    photo: "photo9.jpg",
+    specialization: "student",
     isActive: true,
     trainers: ["001", "003"],
     trainings: ["002"],
@@ -139,7 +139,7 @@ export const studentsData: Student[] = [
     firstName: "Emma",
     dob: "1994-02-14",
     address: "777 Birch St",
-    photo: "photo10.jpg",
+    specialization: "student",
     isActive: false,
     trainers: ["005", "002", "004"],
     trainings: ["003", "004"],

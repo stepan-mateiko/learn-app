@@ -9,12 +9,12 @@ export const trainingsHeadings: string[] = [
 
 interface Training {
   id: string;
+  name: string;
   duration: number;
   trainer: string;
   type: string;
   date: string;
-  name: string;
-  description: string;
+  description?: string;
   students: string[];
 }
 
