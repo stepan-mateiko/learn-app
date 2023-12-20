@@ -1,14 +1,16 @@
-import Button from "../../components/Button/Button";
-import Table from "../../components/Table/Table";
-import MyDatePicker from "../../components/DatePicker/DatePicker";
-import Search from "../../components/Search/Search";
+import RoutePaths from "../../constants/routes";
+import { trainersData, Trainer } from "../../helpers/mockedTrainers";
 import {
   trainingsHeadings,
   trainingsData,
 } from "../../helpers/mockedTrainings";
 import { studentsData, Student } from "../../helpers/mockedStudents";
+
+import Button from "../../components/Button/Button";
+import Table from "../../components/Table/Table";
+import MyDatePicker from "../../components/DatePicker/DatePicker";
+import Search from "../../components/Search/Search";
 import Breadcrumb from "../../components/Breadcrumbs/Breadcrumbs";
-import { trainersData, Trainer } from "../../helpers/mockedTrainers";
 
 interface User {
   userName: string;
@@ -73,7 +75,7 @@ const Training: React.FC = () => {
   return (
     <div>
       <Breadcrumb
-        links={["/my-account", "/my-account/trainings"]}
+        links={[RoutePaths.MY_ACCOUNT, RoutePaths.TRAINING]}
         labels={["My Account", "Trainings"]}
       />
       <h2>Trainings</h2>
@@ -81,7 +83,7 @@ const Training: React.FC = () => {
         <Button
           buttonText="Add training"
           isLink={true}
-          path="my-account/trainings/add-passed-training"
+          path={RoutePaths.ADD_PASSED_TRAINING}
         />
       )}
       <div style={{ display: "flex" }}>

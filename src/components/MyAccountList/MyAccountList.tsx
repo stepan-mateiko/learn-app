@@ -1,3 +1,4 @@
+import RoutePaths from "../../constants/routes";
 import Button from "../Button/Button";
 import studentImg from "../../assets/images/student-profile-img.png";
 
@@ -41,12 +42,12 @@ const MyAccountList: React.FC<{ user: MyAccountListProps }> = ({ user }) => {
         <Button
           buttonText="Edit profile"
           isLink={true}
-          path="my-account/edit"
+          path={RoutePaths.EDIT_PROFILE}
         />
         <Button
           buttonText="Change password"
           isLink={true}
-          path="change-password"
+          path={RoutePaths.CHANGE_PASSWORD}
         />
       </div>
     </div>

@@ -1,5 +1,7 @@
 import { useState } from "react";
 
+import RoutePaths from "../../constants/routes";
+
 import AccountBox from "../../components/AccountBox/AccountBox";
 import MyAccountList from "../../components/MyAccountList/MyAccountList";
 import Table from "../../components/Table/Table";
@@ -64,7 +66,7 @@ const MyAccount: React.FC = () => {
   };
   return (
     <div>
-      <Breadcrumb links={["/my-account"]} labels={["My Account"]} />
+      <Breadcrumb links={[RoutePaths.MY_ACCOUNT]} labels={["My Account"]} />
       <div style={{ display: "flex" }}>
         <MyAccountList user={user} />
         <Table title={tableTitle} headings={headings} data={formattedData} />
@@ -74,7 +76,7 @@ const MyAccount: React.FC = () => {
             <Button
               buttonText="Add trainer"
               isLink={true}
-              path="my-account/add-trainer"
+              path={RoutePaths.ADD_TRAINER}
             />
           </div>
         )}

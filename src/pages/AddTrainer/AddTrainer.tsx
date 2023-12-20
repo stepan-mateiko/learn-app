@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 
+import RoutePaths from "../../constants/routes";
 import Table from "../../components/Table/Table";
 import Button from "../../components/Button/Button";
 import { trainersData } from "../../helpers/mockedTrainers";
@@ -67,7 +68,7 @@ const AddTrainer: React.FC = () => {
   return (
     <div>
       <Breadcrumb
-        links={["/my-account", "/my-account/add-trainer"]}
+        links={[RoutePaths.MY_ACCOUNT, RoutePaths.ADD_TRAINER]}
         labels={["My Account", "Add Trainer"]}
       />
       <h2>Add Trainer</h2>
@@ -78,7 +79,11 @@ const AddTrainer: React.FC = () => {
       <div style={{ display: "flex" }}>
         <form action="#" method="post" onSubmit={handleSubmit}>
           <Table title="All trainers" headings={headings} data={allTrainers} />
-          <Button buttonText="Cancel" isLink={true} path="my-account" />
+          <Button
+            buttonText="Cancel"
+            isLink={true}
+            path={RoutePaths.MY_ACCOUNT}
+          />
           <Button buttonText="Add" isSubmit={true} />
         </form>
 

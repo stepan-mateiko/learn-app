@@ -1,5 +1,8 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+
+import RoutePaths from "../../constants/routes";
+
 import Input from "../../components/Input/Input";
 import Button from "../../components/Button/Button";
 import { Lock } from "../../components/Icon/Icon";
@@ -34,7 +37,7 @@ const ChangePassword: React.FC = () => {
         userPassword: newPassword,
       };
       localStorage.setItem("users", JSON.stringify(updatedUser));
-      navigate("/change-password/success");
+      navigate(RoutePaths.CHANGE_PASSWORD_SUCCESS);
     } else {
       setConfirmPassword("");
       setNewPassword("");
@@ -74,7 +77,11 @@ const ChangePassword: React.FC = () => {
             onChange={handleInputChange(setConfirmPassword)}
           />
           <div>
-            <Button buttonText="Cancel" isLink={true} path="my-account" />
+            <Button
+              buttonText="Cancel"
+              isLink={true}
+              path={RoutePaths.MY_ACCOUNT}
+            />
             <Button buttonText="Change password" isSubmit={true} />
           </div>
         </form>

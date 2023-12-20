@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
+import RoutePaths from "../../constants/routes";
 import Button from "../Button/Button";
 import Input from "../Input/Input";
 import registrationTrainerImg from "../../assets/images/registration-trainer.png";
@@ -57,7 +58,7 @@ const RegistrationForm: React.FC<RegistrationFormProps> = ({ role }) => {
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     handlePostRequest();
-    navigate("/registration/verification");
+    navigate(RoutePaths.REGISTRATION_VERIFICATION);
   };
 
   return (

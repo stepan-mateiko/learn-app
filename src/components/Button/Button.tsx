@@ -22,7 +22,7 @@ const Button: React.FC<ButtonProps> = ({
       onClick={onClick}
       type={isSubmit ? "submit" : "button"}
     >
-      {isLink ? <Link to={`/${path}`}>{buttonText}</Link> : buttonText}
+      {isLink ? <Link to={`${path}`}>{buttonText}</Link> : buttonText}
     </button>
   );
 };

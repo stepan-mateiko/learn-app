@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 
+import RoutePaths from "../../constants/routes";
 import ProfilePic from "../../assets/images/student-profile-img.png";
 
 interface MiniProfileProps {
@@ -23,8 +24,8 @@ const MiniProfile: React.FC<MiniProfileProps> = ({
         <h4>{name}</h4>
         <p>{email}</p>
       </div>
-      <Link to="/my-account">My Account</Link>
-      <Link to="/login" onClick={handleLogOut}>
+      <Link to={RoutePaths.MY_ACCOUNT}>My Account</Link>
+      <Link to={RoutePaths.LOGIN} onClick={handleLogOut}>
         Sign Out
       </Link>
     </div>

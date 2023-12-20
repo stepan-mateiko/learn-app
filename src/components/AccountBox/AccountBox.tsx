@@ -1,3 +1,5 @@
+import RoutePaths from "../../constants/routes";
+
 import Button from "../Button/Button";
 
 const AccountBox: React.FC = () => {
@@ -13,7 +15,7 @@ const AccountBox: React.FC = () => {
       <Button
         buttonText="View trainings"
         isLink={true}
-        path="my-account/trainings"
+        path={RoutePaths.TRAINING}
       />
     </div>
   );

@@ -1,6 +1,8 @@
 import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
 
+import RoutePaths from "../../constants/routes";
+
 import Logo from "../Logo/Logo";
 import Navigation from "../Navigation/Navigation";
 import Button from "../Button/Button";
@@ -16,8 +18,8 @@ const Header: React.FC = () => {
   const storedUser = JSON.parse(localStorage.getItem("user") || "{}") as User;
   const [isMiniProfile, setIsMiniProfile] = useState<boolean>(false);
   const navigationLinks = [
-    { to: "/my-account/trainings", label: "Training" },
-    { to: "/my-account", label: "My Account" },
+    { to: RoutePaths.TRAINING, label: "Training" },
+    { to: RoutePaths.MY_ACCOUNT, label: "My Account" },
   ];
   const [storedToken, setStoredToken] = useState<string>("");
 
@@ -35,15 +37,19 @@ const Header: React.FC = () => {
 
   return (
     <header className="header">
-      <Link to={"/home"}>
+      <Link to={RoutePaths.HOME}>
         <Logo />
       </Link>
 
       <Navigation links={navigationLinks} />
       {!storedToken && (
         <div>
-          <Button buttonText="Sign In" isLink={true} path="login" />
-          <Button buttonText="Join Us" isLink={true} path="join-us" />
+          <Button buttonText="Sign In" isLink={true} path={RoutePaths.LOGIN} />
+          <Button
+            buttonText="Join Us"
+            isLink={true}
+            path={RoutePaths.JOIN_US}
+          />
         </div>
       )}
       {!isMiniProfile && storedToken && (

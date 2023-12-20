@@ -1,5 +1,6 @@
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 
+import RoutePaths from "./constants/routes";
 import Header from "./components/Header/Header";
 import Footer from "./components/Footer/Footer";
 import Registration from "./pages/Registration/Registration";
@@ -24,33 +25,42 @@ const App: React.FC = () => {
       <BrowserRouter>
         <Header />
         <Routes>
-          <Route path="/" element={<HomePage />} />
-          <Route path="*" element={<Navigate to="/" />} />
+          <Route path={RoutePaths.HOME} element={<HomePage />} />
+          <Route
+            path={RoutePaths.NOT_FOUND}
+            element={<Navigate to={RoutePaths.HOME} />}
+          />
 
-          <Route path="/" element={<NonAuthRoute />}>
-            <Route path="/login" element={<LoginPage />} />
-            <Route path="/join-us" element={<JoinUs />} />
-            <Route path="/registration/:role" element={<Registration />} />
+          <Route path={RoutePaths.HOME} element={<NonAuthRoute />}>
+            <Route path={RoutePaths.LOGIN} element={<LoginPage />} />
+            <Route path={RoutePaths.JOIN_US} element={<JoinUs />} />
+            <Route
+              path={`${RoutePaths.REGISTRATION}/:role`}
+              element={<Registration />}
+            />
           </Route>
 
-          <Route path="/" element={<AuthRoute />}>
-            <Route path="/my-account" element={<MyAccount />} />
-            <Route path="/my-account/edit" element={<EditProfile />} />
-            <Route path="/change-password" element={<ChangePassword />} />
-            <Route path="/my-account/trainings" element={<Training />} />
+          <Route path={RoutePaths.HOME} element={<AuthRoute />}>
+            <Route path={RoutePaths.MY_ACCOUNT} element={<MyAccount />} />
+            <Route path={RoutePaths.EDIT_PROFILE} element={<EditProfile />} />
             <Route
-              path="/change-password/success"
+              path={RoutePaths.CHANGE_PASSWORD}
+              element={<ChangePassword />}
+            />
+            <Route path={RoutePaths.TRAINING} element={<Training />} />
+            <Route
+              path={RoutePaths.CHANGE_PASSWORD_SUCCESS}
               element={<ChangePasswordSuccess />}
             />
             <Route
-              path="/registration/verification"
+              path={RoutePaths.REGISTRATION_VERIFICATION}
               element={<RegistrationVerification />}
             />
-            <Route path="/my-account" element={<StudentRoute />}>
-              <Route path="/my-account/add-trainer" element={<AddTrainer />} />
+            <Route path={RoutePaths.MY_ACCOUNT} element={<StudentRoute />}>
+              <Route path={RoutePaths.ADD_TRAINER} element={<AddTrainer />} />
 
               <Route
-                path="/my-account/trainings/add-passed-training"
+                path={RoutePaths.ADD_PASSED_TRAINING}
                 element={<AddPassedTraining />}
               />
             </Route>

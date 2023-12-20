@@ -1,3 +1,5 @@
+import RoutePaths from "../../constants/routes";
+
 import { RegistrationSuccess } from "../../components/Icon/Icon";
 import Button from "../../components/Button/Button";
 
@@ -10,7 +12,7 @@ const ChangePasswordSuccess: React.FC = () => {
       </div>
       <p>Please proceed sign in with new password</p>
 
-      <Button buttonText="Sign In" isLink={true} path="login" />
+      <Button buttonText="Sign In" isLink={true} path={RoutePaths.LOGIN} />
     </div>
   );
 };

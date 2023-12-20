@@ -1,4 +1,5 @@
-import React from "react";
+import RoutePaths from "../../constants/routes";
+
 import Box from "../../components/Box/Box";
 import Button from "../../components/Button/Button";
 import boxImg1 from "../../assets/images/box-img-1.png";
@@ -32,7 +33,7 @@ const HomePage: React.FC = () => {
           Qui ut exercitation officia proident enim non tempor tempor ipsum ex
           nulla ea adipisicing sit consequat enim elit cupidatat o
         </p>
-        <Button buttonText="Join Us" isLink={true} path="join-us" />
+        <Button buttonText="Join Us" isLink={true} path={RoutePaths.JOIN_US} />
       </div>
     );
   };

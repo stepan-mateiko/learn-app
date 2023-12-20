@@ -1,3 +1,5 @@
+import RoutePaths from "../../constants/routes";
+
 import { RegistrationSuccess } from "../../components/Icon/Icon";
 import Button from "../../components/Button/Button";
 
@@ -22,7 +24,11 @@ const RegistrationVerification: React.FC = () => {
       <p>{user.userName}</p>
       <h4>Password</h4>
       <p>{user.userPassword}</p>
-      <Button buttonText="My account" isLink={true} path="my-account" />
+      <Button
+        buttonText="My account"
+        isLink={true}
+        path={RoutePaths.MY_ACCOUNT}
+      />
     </div>
   );
 };

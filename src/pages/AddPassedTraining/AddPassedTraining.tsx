@@ -3,6 +3,7 @@ import "react-toastify/dist/ReactToastify.css";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 
+import RoutePaths from "../../constants/routes";
 import Input from "../../components/Input/Input";
 import Button from "../../components/Button/Button";
 import { trainersData } from "../../helpers/mockedTrainers";
@@ -50,15 +51,15 @@ const AddPassedTraining: React.FC = () => {
   const handleSubmit = () => {
     handlePostRequest();
     notify();
-    setTimeout(() => navigate("/my-account/trainings"), 3000);
+    setTimeout(() => navigate(RoutePaths.TRAINING), 3000);
   };
   return (
     <div>
       <Breadcrumb
         links={[
-          "/my-account",
-          "/my-account/trainings",
-          "/my-account/trainings/add-passed-training",
+          RoutePaths.MY_ACCOUNT,
+          RoutePaths.TRAINING,
+          RoutePaths.ADD_PASSED_TRAINING,
         ]}
         labels={["My Account", "Trainings", "Add Passed Training"]}
       />
@@ -107,7 +108,7 @@ const AddPassedTraining: React.FC = () => {
           <Button
             buttonText="Cancel"
             isLink={true}
-            path="my-account/trainings"
+            path={RoutePaths.TRAINING}
           />
           <Button buttonText="Add" onClick={handleSubmit} />
           <ToastContainer

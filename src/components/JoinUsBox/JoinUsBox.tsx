@@ -1,3 +1,4 @@
+import RoutePaths from "../../constants/routes";
 import Button from "../Button/Button";
 import JoinUsImage1 from "../../assets/images/join-us-img-1.png";
 import JoinUsImage2 from "../../assets/images/join-us-img-2.png";
@@ -17,7 +18,7 @@ const JoinUsBox: React.FC<JoinUsBoxProps> = ({ role }) => {
         <Button
           buttonText="Join Us"
           isLink={true}
-          path={`registration/${role}`}
+          path={`${RoutePaths.REGISTRATION}/${role}`}
         />
       </div>
       <div>

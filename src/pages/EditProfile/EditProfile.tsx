@@ -1,5 +1,8 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+
+import RoutePaths from "../../constants/routes";
+
 import Input from "../../components/Input/Input";
 import Button from "../../components/Button/Button";
 import studentImg from "../../assets/images/student-profile-img.png";
@@ -52,7 +55,7 @@ const EditProfile: React.FC = () => {
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     handlePostRequest();
-    navigate("/my-account");
+    navigate(RoutePaths.MY_ACCOUNT);
   };
 
   return (
@@ -120,7 +123,11 @@ const EditProfile: React.FC = () => {
           />
         )}
         <div>
-          <Button buttonText="Cancel" isLink={true} path="my-account" />
+          <Button
+            buttonText="Cancel"
+            isLink={true}
+            path={RoutePaths.MY_ACCOUNT}
+          />
           <Button buttonText="Save changes" isSubmit={true} />
         </div>
       </form>

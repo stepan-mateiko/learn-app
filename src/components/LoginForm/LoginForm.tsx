@@ -2,6 +2,8 @@ import { Link, useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 
+import RoutePaths from "../../constants/routes";
+
 import Input from "../Input/Input";
 import Button from "../Button/Button";
 import { UserActionTypes } from "../../store/users/types";
@@ -22,7 +24,7 @@ const LoginForm: React.FC = () => {
   useEffect(() => {
     const storedToken = localStorage.getItem("token");
     if (storedToken) {
-      navigate("/home");
+      navigate(RoutePaths.HOME);
     }
   }, [navigate]);
 
@@ -39,7 +41,7 @@ const LoginForm: React.FC = () => {
       type: UserActionTypes.LOGIN,
       payload: loggedUser,
     });
-    navigate("/home");
+    navigate(RoutePaths.HOME);
   };
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -69,7 +71,7 @@ const LoginForm: React.FC = () => {
       </form>
       <p>OR</p>
       <p>
-        Don't have account? <Link to="/join-us">Sign up</Link>
+        Don't have account? <Link to={RoutePaths.JOIN_US}>Sign up</Link>
       </p>
     </div>
   );
