@@ -1,8 +1,8 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
 
 import RoutePaths from "../../constants/routes";
 
+import ChangePasswordSuccess from "../../components/ChangePasswordSuccess/ChangePasswordSuccess";
 import Input from "../../components/Input/Input";
 import Button from "../../components/Button/Button";
 import { Lock } from "../../components/Icon/Icon";
@@ -13,11 +13,11 @@ interface User {
 }
 
 const ChangePassword: React.FC = () => {
-  const navigate = useNavigate();
   const user: User = JSON.parse(localStorage.getItem("users") || "null");
   const [currentPassword, setCurrentPassword] = useState<string>("");
   const [newPassword, setNewPassword] = useState<string>("");
   const [confirmPassword, setConfirmPassword] = useState<string>("");
+  const [isSuccess, setIsSuccess] = useState<boolean>(false);
 
   const handleInputChange =
     (setter: React.Dispatch<React.SetStateAction<string>>) =>
@@ -37,7 +37,7 @@ const ChangePassword: React.FC = () => {
         userPassword: newPassword,
       };
       localStorage.setItem("users", JSON.stringify(updatedUser));
-      navigate(RoutePaths.CHANGE_PASSWORD_SUCCESS);
+      setIsSuccess(true);
     } else {
       setConfirmPassword("");
       setNewPassword("");
@@ -51,42 +51,47 @@ const ChangePassword: React.FC = () => {
   };
 
   return (
-    <div>
-      <h3>Security</h3>
-      <div style={{ display: "flex" }}>
+    <>
+      {!isSuccess && (
         <div>
-          <Lock /> Change password
-        </div>
-        <form action="#" method="post" onSubmit={handleSubmit}>
-          <Input
-            type="password"
-            value={currentPassword}
-            label="Current password"
-            onChange={handleInputChange(setCurrentPassword)}
-          />
-          <Input
-            type="password"
-            value={newPassword}
-            label="New password"
-            onChange={handleInputChange(setNewPassword)}
-          />
-          <Input
-            type="password"
-            value={confirmPassword}
-            label="Confirm new password"
-            onChange={handleInputChange(setConfirmPassword)}
-          />
-          <div>
-            <Button
-              buttonText="Cancel"
-              isLink={true}
-              path={RoutePaths.MY_ACCOUNT}
-            />
-            <Button buttonText="Change password" isSubmit={true} />
+          <h3>Security</h3>
+          <div style={{ display: "flex" }}>
+            <div>
+              <Lock /> Change password
+            </div>
+            <form action="#" method="post" onSubmit={handleSubmit}>
+              <Input
+                type="password"
+                value={currentPassword}
+                label="Current password"
+                onChange={handleInputChange(setCurrentPassword)}
+              />
+              <Input
+                type="password"
+                value={newPassword}
+                label="New password"
+                onChange={handleInputChange(setNewPassword)}
+              />
+              <Input
+                type="password"
+                value={confirmPassword}
+                label="Confirm new password"
+                onChange={handleInputChange(setConfirmPassword)}
+              />
+              <div>
+                <Button
+                  buttonText="Cancel"
+                  isLink={true}
+                  path={RoutePaths.MY_ACCOUNT}
+                />
+                <Button buttonText="Change password" isSubmit={true} />
+              </div>
+            </form>
           </div>
-        </form>
-      </div>
-    </div>
+        </div>
+      )}
+      {isSuccess && <ChangePasswordSuccess />}
+    </>
   );
 };
 

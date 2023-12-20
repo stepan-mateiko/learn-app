@@ -11,7 +11,6 @@ import ChangePassword from "./pages/ChangePassword/ChangePassword";
 import RegistrationVerification from "./pages/RegistrationVerification/RegistrationVerification";
 import LoginPage from "./pages/LoginPage/LoginPage";
 import HomePage from "./pages/HomePage/HomePage";
-import ChangePasswordSuccess from "./pages/ChangePasswordSuccess/ChangePasswordSuccess";
 import EditProfile from "./pages/EditProfile/EditProfile";
 import AddTrainer from "./pages/AddTrainer/AddTrainer";
 import AddPassedTraining from "./pages/AddPassedTraining/AddPassedTraining";
@@ -48,10 +47,7 @@ const App: React.FC = () => {
               element={<ChangePassword />}
             />
             <Route path={RoutePaths.TRAINING} element={<Training />} />
-            <Route
-              path={RoutePaths.CHANGE_PASSWORD_SUCCESS}
-              element={<ChangePasswordSuccess />}
-            />
+
             <Route
               path={RoutePaths.REGISTRATION_VERIFICATION}
               element={<RegistrationVerification />}

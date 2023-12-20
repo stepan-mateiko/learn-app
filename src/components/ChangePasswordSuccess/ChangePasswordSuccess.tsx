@@ -1,7 +1,7 @@
 import RoutePaths from "../../constants/routes";
 
-import { RegistrationSuccess } from "../../components/Icon/Icon";
-import Button from "../../components/Button/Button";
+import { RegistrationSuccess } from "../Icon/Icon";
+import Button from "../Button/Button";
 
 const ChangePasswordSuccess: React.FC = () => {
   return (
