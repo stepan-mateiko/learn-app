@@ -4,6 +4,7 @@ export interface User {
   lastName: string;
   firstName: string;
   isActive: boolean;
+  email: string;
   role: string;
   specialization: string;
   dob?: string;

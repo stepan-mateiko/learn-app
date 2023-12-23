@@ -1,4 +1,5 @@
 import RoutePaths from "../../constants/routes";
+import axios from "axios";
 
 import Box from "../../components/Box/Box";
 import Button from "../../components/Button/Button";
@@ -10,6 +11,21 @@ import homeImg from "../../assets/images/home-img.png";
 const HomePage: React.FC = () => {
   const user = JSON.parse(localStorage.getItem("users") || "null");
   const token = JSON.parse(localStorage.getItem("token") || "null");
+
+  const getData = async () => {
+    try {
+      const data1 = (await axios.get("http://localhost:3080/api/users")).data;
+      console.log(data1.users);
+      const data2 = (await axios.get("http://localhost:3080/api/trainers"))
+        .data;
+      console.log(data2.trainers);
+      const data3 = (await axios.get("http://localhost:3080/api/students"))
+        .data;
+      console.log(data3.students);
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   const renderWelcomeSection = () => {
     return (
@@ -65,6 +81,7 @@ const HomePage: React.FC = () => {
 
   return (
     <div>
+      <button onClick={() => getData()}>Test</button>
       {renderWelcomeSection()}
       {!token && (
         <div>

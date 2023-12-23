@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
 import RoutePaths from "../../constants/routes";
 import Button from "../Button/Button";
@@ -27,31 +28,19 @@ const RegistrationForm: React.FC<RegistrationFormProps> = ({ role }) => {
       }
     };
 
-  const handlePostRequest = () => {
-    const { v4: uuidv4 } = require("uuid");
-    const userName = `${userFirstName}-${userLastName}`.toLowerCase();
-    const generateRandomPassword = (length: number): string => {
-      const charset =
-        "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
-      return Array.from(
-        { length },
-        () => charset[Math.floor(Math.random() * charset.length)]
-      ).join("");
-    };
+  const handlePostRequest = async () => {
     let newUser = {
-      id: uuidv4(),
-      userName: userName,
       firstName: userFirstName,
       lastName: userLastName,
       email: userEmail,
       dob: userDOB,
       address: userAddress,
       role: role,
-      isActive: true,
       specialization: role === "trainer" ? userSpecialization : "student",
-      userPassword: generateRandomPassword(5),
     };
     localStorage.setItem("users", JSON.stringify(newUser));
+    await axios.post("http://localhost:3080/api/users", newUser);
+
     console.log(newUser);
   };
 

@@ -13,16 +13,16 @@ export interface Student {
 
 export const studentsData: Student[] = [
   {
-    id: "2f1763a3-bbe8-4573-af65-bc88d9871911",
-    userName: "stepan-mateiko",
-    firstName: "Stepan",
-    lastName: "Mateiko",
-    dob: "2023-12-12",
-    address: "Lviv, Muzyky 34",
+    firstName: "Jon",
+    lastName: "Snow",
+    dob: "",
+    address: "",
     specialization: "student",
+    trainings: ["001"],
+    trainers: ["3c372c23-3c3b-4bcd-9320-9b03f63ab3e3"],
+    id: "29833a19-e909-4e5c-97ff-2ceee8bd476e",
+    userName: "jon-snow",
     isActive: true,
-    trainers: ["003", "007", "004"],
-    trainings: ["002", "005", "010"],
   },
   {
     id: "001",

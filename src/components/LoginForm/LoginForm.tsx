@@ -1,6 +1,7 @@
 import { Link, useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
+import axios from "axios";
 
 import RoutePaths from "../../constants/routes";
 
@@ -28,6 +29,13 @@ const LoginForm: React.FC = () => {
     }
   }, [navigate]);
 
+  const login = async (data: any) => {
+    console.log(data);
+    const response = await axios.post("http://localhost:3080/api/login", data);
+    const result = JSON.stringify(response.data);
+    localStorage.setItem("users", result);
+    console.log(result);
+  };
   const handlePostRequest = () => {
     const userToken = (Math.random() * 10).toString();
     localStorage.setItem("token", userToken);
@@ -36,7 +44,12 @@ const LoginForm: React.FC = () => {
       token: userToken,
       role: "student",
     };
+    const apiData = {
+      userName: userName,
+      password: userPassword,
+    };
     localStorage.setItem("user", JSON.stringify(loggedUser));
+    login(apiData);
     dispatch({
       type: UserActionTypes.LOGIN,
       payload: loggedUser,

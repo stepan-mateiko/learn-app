@@ -26,7 +26,6 @@ const MyAccount: React.FC = () => {
         )[0] as Trainer);
 
   let formattedData: string[][] = [];
-
   switch (role) {
     case "student":
       formattedData = (myData as Student).trainers
