@@ -25,7 +25,7 @@ export const trainersData: Trainer[] = [
     isActive: true,
   },
   {
-    id: "001",
+    id: "84d2f293-4862-4bab-a875-31745007a743",
     userName: "trainer1",
     lastName: "Johnson",
     firstName: "Michael",

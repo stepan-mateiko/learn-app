@@ -25,7 +25,7 @@ export const studentsData: Student[] = [
     isActive: true,
   },
   {
-    id: "001",
+    id: "84d2f293-4862-4bab-a875-31745007a743",
     userName: "student1",
     lastName: "Doe",
     firstName: "John",

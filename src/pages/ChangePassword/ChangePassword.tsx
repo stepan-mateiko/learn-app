@@ -9,7 +9,7 @@ import { Lock } from "../../components/Icon/Icon";
 
 interface User {
   id: string;
-  userPassword: string;
+  password: string;
 }
 
 const ChangePassword: React.FC = () => {
@@ -18,7 +18,7 @@ const ChangePassword: React.FC = () => {
   const [newPassword, setNewPassword] = useState<string>("");
   const [confirmPassword, setConfirmPassword] = useState<string>("");
   const [isSuccess, setIsSuccess] = useState<boolean>(false);
-
+  console.log(user);
   const handleInputChange =
     (setter: React.Dispatch<React.SetStateAction<string>>) =>
     (newValue: string | number | boolean) => {
@@ -28,17 +28,15 @@ const ChangePassword: React.FC = () => {
     };
 
   const handlePostRequest = () => {
-    if (
-      user.userPassword === currentPassword &&
-      newPassword === confirmPassword
-    ) {
+    if (user.password === currentPassword && newPassword === confirmPassword) {
       const updatedUser: User = {
         ...user,
-        userPassword: newPassword,
+        password: newPassword,
       };
       localStorage.setItem("users", JSON.stringify(updatedUser));
       setIsSuccess(true);
     } else {
+      console.log(user.password);
       setConfirmPassword("");
       setNewPassword("");
       setCurrentPassword("");

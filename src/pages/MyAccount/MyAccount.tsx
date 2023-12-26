@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import axios from "axios";
 
 import RoutePaths from "../../constants/routes";
 
@@ -12,49 +13,71 @@ import ModalBox from "../../components/ModalBox/ModalBox";
 import { studentsData, Student } from "../../helpers/mockedStudents";
 
 const MyAccount: React.FC = () => {
-  const user = JSON.parse(localStorage.getItem("users") || "null");
+  const [trainers, setTrainers] = useState<Trainer[]>([]);
+  const [students, setStudents] = useState<Student[]>([]);
   const [isModalOpen, setModalOpen] = useState<boolean>(false);
+
+  const getData = async () => {
+    const trainersfromBack = (
+      await axios.get("http://localhost:3080/api/trainers")
+    ).data.trainers;
+    const studentsfromBack = (
+      await axios.get("http://localhost:3080/api/students")
+    ).data.students;
+
+    setStudents(studentsfromBack);
+    setTrainers(trainersfromBack);
+  };
+
+  useEffect(() => {
+    getData();
+  }, []);
+
+  const user = JSON.parse(localStorage.getItem("users") || "null");
   const { role } = user;
   const tableTitle = role === "student" ? "My Trainers" : "My students";
+
   const headings =
     role === "student" ? ["Name", "Specialization"] : ["Name", "Status"];
   const myData =
     role === "student"
-      ? (studentsData.filter((student) => student.id === user.id)[0] as Student)
-      : (trainersData.filter(
-          (trainer) => trainer.id === user.id
-        )[0] as Trainer);
+      ? (students.filter((student) => student.id === user.id)[0] as Student)
+      : (trainers.filter((trainer) => trainer.id === user.id)[0] as Trainer);
 
   let formattedData: string[][] = [];
-  switch (role) {
-    case "student":
-      formattedData = (myData as Student).trainers
-        .map((trainerId) => {
-          const trainer = trainersData.find((t) => t.id === trainerId);
-          return trainer
-            ? [
-                `${trainer.firstName} ${trainer.lastName}`,
-                trainer.specialization,
-              ]
-            : [];
-        })
-        .filter(Boolean);
-      break;
-    case "trainer":
-      formattedData = (myData as Trainer).students
-        .map((studentId) => {
-          const student = studentsData.find((s) => s.id === studentId);
-          return student
-            ? [
-                `${student.firstName} ${student.lastName}`,
-                student.isActive ? "Active" : "Not active",
-              ]
-            : [];
-        })
-        .filter(Boolean);
-      break;
-    default:
-      break;
+
+  console.log(myData);
+  if (myData) {
+    switch (role) {
+      case "student":
+        formattedData = (myData as Student).trainers
+          .map((trainerId) => {
+            const trainer = trainers.find((t) => t.id === trainerId);
+            return trainer
+              ? [
+                  `${trainer.firstName} ${trainer.lastName}`,
+                  trainer.specialization,
+                ]
+              : [];
+          })
+          .filter(Boolean);
+        break;
+      case "trainer":
+        formattedData = (myData as Trainer).students
+          .map((studentId) => {
+            const student = students.find((s) => s.id === studentId);
+            return student
+              ? [
+                  `${student.firstName} ${student.lastName}`,
+                  student.isActive ? "Active" : "Not active",
+                ]
+              : [];
+          })
+          .filter(Boolean);
+        break;
+      default:
+        break;
+    }
   }
 
   const handleModalOpen = () => {

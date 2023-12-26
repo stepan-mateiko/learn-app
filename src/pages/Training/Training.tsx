@@ -1,10 +1,13 @@
+import axios from "axios";
+import { useEffect, useState } from "react";
+
 import RoutePaths from "../../constants/routes";
-import { trainersData, Trainer } from "../../helpers/mockedTrainers";
+import { Trainer } from "../../helpers/mockedTrainers";
 import {
   trainingsHeadings,
-  trainingsData,
+  TrainingInterface,
 } from "../../helpers/mockedTrainings";
-import { studentsData, Student } from "../../helpers/mockedStudents";
+import { Student } from "../../helpers/mockedStudents";
 
 import Button from "../../components/Button/Button";
 import Table from "../../components/Table/Table";
@@ -20,58 +23,72 @@ interface User {
   id: string;
 }
 const Training: React.FC = () => {
+  const [trainers, setTrainers] = useState<Trainer[]>([]);
+  const [students, setStudents] = useState<Student[]>([]);
+  const [trainings, setTrainings] = useState<TrainingInterface[]>([]);
+
   const user = JSON.parse(localStorage.getItem("users") || "null") as User;
   const { role } = user;
-  const myData =
-    role === "student"
-      ? (studentsData.filter((student) => student.id === user.id)[0] as Student)
-      : (trainersData.filter(
-          (trainer) => trainer.id === user.id
-        )[0] as Trainer);
-
   const formattedHeading =
     role === "student"
       ? trainingsHeadings.filter((training) => training !== "Students")
       : trainingsHeadings.filter((training) => training !== "Trainer");
 
-  let formattedData: any[][] = [];
+  const getData = async () => {
+    const trainersfromBack = (
+      await axios.get("http://localhost:3080/api/trainers")
+    ).data.trainers;
+    const studentsfromBack = (
+      await axios.get("http://localhost:3080/api/students")
+    ).data.students;
+    const trainingsFromBack = (
+      await axios.get("http://localhost:3080/api/trainings")
+    ).data.trainings;
+    setStudents(studentsfromBack);
+    setTrainers(trainersfromBack);
+    setTrainings(trainingsFromBack);
+  };
 
+  useEffect(() => {
+    getData();
+  }, []);
+
+  let formattedData: any[][] = [];
+  const myData =
+    role === "student"
+      ? (students.filter((student) => student.id === user.id)[0] as Student)
+      : (trainers.filter((trainer) => trainer.id === user.id)[0] as Trainer);
   switch (role) {
     case "student":
-      formattedData = trainingsData
-        .filter((item) => (myData as Student).trainers.includes(item.id))
+      formattedData = trainings
+        .filter((item) => (myData as Student).id === item.student)
         .map((training) => [
           training.date,
           training.name,
           training.type,
           `${
-            trainersData.find((item) => item.id === training.trainer)?.firstName
-          } ${
-            trainersData.find((item) => item.id === training.trainer)?.lastName
-          }`,
-          training.trainer,
+            trainers.find((item) => item.id === training.trainer)?.firstName
+          } ${trainers.find((item) => item.id === training.trainer)?.lastName}`,
           training.duration,
         ]);
       break;
     case "trainer":
-      formattedData = trainingsData
-        .filter((item) => (myData as Trainer).students.includes(item.id))
+      formattedData = trainings
+        .filter((item) => (myData as Trainer).id === item.trainer)
         .map((training) => [
           training.date,
           training.name,
           training.type,
-          training.students.map(
-            (item) =>
-              `${studentsData.find((e) => e.id === item)?.firstName}  ${
-                studentsData.find((e) => e.id === item)?.lastName
-              }`
-          ),
+          `${students.find((e) => e.id === training.student)?.firstName}  ${
+            students.find((e) => e.id === training.student)?.lastName
+          }`,
           training.duration,
         ]);
       break;
     default:
       break;
   }
+
   return (
     <div>
       <Breadcrumb

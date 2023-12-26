@@ -1,13 +1,14 @@
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useNavigate } from "react-router-dom";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import axios from "axios";
 
 import RoutePaths from "../../constants/routes";
 import Input from "../../components/Input/Input";
 import Button from "../../components/Button/Button";
-import { trainersData } from "../../helpers/mockedTrainers";
 import Breadcrumb from "../../components/Breadcrumbs/Breadcrumbs";
+import { Trainer } from "../../helpers/mockedTrainers";
 
 const AddPassedTraining: React.FC = () => {
   const user = JSON.parse(localStorage.getItem("users") || "null");
@@ -19,10 +20,22 @@ const AddPassedTraining: React.FC = () => {
   const [trainingType, setTrainingType] = useState<string>("");
   const [trainingDescription, setTrainingDescription] = useState<string>("");
   const [trainingTrainer, setTrainingTrainer] = useState<string>("");
+  const [trainersList, setTrainersList] = useState<Trainer[]>([]);
 
-  const formattedData = trainersData
-    .map((trainer) => [`${trainer.firstName} ${trainer.lastName}`])
-    .map((item) => item[0]);
+  const getTrainers = async () => {
+    const trainersfromBack = (
+      await axios.get("http://localhost:3080/api/trainers")
+    ).data.trainers;
+    setTrainersList(trainersfromBack);
+  };
+
+  useEffect(() => {
+    getTrainers();
+  }, []);
+
+  const formattedTrainers = trainersList.map(
+    (trainer) => `${trainer.firstName} ${trainer.lastName}`
+  );
 
   const handleInputChange =
     (setter: React.Dispatch<React.SetStateAction<string>>) =>
@@ -32,19 +45,20 @@ const AddPassedTraining: React.FC = () => {
       }
     };
 
-  const handlePostRequest = () => {
-    const { v4: uuidv4 } = require("uuid");
+  const handlePostRequest = async () => {
     let newTraining = {
-      id: uuidv4(),
       duration: trainingDuration,
-      trainer: trainingTrainer,
+      trainer: trainersList.filter(
+        (trainer) =>
+          `${trainer.firstName} ${trainer.lastName}` === trainingTrainer
+      )[0].id,
       type: trainingType,
       date: trainingsDate,
       name: trainingName,
       description: trainingDescription,
-      students: [user.id],
+      student: user.id,
     };
-    localStorage.setItem("trainings", JSON.stringify(newTraining));
+    await axios.post("http://localhost:3080/api/trainings", newTraining);
     console.log(newTraining);
   };
 
@@ -102,7 +116,7 @@ const AddPassedTraining: React.FC = () => {
           value={trainingTrainer}
           label="Add trainers"
           onChange={handleInputChange(setTrainingTrainer)}
-          options={formattedData}
+          options={formattedTrainers}
         />
         <div>
           <Button
