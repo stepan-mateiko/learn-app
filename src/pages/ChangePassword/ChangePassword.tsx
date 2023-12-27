@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import axios from "axios";
 
 import RoutePaths from "../../constants/routes";
 
@@ -10,6 +11,8 @@ import { Lock } from "../../components/Icon/Icon";
 interface User {
   id: string;
   password: string;
+  createdAt?: string;
+  userName?: string;
 }
 
 const ChangePassword: React.FC = () => {
@@ -18,7 +21,6 @@ const ChangePassword: React.FC = () => {
   const [newPassword, setNewPassword] = useState<string>("");
   const [confirmPassword, setConfirmPassword] = useState<string>("");
   const [isSuccess, setIsSuccess] = useState<boolean>(false);
-  console.log(user);
   const handleInputChange =
     (setter: React.Dispatch<React.SetStateAction<string>>) =>
     (newValue: string | number | boolean) => {
@@ -27,12 +29,15 @@ const ChangePassword: React.FC = () => {
       }
     };
 
-  const handlePostRequest = () => {
+  const handlePostRequest = async () => {
     if (user.password === currentPassword && newPassword === confirmPassword) {
       const updatedUser: User = {
         ...user,
         password: newPassword,
       };
+      await axios.put(`http://localhost:3080/api/users/${user.id}`, {
+        password: newPassword,
+      });
       localStorage.setItem("users", JSON.stringify(updatedUser));
       setIsSuccess(true);
     } else {

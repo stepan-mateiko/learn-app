@@ -1,15 +1,38 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import axios from "axios";
 
 import RoutePaths from "../../constants/routes";
 import Table from "../../components/Table/Table";
 import Button from "../../components/Button/Button";
-import { trainersData } from "../../helpers/mockedTrainers";
-import { studentsData } from "../../helpers/mockedStudents";
+import { Trainer } from "../../helpers/mockedTrainers";
+import { Student } from "../../helpers/mockedStudents";
 import Breadcrumb from "../../components/Breadcrumbs/Breadcrumbs";
 
 const AddTrainer: React.FC = () => {
   const user = JSON.parse(localStorage.getItem("users") || "null");
-  const myData = studentsData.filter((student) => student.id === user.id)[0];
+  const { id: studentId } = user;
+  const [trainers, setTrainers] = useState<Trainer[]>([]);
+  const [students, setStudents] = useState<Student[]>([]);
+  const [myTrainers, setMyTrainers] = useState<any[][]>([]);
+
+  const getData = async () => {
+    const trainersfromBack = (
+      await axios.get("http://localhost:3080/api/trainers")
+    ).data.trainers;
+    const studentsfromBack = (
+      await axios.get("http://localhost:3080/api/students")
+    ).data.students;
+
+    setStudents(studentsfromBack);
+    setTrainers(trainersfromBack);
+  };
+
+  useEffect(() => {
+    getData();
+  }, []);
+
+  const myData = students.filter((student) => student.id === user.id)[0];
+
   const [checkedTrainers, setCheckedTrainers] = useState<
     Record<string, boolean>
   >({});
@@ -21,37 +44,71 @@ const AddTrainer: React.FC = () => {
     }));
   };
 
-  const allTrainers = trainersData.map((trainer) => [
-    <input
-      type="checkbox"
-      checked={checkedTrainers[trainer.id]}
-      onChange={() => handleCheckboxChange(trainer.id)}
-    />,
-    `${trainer.firstName} ${trainer.lastName}`,
-    trainer.specialization,
-  ]);
+  const allTrainers = trainers
+    .filter((item) => !myData.trainers.includes(item.id))
+    .map((trainer) => [
+      <input
+        type="checkbox"
+        checked={checkedTrainers[trainer.id]}
+        onChange={() => handleCheckboxChange(trainer.id)}
+      />,
+      `${trainer.firstName} ${trainer.lastName}`,
+      trainer.specialization,
+    ]);
 
-  const [myTrainers, setMyTrainers] = useState<any[][]>(
-    trainersData
-      .filter((item) => myData.trainers.includes(item.id))
-      .map((trainer) => [
-        `${trainer.firstName} ${trainer.lastName}`,
-        trainer.specialization,
-      ])
-  );
+  useEffect(() => {
+    setMyTrainers(
+      trainers
+        .filter((item) => myData.trainers.includes(item.id))
+        .map((trainer) => [
+          `${trainer.firstName} ${trainer.lastName}`,
+          trainer.specialization,
+        ])
+    );
+  }, [trainers]);
 
   const headings = ["", "Name", "Specialization"];
 
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
-    const selectedTrainers = trainersData
+    const selectedIds = trainers
+      .filter((item) => Object.keys(checkedTrainers).includes(item.id))
+      .map((item) => item.id);
+
+    const selectedTrainers = trainers
       .filter((item) => Object.keys(checkedTrainers).includes(item.id))
       .map((trainer) => [
         `${trainer.firstName} ${trainer.lastName}`,
         trainer.specialization,
       ]);
+    const myOldtrainers = myData.trainers;
+    const trainersOldStudents = trainers
+      .filter((item) => Object.keys(checkedTrainers).includes(item.id))
+      .map((item) => [item.id, item.students]);
 
+    console.log(
+      selectedIds.map((item) =>
+        trainersOldStudents
+          .filter((e) => e[0] === item)
+          .map((e) => e[1])[0]
+          .concat(studentId)
+      )
+    );
+
+    await axios.put(`http://localhost:3080/api/students/${studentId}`, {
+      trainers: myOldtrainers.concat(selectedIds),
+    });
+
+    selectedIds.map(
+      async (item) =>
+        await axios.put(`http://localhost:3080/api/trainers/${item}`, {
+          students: trainersOldStudents
+            .filter((e) => e[0] === item)
+            .map((e) => e[1])[0]
+            .concat(studentId),
+        })
+    );
     setMyTrainers((prevMyTrainers) => {
       const existingTrainersSet = new Set(
         prevMyTrainers.map((trainer) => trainer[0])

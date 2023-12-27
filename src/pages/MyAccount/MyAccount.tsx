@@ -46,7 +46,6 @@ const MyAccount: React.FC = () => {
 
   let formattedData: string[][] = [];
 
-  console.log(myData);
   if (myData) {
     switch (role) {
       case "student":

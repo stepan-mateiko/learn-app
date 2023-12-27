@@ -10,6 +10,7 @@ import studentImg from "../../assets/images/student-profile-img.png";
 const EditProfile: React.FC = () => {
   const navigate = useNavigate();
   const user = JSON.parse(localStorage.getItem("users") || "null");
+  console.log(user);
   const { role } = user;
   const [userFirstName, setUserFirstName] = useState<string>(user.firstName);
   const [userLastName, setUserLastName] = useState<string>(user.lastName);
