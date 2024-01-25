@@ -9,7 +9,7 @@ import { Student } from "../../helpers/mockedStudents";
 import Breadcrumb from "../../components/Breadcrumbs/Breadcrumbs";
 
 const AddTrainer: React.FC = () => {
-  const user = JSON.parse(localStorage.getItem("users") || "null");
+  const user = JSON.parse(localStorage.getItem("user") || "null");
   const { id: studentId } = user;
   const [trainers, setTrainers] = useState<Trainer[]>([]);
   const [students, setStudents] = useState<Student[]>([]);
@@ -86,15 +86,6 @@ const AddTrainer: React.FC = () => {
     const trainersOldStudents = trainers
       .filter((item) => Object.keys(checkedTrainers).includes(item.id))
       .map((item) => [item.id, item.students]);
-
-    console.log(
-      selectedIds.map((item) =>
-        trainersOldStudents
-          .filter((e) => e[0] === item)
-          .map((e) => e[1])[0]
-          .concat(studentId)
-      )
-    );
 
     await axios.put(`http://localhost:3080/api/students/${studentId}`, {
       trainers: myOldtrainers.concat(selectedIds),

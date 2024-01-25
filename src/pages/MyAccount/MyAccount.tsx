@@ -44,7 +44,6 @@ const MyAccount: React.FC = () => {
       ? { ...user, ...students.filter((student) => student.id === user.id)[0] }
       : { ...user, ...trainers.filter((trainer) => trainer.id === user.id)[0] };
 
-  console.log(myData);
   let formattedData: string[][] = [];
   switch (role) {
     case "student":

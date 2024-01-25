@@ -21,8 +21,7 @@ const RegistrationForm: React.FC<RegistrationFormProps> = ({ role }) => {
   const [userEmail, setUserEmail] = useState<string>("");
   const [userDOB, setUserDOB] = useState<string>("");
   const [userAddress, setUserAddress] = useState<string>("");
-  const [userSpecialization, setUserSpecialization] =
-    useState<string>("HTML/CSS");
+  const [userSpecialization, setUserSpecialization] = useState<string>("");
   const navigate = useNavigate();
   const [specializationOptions, setSpecializationOptions] = useState<
     Specializations[]
@@ -30,6 +29,7 @@ const RegistrationForm: React.FC<RegistrationFormProps> = ({ role }) => {
   const getSpecializations = async () => {
     const res = await axios.get("http://localhost:3080/api/specializations");
     setSpecializationOptions(res.data.specializations);
+    setUserSpecialization(res.data.specializations[0].specialization);
   };
   useEffect(() => {
     getSpecializations();

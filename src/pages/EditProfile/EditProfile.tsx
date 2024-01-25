@@ -12,7 +12,7 @@ import { Trainer } from "../../helpers/mockedTrainers";
 
 const EditProfile: React.FC = () => {
   const navigate = useNavigate();
-  const user = JSON.parse(localStorage.getItem("users") || "null");
+  const user = JSON.parse(localStorage.getItem("user") || "null");
   const { role } = user;
   const [myData, setMyData] = useState<Student | Trainer>(user);
 
@@ -39,7 +39,7 @@ const EditProfile: React.FC = () => {
   }, []);
 
   const [userFirstName, setUserFirstName] = useState<string>(user.firstName);
-  const [userLastName, setUserLastName] = useState<string>(user.lastName);
+  const [userLastName, setUserLastName] = useState<string>(myData.lastName);
   const [userEmail, setUserEmail] = useState<string>(user.email);
   const [userDOB, setUserDOB] = useState<string>(myData.dob);
   const [userAddress, setUserAddress] = useState<string>(myData.address);
@@ -48,7 +48,6 @@ const EditProfile: React.FC = () => {
   const [trainerSpecialization, setTrainerSpecialization] =
     useState<string>("");
 
-  console.log(myData.lastName);
   const handleInputChange =
     (setter: React.Dispatch<React.SetStateAction<string>>) =>
     (newValue: string | number | boolean) => {
@@ -65,20 +64,34 @@ const EditProfile: React.FC = () => {
     }
   };
 
-  const handlePostRequest = () => {
+  const handlePostRequest = async () => {
     let updatedUser = {
       ...user,
       userName: userUserName,
       firstName: userFirstName,
       lastName: userLastName,
       email: userEmail,
-      dob: userDOB,
-      address: userAddress,
-      isActive: userIsActive,
-      specialization: role === "trainer" ? trainerSpecialization : "student",
     };
-    let updatedRole = {};
-    localStorage.setItem("users", JSON.stringify(updatedUser));
+    await axios.put(`http://localhost:3080/api/users/${user.id}`, updatedUser);
+
+    let updatedExtra: Record<string, string | boolean> = {};
+    if (role === "student") {
+      updatedExtra.dob = userDOB;
+      updatedExtra.address = userAddress;
+      updatedExtra.isActive = userIsActive;
+      await axios.put(
+        `http://localhost:3080/api/students/${user.id}`,
+        updatedExtra
+      );
+    } else {
+      updatedExtra.specialization = trainerSpecialization;
+      updatedExtra.isActive = userIsActive;
+      await axios.put(
+        `http://localhost:3080/api/trainers/${user.id}`,
+        updatedExtra
+      );
+    }
+    localStorage.setItem("user", JSON.stringify(updatedUser));
   };
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {

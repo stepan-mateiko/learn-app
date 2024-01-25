@@ -10,6 +10,11 @@ import Button from "../../components/Button/Button";
 import Breadcrumb from "../../components/Breadcrumbs/Breadcrumbs";
 import { Trainer } from "../../helpers/mockedTrainers";
 
+interface TrainingType {
+  id: string;
+  trainingType: string;
+}
+
 const AddPassedTraining: React.FC = () => {
   const user = JSON.parse(localStorage.getItem("user") || "null");
   const navigate = useNavigate();
@@ -21,18 +26,28 @@ const AddPassedTraining: React.FC = () => {
   const [trainingDescription, setTrainingDescription] = useState<string>("");
   const [trainingTrainer, setTrainingTrainer] = useState<string>("");
   const [trainersList, setTrainersList] = useState<Trainer[]>([]);
+  const [trainingTypesList, setTrainingTypesList] = useState<string[]>([]);
 
-  const getTrainers = async () => {
+  const getData = async () => {
     const trainersfromBack = (
       await axios.get("http://localhost:3080/api/trainers")
     ).data.trainers;
+    const trainingTypesfromBack = (
+      await axios.get("http://localhost:3080/api/trainingTypes")
+    ).data.trainingTypes;
     setTrainersList(trainersfromBack);
+    setTrainingTrainer(
+      `${trainersfromBack[0].firstName} ${trainersfromBack[0].lastName}`
+    );
+    setTrainingTypesList(
+      trainingTypesfromBack.map((item: TrainingType) => item.trainingType)
+    );
+    setTrainingType(trainingTypesfromBack[0].trainingType);
   };
 
   useEffect(() => {
-    getTrainers();
+    getData();
   }, []);
-
   const formattedTrainers = trainersList.map(
     (trainer) => `${trainer.firstName} ${trainer.lastName}`
   );
@@ -59,7 +74,6 @@ const AddPassedTraining: React.FC = () => {
       student: user.id,
     };
     await axios.post("http://localhost:3080/api/trainings", newTraining);
-    console.log(newTraining);
   };
 
   const handleSubmit = () => {
@@ -103,7 +117,7 @@ const AddPassedTraining: React.FC = () => {
           value={trainingType}
           label="Type"
           onChange={handleInputChange(setTrainingType)}
-          options={["Webinar", "Full course", "Bootcamp"]}
+          options={trainingTypesList}
         />
         <Input
           type="textarea"
