@@ -1,15 +1,26 @@
 import RoutePaths from "../../constants/routes";
+import axios from "axios";
 
 import { RegistrationSuccess } from "../../components/Icon/Icon";
 import Button from "../../components/Button/Button";
+import { useState } from "react";
 
 interface User {
   userName: string;
-  email: string;
-  userPassword: string;
+  password: string;
 }
 const RegistrationVerification: React.FC = () => {
-  const user = JSON.parse(localStorage.getItem("users") || "{}") as User;
+  const [user, setUser] = useState<User>({ userName: "", password: "" });
+  const getData = async () => {
+    try {
+      const userName = localStorage.getItem("user");
+      const result = await axios.get(
+        `http://localhost:3080/api/users/${userName}`
+      );
+      setUser(result.data);
+    } catch (error) {}
+  };
+  getData();
   return (
     <div style={{ textAlign: "center" }}>
       <h2>Registration</h2>
@@ -23,7 +34,7 @@ const RegistrationVerification: React.FC = () => {
       <h4>User Name</h4>
       <p>{user.userName}</p>
       <h4>Password</h4>
-      <p>{user.userPassword}</p>
+      <p>{user.password}</p>
       <Button
         buttonText="My account"
         isLink={true}

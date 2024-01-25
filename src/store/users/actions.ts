@@ -1,5 +1,32 @@
 import { UserActionTypes } from "./types";
 
+interface CreacteUser {
+  type: UserActionTypes.CREATE;
+  payload: {
+    userName: string;
+    firstName: string;
+    lastName: string;
+    email: string;
+    password: string;
+    role: string;
+  };
+}
+interface UpdateUser {
+  type: UserActionTypes.UPDATE;
+  payload: {
+    userName: string;
+    firstName: string;
+    lastName: string;
+    email: string;
+    password: string;
+    role: string;
+  };
+}
+interface DeleteUser {
+  type: UserActionTypes.DELETE;
+  payload: string;
+}
+
 interface LoginSuccess {
   type: UserActionTypes.LOGIN;
   payload: {
@@ -8,7 +35,6 @@ interface LoginSuccess {
     lastName: string;
     email: string;
     password: string;
-    token: string;
     role: string;
   };
 }
@@ -30,4 +56,10 @@ interface GetUserInfo {
   };
 }
 
-export type UserAction = LoginSuccess | Logout | GetUserInfo;
+export type UserAction =
+  | LoginSuccess
+  | Logout
+  | GetUserInfo
+  | CreacteUser
+  | DeleteUser
+  | UpdateUser;

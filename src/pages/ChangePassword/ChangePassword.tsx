@@ -16,7 +16,7 @@ interface User {
 }
 
 const ChangePassword: React.FC = () => {
-  const user: User = JSON.parse(localStorage.getItem("users") || "null");
+  const user: User = JSON.parse(localStorage.getItem("user") || "null");
   const [currentPassword, setCurrentPassword] = useState<string>("");
   const [newPassword, setNewPassword] = useState<string>("");
   const [confirmPassword, setConfirmPassword] = useState<string>("");
@@ -31,14 +31,10 @@ const ChangePassword: React.FC = () => {
 
   const handlePostRequest = async () => {
     if (user.password === currentPassword && newPassword === confirmPassword) {
-      const updatedUser: User = {
-        ...user,
-        password: newPassword,
-      };
       await axios.put(`http://localhost:3080/api/users/${user.id}`, {
         password: newPassword,
       });
-      localStorage.setItem("users", JSON.stringify(updatedUser));
+      localStorage.removeItem("user");
       setIsSuccess(true);
     } else {
       console.log(user.password);

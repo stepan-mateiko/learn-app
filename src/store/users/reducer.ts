@@ -23,7 +23,6 @@ export function userReducer(state = userInitialState, action: UserAction) {
         lastName: action.payload.lastName,
         email: action.payload.email,
         password: action.payload.password,
-        token: action.payload.token,
         role: action.payload.role,
       };
     case UserActionTypes.LOGOUT:
@@ -47,8 +46,33 @@ export function userReducer(state = userInitialState, action: UserAction) {
         lastName: action.payload.lastName,
         email: action.payload.email,
         password: action.payload.password,
-        token: action.payload.token,
         role: action.payload.role,
+      };
+    case UserActionTypes.CREATE:
+      return {
+        ...state,
+        isAuth: true,
+        userName: action.payload.userName,
+        firstName: action.payload.firstName,
+        lastName: action.payload.lastName,
+        email: action.payload.email,
+        password: action.payload.password,
+        role: action.payload.role,
+      };
+    case UserActionTypes.UPDATE:
+      return {
+        ...state,
+        isAuth: true,
+        userName: action.payload.userName,
+        firstName: action.payload.firstName,
+        lastName: action.payload.lastName,
+        email: action.payload.email,
+        password: action.payload.password,
+        role: action.payload.role,
+      };
+    case UserActionTypes.DELETE:
+      return {
+        ...state,
       };
     default:
       return state;

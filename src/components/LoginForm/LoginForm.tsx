@@ -30,15 +30,27 @@ const LoginForm: React.FC = () => {
   }, [navigate]);
 
   const login = async (data: any) => {
-    console.log(data);
-    const response = await axios.post("http://localhost:3080/api/login", data);
-    const result = JSON.stringify(response.data);
-    localStorage.setItem("users", result);
-    console.log(result);
+    try {
+      const response = await axios.post(
+        "http://localhost:3080/api/login",
+        data,
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
+      const result = JSON.stringify(response.data);
+      localStorage.setItem("user", result);
+      navigate(RoutePaths.HOME);
+    } catch (error: any) {
+      console.error("Login error:", error.response.data.message);
+    }
   };
+
   const handlePostRequest = () => {
     const userToken = (Math.random() * 10).toString();
-    localStorage.setItem("token", userToken);
+    // localStorage.setItem("token", userToken);
     const loggedUser = {
       userName: userName,
       token: userToken,
@@ -48,13 +60,11 @@ const LoginForm: React.FC = () => {
       userName: userName,
       password: userPassword,
     };
-    localStorage.setItem("user", JSON.stringify(loggedUser));
     login(apiData);
     dispatch({
       type: UserActionTypes.LOGIN,
       payload: loggedUser,
     });
-    navigate(RoutePaths.HOME);
   };
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();

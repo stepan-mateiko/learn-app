@@ -27,7 +27,7 @@ const Training: React.FC = () => {
   const [students, setStudents] = useState<Student[]>([]);
   const [trainings, setTrainings] = useState<TrainingInterface[]>([]);
 
-  const user = JSON.parse(localStorage.getItem("users") || "null") as User;
+  const user = JSON.parse(localStorage.getItem("user") || "null") as User;
   const { role } = user;
   const formattedHeading =
     role === "student"

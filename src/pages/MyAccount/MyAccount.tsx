@@ -7,10 +7,10 @@ import AccountBox from "../../components/AccountBox/AccountBox";
 import MyAccountList from "../../components/MyAccountList/MyAccountList";
 import Table from "../../components/Table/Table";
 import Breadcrumb from "../../components/Breadcrumbs/Breadcrumbs";
-import { trainersData, Trainer } from "../../helpers/mockedTrainers";
+import { Trainer } from "../../helpers/mockedTrainers";
 import Button from "../../components/Button/Button";
 import ModalBox from "../../components/ModalBox/ModalBox";
-import { studentsData, Student } from "../../helpers/mockedStudents";
+import { Student } from "../../helpers/mockedStudents";
 
 const MyAccount: React.FC = () => {
   const [trainers, setTrainers] = useState<Trainer[]>([]);
@@ -33,7 +33,7 @@ const MyAccount: React.FC = () => {
     getData();
   }, []);
 
-  const user = JSON.parse(localStorage.getItem("users") || "null");
+  const user = JSON.parse(localStorage.getItem("user") || "null");
   const { role } = user;
   const tableTitle = role === "student" ? "My Trainers" : "My students";
 
@@ -41,14 +41,14 @@ const MyAccount: React.FC = () => {
     role === "student" ? ["Name", "Specialization"] : ["Name", "Status"];
   const myData =
     role === "student"
-      ? (students.filter((student) => student.id === user.id)[0] as Student)
-      : (trainers.filter((trainer) => trainer.id === user.id)[0] as Trainer);
+      ? { ...user, ...students.filter((student) => student.id === user.id)[0] }
+      : { ...user, ...trainers.filter((trainer) => trainer.id === user.id)[0] };
 
+  console.log(myData);
   let formattedData: string[][] = [];
-
-  if (myData) {
-    switch (role) {
-      case "student":
+  switch (role) {
+    case "student":
+      if (myData.trainers) {
         formattedData = (myData as Student).trainers
           .map((trainerId) => {
             const trainer = trainers.find((t) => t.id === trainerId);
@@ -60,8 +60,10 @@ const MyAccount: React.FC = () => {
               : [];
           })
           .filter(Boolean);
-        break;
-      case "trainer":
+      }
+      break;
+    case "trainer":
+      if (myData.students) {
         formattedData = (myData as Trainer).students
           .map((studentId) => {
             const student = students.find((s) => s.id === studentId);
@@ -73,12 +75,11 @@ const MyAccount: React.FC = () => {
               : [];
           })
           .filter(Boolean);
-        break;
-      default:
-        break;
-    }
+      }
+      break;
+    default:
+      break;
   }
-
   const handleModalOpen = () => {
     setModalOpen(true);
   };
@@ -89,7 +90,7 @@ const MyAccount: React.FC = () => {
     <div>
       <Breadcrumb links={[RoutePaths.MY_ACCOUNT]} labels={["My Account"]} />
       <div style={{ display: "flex" }}>
-        <MyAccountList user={user} />
+        {myData && <MyAccountList user={myData} />}
         <Table title={tableTitle} headings={headings} data={formattedData} />
         {role === "student" && (
           <div>

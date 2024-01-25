@@ -10,14 +10,24 @@ interface MyAccountListProps {
   dob: string;
   address: string;
   email: string;
-  role: string;
   specialization: string;
   isActive: boolean;
-  userPassword: string;
+  role: string;
 }
 
 const MyAccountList: React.FC<{ user: MyAccountListProps }> = ({ user }) => {
-  const { firstName, lastName, dob, address, email, userName, isActive } = user;
+  const {
+    firstName,
+    lastName,
+    dob,
+    address,
+    email,
+    userName,
+    isActive,
+    specialization,
+    role,
+  } = user;
+
   return (
     <div>
       <h3>My Profile</h3>
@@ -32,10 +42,10 @@ const MyAccountList: React.FC<{ user: MyAccountListProps }> = ({ user }) => {
       <p>{lastName}</p>
       <h4>User name</h4>
       <p> {userName}</p>
-      <h4>Date of birth</h4>
-      <p>{dob}</p>
-      <h4>Address</h4>
-      <p>{address}</p>
+      <h4>{role === "student" ? "Date of Birth" : "Specialization"}</h4>
+      <p>{role === "student" ? dob : specialization}</p>
+      {role === "student" && <h4>Address</h4>}
+      {role === "student" && <p>{address}</p>}
       <h4>Email</h4>
       <p>{email}</p>
       <div>

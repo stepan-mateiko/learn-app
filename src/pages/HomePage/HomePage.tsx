@@ -9,8 +9,7 @@ import boxImg3 from "../../assets/images/box-img-3.png";
 import homeImg from "../../assets/images/home-img.png";
 
 const HomePage: React.FC = () => {
-  const user = JSON.parse(localStorage.getItem("users") || "null");
-  const token = JSON.parse(localStorage.getItem("token") || "null");
+  const user = JSON.parse(localStorage.getItem("user") || "null");
 
   const getData = async () => {
     try {
@@ -30,8 +29,8 @@ const HomePage: React.FC = () => {
   const renderWelcomeSection = () => {
     return (
       <div>
-        {!token && <h1>Let's start learning</h1>}
-        {token && <h1>{`Hi, ${user.firstName}`}</h1>}
+        {!user && <h1>Let's start learning</h1>}
+        {user && <h1>{`Hi, ${user.firstName}`}</h1>}
         <p>
           Welcome to Learn Platform - where every day is a day to learn. Dive
           into the vast ocean of knowledge and empower yourself with the tools
@@ -83,13 +82,13 @@ const HomePage: React.FC = () => {
     <div>
       <button onClick={() => getData()}>Test</button>
       {renderWelcomeSection()}
-      {!token && (
+      {!user && (
         <div>
           <img src={homeImg} alt="home" />
         </div>
       )}
-      {!token && renderJoinUsSection()}
-      {token && renderWhatsNewSection()}
+      {!user && renderJoinUsSection()}
+      {user && renderWhatsNewSection()}
     </div>
   );
 };

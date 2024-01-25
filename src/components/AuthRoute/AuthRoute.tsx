@@ -3,9 +3,9 @@ import { Outlet, Navigate } from "react-router-dom";
 import RoutePaths from "../../constants/routes";
 
 const AuthRoute: React.FC = () => {
-  const token = localStorage.getItem("token") || "";
+  const user = localStorage.getItem("user") || "";
 
-  if (!token) {
+  if (!user) {
     return <Navigate to={RoutePaths.HOME} />;
   }
 

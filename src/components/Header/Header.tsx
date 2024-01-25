@@ -15,17 +15,16 @@ interface User {
 }
 
 const Header: React.FC = () => {
-  const storedUser = JSON.parse(localStorage.getItem("user") || "{}") as User;
   const [isMiniProfile, setIsMiniProfile] = useState<boolean>(false);
   const navigationLinks = [
     { to: RoutePaths.TRAINING, label: "Training" },
     { to: RoutePaths.MY_ACCOUNT, label: "My Account" },
   ];
-  const [storedToken, setStoredToken] = useState<string>("");
+  const [storedUser, setStoredUser] = useState<any>({});
 
   useEffect(() => {
-    setStoredToken(localStorage.getItem("token") || "");
-  }, [storedToken]);
+    setStoredUser(JSON.parse(localStorage.getItem("user") || "null"));
+  }, []);
 
   const showMiniProfile = () => {
     setIsMiniProfile(true);
@@ -42,7 +41,7 @@ const Header: React.FC = () => {
       </Link>
 
       <Navigation links={navigationLinks} />
-      {!storedToken && (
+      {!storedUser && (
         <div>
           <Button buttonText="Sign In" isLink={true} path={RoutePaths.LOGIN} />
           <Button
@@ -52,7 +51,7 @@ const Header: React.FC = () => {
           />
         </div>
       )}
-      {!isMiniProfile && storedToken && (
+      {!isMiniProfile && storedUser && (
         <div onClick={showMiniProfile}>
           {storedUser.userName}{" "}
           <img

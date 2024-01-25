@@ -11,7 +11,7 @@ import Breadcrumb from "../../components/Breadcrumbs/Breadcrumbs";
 import { Trainer } from "../../helpers/mockedTrainers";
 
 const AddPassedTraining: React.FC = () => {
-  const user = JSON.parse(localStorage.getItem("users") || "null");
+  const user = JSON.parse(localStorage.getItem("user") || "null");
   const navigate = useNavigate();
   const notify = () => toast.success("Training added!");
   const [trainingName, setTrainingName] = useState<string>("");

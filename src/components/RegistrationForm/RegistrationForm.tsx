@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
@@ -11,15 +11,29 @@ import registrationStudentImg from "../../assets/images/registration-student.png
 interface RegistrationFormProps {
   role: string | undefined;
 }
+interface Specializations {
+  id: string;
+  specialization: string;
+}
 const RegistrationForm: React.FC<RegistrationFormProps> = ({ role }) => {
   const [userFirstName, setUserFirstName] = useState<string>("");
   const [userLastName, setUserLastName] = useState<string>("");
   const [userEmail, setUserEmail] = useState<string>("");
   const [userDOB, setUserDOB] = useState<string>("");
   const [userAddress, setUserAddress] = useState<string>("");
-  const [userSpecialization, setUserSpecialization] = useState<string>("");
+  const [userSpecialization, setUserSpecialization] =
+    useState<string>("HTML/CSS");
   const navigate = useNavigate();
-
+  const [specializationOptions, setSpecializationOptions] = useState<
+    Specializations[]
+  >([]);
+  const getSpecializations = async () => {
+    const res = await axios.get("http://localhost:3080/api/specializations");
+    setSpecializationOptions(res.data.specializations);
+  };
+  useEffect(() => {
+    getSpecializations();
+  }, []);
   const handleInputChange =
     (setter: React.Dispatch<React.SetStateAction<string>>) =>
     (newValue: string | number | boolean) => {
@@ -29,27 +43,34 @@ const RegistrationForm: React.FC<RegistrationFormProps> = ({ role }) => {
     };
 
   const handlePostRequest = async () => {
+    const userName = `${userFirstName}-${userLastName}`.toLowerCase();
+    console.log(userName);
     let newUser = {
+      userName,
       firstName: userFirstName,
       lastName: userLastName,
       email: userEmail,
       dob: userDOB,
       address: userAddress,
       role: role,
-      specialization: role === "trainer" ? userSpecialization : "student",
+      specialization:
+        role === "trainer"
+          ? specializationOptions.filter(
+              (item) => item.specialization === userSpecialization
+            )[0].specialization
+          : "student",
     };
-    localStorage.setItem("users", JSON.stringify(newUser));
     await axios.post("http://localhost:3080/api/users", newUser);
-
-    console.log(newUser);
+    localStorage.setItem("user", newUser.userName);
   };
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     handlePostRequest();
-    navigate(RoutePaths.REGISTRATION_VERIFICATION);
+    setTimeout(() => {
+      navigate(RoutePaths.REGISTRATION_VERIFICATION);
+    }, 200);
   };
-
   return (
     <div style={{ display: "flex" }}>
       <div>
@@ -92,7 +113,7 @@ const RegistrationForm: React.FC<RegistrationFormProps> = ({ role }) => {
             label="specialization"
             value={userSpecialization}
             onChange={handleInputChange(setUserSpecialization)}
-            options={["Front-end", "UI/UX Design", "QA"]}
+            options={specializationOptions.map((item) => item.specialization)}
           />
         )}
         {role === "student" && (

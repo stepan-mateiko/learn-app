@@ -15,7 +15,7 @@ const MiniProfile: React.FC<MiniProfileProps> = ({
   hideMiniProfile,
 }) => {
   const handleLogOut = () => {
-    localStorage.removeItem("token");
+    localStorage.removeItem("user");
   };
   return (
     <div onClick={hideMiniProfile}>

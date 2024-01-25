@@ -1,27 +1,54 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
 import RoutePaths from "../../constants/routes";
 
 import Input from "../../components/Input/Input";
 import Button from "../../components/Button/Button";
 import studentImg from "../../assets/images/student-profile-img.png";
+import { Student } from "../../helpers/mockedStudents";
+import { Trainer } from "../../helpers/mockedTrainers";
 
 const EditProfile: React.FC = () => {
   const navigate = useNavigate();
   const user = JSON.parse(localStorage.getItem("users") || "null");
-  console.log(user);
   const { role } = user;
+  const [myData, setMyData] = useState<Student | Trainer>(user);
+
+  const getData = async () => {
+    const trainersfromBack = (
+      await axios.get("http://localhost:3080/api/trainers")
+    ).data.trainers;
+    const studentsfromBack = (
+      await axios.get("http://localhost:3080/api/students")
+    ).data.students;
+
+    if (role === "student") {
+      setMyData(
+        studentsfromBack.filter((item: Student) => item.id === user.id)[0]
+      );
+    } else if (role === "trainer") {
+      setMyData(
+        trainersfromBack.filter((item: Trainer) => item.id === user.id)[0]
+      );
+    }
+  };
+  useEffect(() => {
+    getData();
+  }, []);
+
   const [userFirstName, setUserFirstName] = useState<string>(user.firstName);
   const [userLastName, setUserLastName] = useState<string>(user.lastName);
   const [userEmail, setUserEmail] = useState<string>(user.email);
-  const [userDOB, setUserDOB] = useState<string>(user.dob);
-  const [userAddress, setUserAddress] = useState<string>(user.address);
+  const [userDOB, setUserDOB] = useState<string>(myData.dob);
+  const [userAddress, setUserAddress] = useState<string>(myData.address);
   const [userUserName, setUserUserName] = useState<string>(user.userName);
-  const [userIsActive, setUserIsActive] = useState<boolean>(user.isActive);
+  const [userIsActive, setUserIsActive] = useState<boolean>(myData.isActive);
   const [trainerSpecialization, setTrainerSpecialization] =
     useState<string>("");
 
+  console.log(myData.lastName);
   const handleInputChange =
     (setter: React.Dispatch<React.SetStateAction<string>>) =>
     (newValue: string | number | boolean) => {
@@ -50,6 +77,7 @@ const EditProfile: React.FC = () => {
       isActive: userIsActive,
       specialization: role === "trainer" ? trainerSpecialization : "student",
     };
+    let updatedRole = {};
     localStorage.setItem("users", JSON.stringify(updatedUser));
   };
 
