@@ -13,40 +13,28 @@ import {
   fetchAllStudents,
   updateStudentOnServer,
 } from "../../store/students/thunk";
+import {
+  fetchAllTrainers,
+  updateTrainerOnServer,
+} from "../../store/trainers/thunk";
 import { RootState } from "../../store";
 
 const HomePage: React.FC = () => {
   const user = JSON.parse(localStorage.getItem("user") || "null");
-  const students = useSelector((state: RootState) => state.students);
+  const trainers = useSelector((state: RootState) => state.trainers);
   const dispatch = useDispatch();
-  console.log(students);
+  console.log(trainers);
 
   const test = {
-    firstName: "Ivan",
-    lastName: "Snow",
-    email: "mywatchbegins@gmail.com",
-    dob: "2000-12-21",
-    address: "Castle Black",
-    trainings: [
-      "edfd67f1-e5b8-418c-aa63-eacf32b4f00d",
-      "f4c781d0-c84d-4e50-9aaa-aeb9d8d78fbb",
-      "9037ce96-246a-4f7f-90ed-4684803acfea",
-      "5f0ef939-5803-49f2-9481-30684a944ef5",
-      "9edbbcd7-805e-46ea-8534-e779401378d4",
-      "d68853b4-595c-4bd6-8459-9c1e5767b798",
-      "b88efcc3-1ec5-45a9-be15-11ff77d942ba",
-      "2f073742-037b-4613-8c54-0e46eb1f6e4a",
-    ],
-    trainers: [
-      "3c372c23-3c3b-4bcd-9320-9b03f63ab3e3",
-      "5d5630a6-d50a-4747-8ca6-74c57d581939",
-      "2fa290da-318d-416d-b3b8-a717e081b27d",
-      "e2db5979-4a52-4bb3-9bc7-ad13cbb1d956",
-      "872fd870-1164-43e2-b0aa-cea0c03f7b9b",
-      "1e3176b7-39b9-421e-8c71-1c583ad33bb7",
-    ],
-    id: "29833a19-e909-4e5c-97ff-2ceee8bd476e",
+    firstName: "Petro",
+    lastName: "Ivanov",
+    email: "ivanov@gmail.com",
+    specialization: "TypeScript",
+    students: ["29833a19-e909-4e5c-97ff-2ceee8bd476e"],
+    trainings: ["5f0ef939-5803-49f2-9481-30684a944ef5"],
+    id: "2fa290da-318d-416d-b3b8-a717e081b27d",
     isActive: true,
+    userName: "petro-ivanov",
   };
   const getData = async () => {
     try {
@@ -118,7 +106,7 @@ const HomePage: React.FC = () => {
   return (
     <div>
       <button
-        onClick={() => dispatch(updateStudentOnServer(test.id, test) as any)}
+        onClick={() => dispatch(updateTrainerOnServer(test.id, test) as any)}
       >
         Test
       </button>

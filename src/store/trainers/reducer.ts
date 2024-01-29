@@ -1,22 +1,20 @@
-import { TrainersAction } from "./actions";
-import { TrainersType, TrainersActionTypes } from "./types";
+import { TrainersActionTypes, TrainersType } from "./types";
 
-const trainersInitialState: TrainersType[] = [];
+const initialState: TrainersType[] = [];
 
-const trainersReducer = (
-  state = trainersInitialState,
-  action: TrainersAction
-) => {
+const trainerReducer = (state = initialState, action: any) => {
   switch (action.type) {
     case TrainersActionTypes.GET_TRAINERS:
-      return [...state, action.payload];
-    case TrainersActionTypes.ADD_TRAINER:
-      return [...state, action.payload];
-    case TrainersActionTypes.DELETE_TRAINER:
-      return state.filter((trainer) => trainer.id !== action.payload);
+      return action.payload;
+
+    case TrainersActionTypes.UPDATE_TRAINER:
+      return state.map((trainer) =>
+        trainer.id === action.payload.id ? action.payload : trainer
+      );
+
     default:
       return state;
   }
 };
 
-export default trainersReducer;
+export default trainerReducer;

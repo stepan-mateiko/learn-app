@@ -1,12 +1,8 @@
 import { StudentsActionTypes, StudentsType } from "./types";
 
-export interface StudentsState {
-  students: StudentsType[];
-}
-
 const initialState: StudentsType[] = [];
 
-const userReducer = (state = initialState, action: any) => {
+const studentReducer = (state = initialState, action: any) => {
   switch (action.type) {
     case StudentsActionTypes.GET_STUDENTS:
       return action.payload;
@@ -21,4 +17,4 @@ const userReducer = (state = initialState, action: any) => {
   }
 };
 
-export default userReducer;
+export default studentReducer;

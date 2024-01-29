@@ -66,7 +66,7 @@ export const trainersAPI = {
   fetchAllTrainers: async () => {
     try {
       const response = await axios.get(`${baseURL}/trainers`);
-      return response.data.result;
+      return response.data.trainers;
     } catch (error) {
       console.error("Error fetching trainers:", error);
       throw error;
