@@ -105,6 +105,7 @@ const MyAccount: React.FC = () => {
       <AccountBox />
       {isModalOpen && (
         <ModalBox
+          id={user.id}
           isModalOpen={isModalOpen}
           handleModalClose={handleModalClose}
         />

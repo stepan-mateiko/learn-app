@@ -1,14 +1,32 @@
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
+
 import ReactModal from "react-modal";
 import Button from "../Button/Button";
 
+import RoutePaths from "../../constants/routes";
+
 interface ModalBoxProps {
+  id: string;
   isModalOpen: boolean;
   handleModalClose: () => void;
 }
 const ModalBox: React.FC<ModalBoxProps> = ({
   isModalOpen,
   handleModalClose,
+  id,
 }) => {
+  const navigate = useNavigate();
+  const deleteAccount = async () => {
+    try {
+      await axios.delete(`http://localhost:3080/api/users/${id}`);
+      handleModalClose();
+      navigate(RoutePaths.LOGIN);
+      localStorage.removeItem("user");
+    } catch (error) {
+      console.error("Error fetching data:", error);
+    }
+  };
   return (
     <ReactModal
       isOpen={isModalOpen}
@@ -29,7 +47,7 @@ const ModalBox: React.FC<ModalBoxProps> = ({
 
       <div>
         <Button onClick={handleModalClose} buttonText="Cancel" />
-        <Button buttonText="Confirm" />
+        <Button buttonText="Confirm" onClick={deleteAccount} />
       </div>
     </ReactModal>
   );

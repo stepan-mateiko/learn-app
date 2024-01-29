@@ -26,6 +26,7 @@ const RegistrationForm: React.FC<RegistrationFormProps> = ({ role }) => {
   const [specializationOptions, setSpecializationOptions] = useState<
     Specializations[]
   >([]);
+
   const getSpecializations = async () => {
     const res = await axios.get("http://localhost:3080/api/specializations");
     setSpecializationOptions(res.data.specializations);
