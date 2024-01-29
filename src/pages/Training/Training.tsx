@@ -1,6 +1,5 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-
 import RoutePaths from "../../constants/routes";
 import { Trainer } from "../../helpers/mockedTrainers";
 import {
@@ -8,7 +7,6 @@ import {
   TrainingInterface,
 } from "../../helpers/mockedTrainings";
 import { Student } from "../../helpers/mockedStudents";
-
 import Button from "../../components/Button/Button";
 import Table from "../../components/Table/Table";
 import MyDatePicker from "../../components/DatePicker/DatePicker";
@@ -22,10 +20,14 @@ interface User {
   role: string;
   id: string;
 }
+
 const Training: React.FC = () => {
   const [trainers, setTrainers] = useState<Trainer[]>([]);
   const [students, setStudents] = useState<Student[]>([]);
   const [trainings, setTrainings] = useState<TrainingInterface[]>([]);
+  const [filteredTrainings, setFilteredTrainings] = useState<any[][]>([]);
+  const [selectedStartDate, setSelectedStartDate] = useState<Date | null>(null);
+  const [selectedEndDate, setSelectedEndDate] = useState<Date | null>(null);
 
   const user = JSON.parse(localStorage.getItem("user") || "null") as User;
   const { role } = user;
@@ -58,6 +60,7 @@ const Training: React.FC = () => {
     role === "student"
       ? (students.filter((student) => student.id === user.id)[0] as Student)
       : (trainers.filter((trainer) => trainer.id === user.id)[0] as Trainer);
+
   switch (role) {
     case "student":
       formattedData = trainings
@@ -84,10 +87,47 @@ const Training: React.FC = () => {
           }`,
           training.duration,
         ]);
+
       break;
     default:
       break;
   }
+  // useEffect(() => {
+  //   setFilteredTrainings(formattedData);
+  // }, [formattedData]);
+
+  const handleFilterChange = (filteredData: any[][]) => {
+    setFilteredTrainings(filteredData);
+  };
+
+  const handleDateChange = (startDate: Date | null, endDate: Date | null) => {
+    setSelectedStartDate(startDate);
+    setSelectedEndDate(endDate);
+
+    const filteredByDate = trainings
+      .filter(
+        (item) => item.student === myData.id || item.trainer === myData.id
+      )
+      .filter((training) => {
+        const trainingDate = new Date(training.date);
+        return (
+          (!startDate || trainingDate >= startDate) &&
+          (!endDate || trainingDate <= endDate)
+        );
+      });
+
+    const formattedFilteredData = filteredByDate.map((training) => [
+      training.date,
+      training.name,
+      training.type,
+      `${trainers.find((item) => item.id === training.trainer)?.firstName} ${
+        trainers.find((item) => item.id === training.trainer)?.lastName
+      }`,
+      training.duration,
+    ]);
+
+    setFilteredTrainings(formattedFilteredData);
+  };
 
   return (
     <div>
@@ -105,16 +145,24 @@ const Training: React.FC = () => {
       )}
       <div style={{ display: "flex" }}>
         <div>
-          <Search />
+          <Search
+            role={role}
+            data={formattedData}
+            update={handleFilterChange}
+          />
         </div>
         <div>
-          <MyDatePicker />
+          <MyDatePicker
+            selectedStartDate={selectedStartDate}
+            selectedEndDate={selectedEndDate}
+            onDateChange={handleDateChange}
+          />
         </div>
       </div>
       <Table
         title={role === "student" ? "My passed trainings" : "Results"}
         headings={formattedHeading}
-        data={formattedData}
+        data={filteredTrainings.length > 0 ? filteredTrainings : []}
       />
     </div>
   );
