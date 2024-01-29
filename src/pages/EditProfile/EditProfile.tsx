@@ -10,11 +10,29 @@ import studentImg from "../../assets/images/student-profile-img.png";
 import { Student } from "../../helpers/mockedStudents";
 import { Trainer } from "../../helpers/mockedTrainers";
 
+interface Specializations {
+  id: string;
+  specialization: string;
+}
+
 const EditProfile: React.FC = () => {
   const navigate = useNavigate();
   const user = JSON.parse(localStorage.getItem("user") || "null");
   const { role } = user;
+
   const [myData, setMyData] = useState<Student | Trainer>(user);
+  const [userFirstName, setUserFirstName] = useState<string>(user.firstName);
+  const [userLastName, setUserLastName] = useState<string>(myData.lastName);
+  const [userEmail, setUserEmail] = useState<string>(user.email);
+  const [userDOB, setUserDOB] = useState<string>(myData.dob);
+  const [userAddress, setUserAddress] = useState<string>(myData.address);
+  const [userUserName, setUserUserName] = useState<string>(user.userName);
+  const [userIsActive, setUserIsActive] = useState<boolean>(true);
+  const [trainerSpecialization, setTrainerSpecialization] =
+    useState<string>("");
+  const [specializationOptions, setSpecializationOptions] = useState<
+    Specializations[]
+  >([]);
 
   const getData = async () => {
     const trainersfromBack = (
@@ -23,30 +41,36 @@ const EditProfile: React.FC = () => {
     const studentsfromBack = (
       await axios.get("http://localhost:3080/api/students")
     ).data.students;
+    const specializationsFromBack = await axios.get(
+      "http://localhost:3080/api/specializations"
+    );
+    setSpecializationOptions(specializationsFromBack.data.specializations);
 
     if (role === "student") {
       setMyData(
         studentsfromBack.filter((item: Student) => item.id === user.id)[0]
       );
+      setUserAddress(
+        studentsfromBack.filter((item: Student) => item.id === user.id)[0]
+          .address
+      );
+      setUserDOB(
+        studentsfromBack.filter((item: Student) => item.id === user.id)[0].dob
+      );
     } else if (role === "trainer") {
       setMyData(
         trainersfromBack.filter((item: Trainer) => item.id === user.id)[0]
       );
+      setTrainerSpecialization(
+        trainersfromBack.filter((item: Trainer) => item.id === user.id)[0]
+          .specialization
+      );
     }
   };
+
   useEffect(() => {
     getData();
   }, []);
-
-  const [userFirstName, setUserFirstName] = useState<string>(user.firstName);
-  const [userLastName, setUserLastName] = useState<string>(myData.lastName);
-  const [userEmail, setUserEmail] = useState<string>(user.email);
-  const [userDOB, setUserDOB] = useState<string>(myData.dob);
-  const [userAddress, setUserAddress] = useState<string>(myData.address);
-  const [userUserName, setUserUserName] = useState<string>(user.userName);
-  const [userIsActive, setUserIsActive] = useState<boolean>(myData.isActive);
-  const [trainerSpecialization, setTrainerSpecialization] =
-    useState<string>("");
 
   const handleInputChange =
     (setter: React.Dispatch<React.SetStateAction<string>>) =>
@@ -161,7 +185,7 @@ const EditProfile: React.FC = () => {
             label="My specialization"
             value={trainerSpecialization}
             onChange={handleInputChange(setTrainerSpecialization)}
-            options={["PHP", "JavaScript", "React", "Angular"]}
+            options={specializationOptions.map((item) => item.specialization)}
           />
         )}
         <div>
