@@ -1,18 +1,16 @@
 export type StudentsType = {
-  id: string;
-  username: string;
-  lastName: string;
   firstName: string;
+  lastName: string;
+  email: string;
   dob?: string;
   address?: string;
-  specialization: string;
-  photo?: string;
   trainers?: string[];
   trainings?: string[];
+  id: string;
+  isActive: boolean;
 };
 
 export const enum StudentsActionTypes {
   GET_STUDENTS = "GET_STUDENTS",
-  ADD_STUDENT = "ADD_STUDENT",
-  DELETE_STUDENT = "DELETE_STUDENT",
+  UPDATE_STUDENT = "UPDATE_STUDENT",
 }

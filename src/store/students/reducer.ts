@@ -1,22 +1,24 @@
-import { StudentsAction } from "./actions";
-import { StudentsType, StudentsActionTypes } from "./types";
+import { StudentsActionTypes, StudentsType } from "./types";
 
-const studentsInitialState: StudentsType[] = [];
+export interface StudentsState {
+  students: StudentsType[];
+}
 
-const studentsReducer = (
-  state = studentsInitialState,
-  action: StudentsAction
-) => {
+const initialState: StudentsType[] = [];
+
+const userReducer = (state = initialState, action: any) => {
   switch (action.type) {
     case StudentsActionTypes.GET_STUDENTS:
-      return [...state, action.payload];
-    case StudentsActionTypes.ADD_STUDENT:
-      return [...state, action.payload];
-    case StudentsActionTypes.DELETE_STUDENT:
-      return state.filter((student) => student.id !== action.payload);
+      return action.payload;
+
+    case StudentsActionTypes.UPDATE_STUDENT:
+      return state.map((student) =>
+        student.id === action.payload.id ? action.payload : student
+      );
+
     default:
       return state;
   }
 };
 
-export default studentsReducer;
+export default userReducer;

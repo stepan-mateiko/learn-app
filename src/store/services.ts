@@ -47,7 +47,7 @@ export const studentsAPI = {
   fetchAllStudents: async () => {
     try {
       const response = await axios.get(`${baseURL}/students`);
-      return response.data.result;
+      return response.data.students;
     } catch (error) {
       console.error("Error fetching students:", error);
       throw error;
