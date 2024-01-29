@@ -49,52 +49,42 @@ const Training: React.FC = () => {
     setStudents(studentsfromBack);
     setTrainers(trainersfromBack);
     setTrainings(trainingsFromBack);
+    setFilteredTrainings(
+      trainingsFromBack
+        .filter(
+          (item: any) => item.student === user.id || item.trainer === user.id
+        )
+        .map((training: any) => [
+          training.date,
+          training.name,
+          training.type,
+          role === "student"
+            ? `${
+                trainersfromBack.find(
+                  (item: Trainer) => item.id === training.trainer
+                )?.firstName
+              } ${
+                trainersfromBack.find(
+                  (item: Trainer) => item.id === training.trainer
+                )?.lastName
+              }`
+            : `${
+                studentsfromBack.find(
+                  (item: Student) => item.id === training.student
+                )?.firstName
+              } ${
+                studentsfromBack.find(
+                  (item: Student) => item.id === training.student
+                )?.lastName
+              }`,
+          training.duration,
+        ])
+    );
   };
 
   useEffect(() => {
     getData();
   }, []);
-
-  let formattedData: any[][] = [];
-  const myData =
-    role === "student"
-      ? (students.filter((student) => student.id === user.id)[0] as Student)
-      : (trainers.filter((trainer) => trainer.id === user.id)[0] as Trainer);
-
-  switch (role) {
-    case "student":
-      formattedData = trainings
-        .filter((item) => (myData as Student).id === item.student)
-        .map((training) => [
-          training.date,
-          training.name,
-          training.type,
-          `${
-            trainers.find((item) => item.id === training.trainer)?.firstName
-          } ${trainers.find((item) => item.id === training.trainer)?.lastName}`,
-          training.duration,
-        ]);
-      break;
-    case "trainer":
-      formattedData = trainings
-        .filter((item) => (myData as Trainer).id === item.trainer)
-        .map((training) => [
-          training.date,
-          training.name,
-          training.type,
-          `${students.find((e) => e.id === training.student)?.firstName}  ${
-            students.find((e) => e.id === training.student)?.lastName
-          }`,
-          training.duration,
-        ]);
-
-      break;
-    default:
-      break;
-  }
-  // useEffect(() => {
-  //   setFilteredTrainings(formattedData);
-  // }, [formattedData]);
 
   const handleFilterChange = (filteredData: any[][]) => {
     setFilteredTrainings(filteredData);
@@ -105,9 +95,7 @@ const Training: React.FC = () => {
     setSelectedEndDate(endDate);
 
     const filteredByDate = trainings
-      .filter(
-        (item) => item.student === myData.id || item.trainer === myData.id
-      )
+      .filter((item) => item.student === user.id || item.trainer === user.id)
       .filter((training) => {
         const trainingDate = new Date(training.date);
         return (
@@ -120,9 +108,14 @@ const Training: React.FC = () => {
       training.date,
       training.name,
       training.type,
-      `${trainers.find((item) => item.id === training.trainer)?.firstName} ${
-        trainers.find((item) => item.id === training.trainer)?.lastName
-      }`,
+      role === "student"
+        ? `${
+            trainers.find((item) => item.id === training.trainer)?.firstName
+          } ${trainers.find((item) => item.id === training.trainer)?.lastName}`
+        : `${
+            students.find((item) => item.id === training.student)?.firstName
+          } ${students.find((item) => item.id === training.student)?.lastName}`,
+
       training.duration,
     ]);
 
@@ -147,7 +140,7 @@ const Training: React.FC = () => {
         <div>
           <Search
             role={role}
-            data={formattedData}
+            data={filteredTrainings}
             update={handleFilterChange}
           />
         </div>
