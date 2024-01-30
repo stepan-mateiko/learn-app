@@ -18,15 +18,14 @@ import {
   updateTrainerOnServer,
 } from "../../store/trainers/thunk";
 import { fetchAllSpecializations } from "../../store/specializations/thunk";
+import { fetchAllTrainingTypes } from "../../store/trainingTypes/thunk";
 import { RootState } from "../../store";
 
 const HomePage: React.FC = () => {
   const user = JSON.parse(localStorage.getItem("user") || "null");
-  const specializations = useSelector(
-    (state: RootState) => state.specializations
-  );
+  const trainingTypes = useSelector((state: RootState) => state.trainingTypes);
   const dispatch = useDispatch();
-  console.log(specializations);
+  console.log(trainingTypes);
 
   const getData = async () => {
     try {
@@ -97,7 +96,7 @@ const HomePage: React.FC = () => {
 
   return (
     <div>
-      <button onClick={() => dispatch(fetchAllSpecializations() as any)}>
+      <button onClick={() => dispatch(fetchAllTrainingTypes() as any)}>
         Test
       </button>
       {renderWelcomeSection()}
