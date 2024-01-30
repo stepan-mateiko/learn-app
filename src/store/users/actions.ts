@@ -1,65 +1,25 @@
-import { UserActionTypes } from "./types";
+import { UsersActions, UsersActionTypes, UserType } from "./types";
 
-interface CreacteUser {
-  type: UserActionTypes.CREATE;
-  payload: {
-    userName: string;
-    firstName: string;
-    lastName: string;
-    email: string;
-    password: string;
-    role: string;
-  };
-}
-interface UpdateUser {
-  type: UserActionTypes.UPDATE;
-  payload: {
-    userName: string;
-    firstName: string;
-    lastName: string;
-    email: string;
-    password: string;
-    role: string;
-  };
-}
-interface DeleteUser {
-  type: UserActionTypes.DELETE;
-  payload: string;
-}
+export const addUser = (user: UserType): UsersActions => ({
+  type: UsersActionTypes.ADD_USER,
+  payload: user,
+});
 
-interface LoginSuccess {
-  type: UserActionTypes.LOGIN;
-  payload: {
-    userName: string;
-    firstName: string;
-    lastName: string;
-    email: string;
-    password: string;
-    role: string;
-  };
-}
+export const updateUser = (user: UserType): UsersActions => ({
+  type: UsersActionTypes.UPDATE_USER,
+  payload: user,
+});
 
-interface Logout {
-  type: UserActionTypes.LOGOUT;
-}
+export const loginUser = (user: UserType): UsersActions => ({
+  type: UsersActionTypes.LOGIN_USER,
+  payload: user,
+});
 
-interface GetUserInfo {
-  type: UserActionTypes.GET_USER_INFO;
-  payload: {
-    userName: string;
-    firstName: string;
-    lastName: string;
-    email: string;
-    password: string;
-    token: string;
-    role: string;
-  };
-}
+export const logoutUser = (): UsersActions => ({
+  type: UsersActionTypes.LOGOUT_USER,
+});
 
-export type UserAction =
-  | LoginSuccess
-  | Logout
-  | GetUserInfo
-  | CreacteUser
-  | DeleteUser
-  | UpdateUser;
+export const deleteUser = (id: string): UsersActions => ({
+  type: UsersActionTypes.DELETE_USER,
+  payload: { id },
+});

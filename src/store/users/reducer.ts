@@ -1,80 +1,25 @@
-import { UserActionTypes } from "./types";
-import { UserAction } from "./actions";
+import { UsersActions, UsersActionTypes, UserType } from "./types";
 
-export const userInitialState = {
-  isAuth: false,
-  userName: "",
-  firstName: "",
-  lastName: "",
-  email: "",
-  password: "",
-  token: localStorage.getItem("token") || "",
-  role: "",
-};
+const initialState: UserType | {} = {};
 
-export function userReducer(state = userInitialState, action: UserAction) {
+const usersReducer = (
+  state = initialState,
+  action: UsersActions
+): UserType | {} => {
   switch (action.type) {
-    case UserActionTypes.LOGIN:
-      return {
-        ...state,
-        isAuth: true,
-        userName: action.payload.userName,
-        firstName: action.payload.firstName,
-        lastName: action.payload.lastName,
-        email: action.payload.email,
-        password: action.payload.password,
-        role: action.payload.role,
-      };
-    case UserActionTypes.LOGOUT:
-      return {
-        ...state,
-        isAuth: false,
-        userName: "",
-        firstName: "",
-        lastName: "",
-        email: "",
-        password: "",
-        token: "",
-        role: "",
-      };
-    case UserActionTypes.GET_USER_INFO:
-      return {
-        ...state,
-        isAuth: true,
-        userName: action.payload.userName,
-        firstName: action.payload.firstName,
-        lastName: action.payload.lastName,
-        email: action.payload.email,
-        password: action.payload.password,
-        role: action.payload.role,
-      };
-    case UserActionTypes.CREATE:
-      return {
-        ...state,
-        isAuth: true,
-        userName: action.payload.userName,
-        firstName: action.payload.firstName,
-        lastName: action.payload.lastName,
-        email: action.payload.email,
-        password: action.payload.password,
-        role: action.payload.role,
-      };
-    case UserActionTypes.UPDATE:
-      return {
-        ...state,
-        isAuth: true,
-        userName: action.payload.userName,
-        firstName: action.payload.firstName,
-        lastName: action.payload.lastName,
-        email: action.payload.email,
-        password: action.payload.password,
-        role: action.payload.role,
-      };
-    case UserActionTypes.DELETE:
-      return {
-        ...state,
-      };
+    case UsersActionTypes.ADD_USER:
+      return action.payload;
+    case UsersActionTypes.UPDATE_USER:
+      return action.payload;
+    case UsersActionTypes.LOGIN_USER:
+      return action.payload;
+    case UsersActionTypes.LOGOUT_USER:
+      return state;
+    case UsersActionTypes.DELETE_USER:
+      return state;
     default:
       return state;
   }
-}
+};
+
+export default usersReducer;

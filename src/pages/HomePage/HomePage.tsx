@@ -1,5 +1,4 @@
 import RoutePaths from "../../constants/routes";
-import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 
 import Box from "../../components/Box/Box";
@@ -18,28 +17,24 @@ import {
   updateTrainerOnServer,
 } from "../../store/trainers/thunk";
 import { fetchAllSpecializations } from "../../store/specializations/thunk";
+import { loginUserAsync, updateUserAsync } from "../../store/users/thunk";
 import { fetchAllTrainingTypes } from "../../store/trainingTypes/thunk";
 import { RootState } from "../../store";
 
 const HomePage: React.FC = () => {
   const user = JSON.parse(localStorage.getItem("user") || "null");
-  const trainingTypes = useSelector((state: RootState) => state.trainingTypes);
+  const userStore = useSelector((state: RootState) => state.user);
   const dispatch = useDispatch();
-  console.log(trainingTypes);
+  console.log(userStore);
 
-  const getData = async () => {
-    try {
-      const data1 = (await axios.get("http://localhost:3080/api/users")).data;
-      console.log(data1.users);
-      const data2 = (await axios.get("http://localhost:3080/api/trainers"))
-        .data;
-      console.log(data2.trainers);
-      const data3 = (await axios.get("http://localhost:3080/api/students"))
-        .data;
-      console.log(data3.students);
-    } catch (error) {
-      console.log(error);
-    }
+  const test = {
+    firstName: "Iryna",
+    lastName: "Mateiko",
+    email: "ira@gmail.com",
+    role: "trainer",
+    id: "e2db5979-4a52-4bb3-9bc7-ad13cbb1d956",
+    userName: "iryna-mateiko",
+    password: "Stark99",
   };
 
   const renderWelcomeSection = () => {
@@ -94,11 +89,17 @@ const HomePage: React.FC = () => {
     );
   };
 
+  const handleTest = () => {
+    dispatch(loginUserAsync(test) as any);
+    dispatch(fetchAllStudents() as any);
+    dispatch(fetchAllTrainers() as any);
+    dispatch(fetchAllTrainingTypes() as any);
+    dispatch(fetchAllSpecializations() as any);
+  };
+
   return (
     <div>
-      <button onClick={() => dispatch(fetchAllTrainingTypes() as any)}>
-        Test
-      </button>
+      <button onClick={() => handleTest()}>Test</button>
       {renderWelcomeSection()}
       {!user && (
         <div>

@@ -7,7 +7,7 @@ import RoutePaths from "../../constants/routes";
 
 import Input from "../Input/Input";
 import Button from "../Button/Button";
-import { UserActionTypes } from "../../store/users/types";
+import { UsersActionTypes } from "../../store/users/types";
 
 const LoginForm: React.FC = () => {
   const navigate = useNavigate();
@@ -62,7 +62,7 @@ const LoginForm: React.FC = () => {
     };
     login(apiData);
     dispatch({
-      type: UserActionTypes.LOGIN,
+      type: UsersActionTypes.LOGIN_USER,
       payload: loggedUser,
     });
   };
