@@ -2,7 +2,7 @@ import { TrainersActionTypes, TrainersType } from "./types";
 
 const initialState: TrainersType[] = [];
 
-const trainerReducer = (state = initialState, action: any) => {
+const trainersReducer = (state = initialState, action: any) => {
   switch (action.type) {
     case TrainersActionTypes.GET_TRAINERS:
       return action.payload;
@@ -17,4 +17,4 @@ const trainerReducer = (state = initialState, action: any) => {
   }
 };
 
-export default trainerReducer;
+export default trainersReducer;

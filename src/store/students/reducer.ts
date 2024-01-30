@@ -2,7 +2,7 @@ import { StudentsActionTypes, StudentsType } from "./types";
 
 const initialState: StudentsType[] = [];
 
-const studentReducer = (state = initialState, action: any) => {
+const studentsReducer = (state = initialState, action: any) => {
   switch (action.type) {
     case StudentsActionTypes.GET_STUDENTS:
       return action.payload;
@@ -17,4 +17,4 @@ const studentReducer = (state = initialState, action: any) => {
   }
 };
 
-export default studentReducer;
+export default studentsReducer;

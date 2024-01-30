@@ -17,25 +17,17 @@ import {
   fetchAllTrainers,
   updateTrainerOnServer,
 } from "../../store/trainers/thunk";
+import { fetchAllSpecializations } from "../../store/specializations/thunk";
 import { RootState } from "../../store";
 
 const HomePage: React.FC = () => {
   const user = JSON.parse(localStorage.getItem("user") || "null");
-  const trainers = useSelector((state: RootState) => state.trainers);
+  const specializations = useSelector(
+    (state: RootState) => state.specializations
+  );
   const dispatch = useDispatch();
-  console.log(trainers);
+  console.log(specializations);
 
-  const test = {
-    firstName: "Petro",
-    lastName: "Ivanov",
-    email: "ivanov@gmail.com",
-    specialization: "TypeScript",
-    students: ["29833a19-e909-4e5c-97ff-2ceee8bd476e"],
-    trainings: ["5f0ef939-5803-49f2-9481-30684a944ef5"],
-    id: "2fa290da-318d-416d-b3b8-a717e081b27d",
-    isActive: true,
-    userName: "petro-ivanov",
-  };
   const getData = async () => {
     try {
       const data1 = (await axios.get("http://localhost:3080/api/users")).data;
@@ -105,9 +97,7 @@ const HomePage: React.FC = () => {
 
   return (
     <div>
-      <button
-        onClick={() => dispatch(updateTrainerOnServer(test.id, test) as any)}
-      >
+      <button onClick={() => dispatch(fetchAllSpecializations() as any)}>
         Test
       </button>
       {renderWelcomeSection()}
