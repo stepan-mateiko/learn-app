@@ -1,13 +1,29 @@
-import { UsersActions, UsersActionTypes, UserType } from "./types";
+import {
+  LoginType,
+  RegisterType,
+  UsersActions,
+  UsersActionTypes,
+  UserType,
+} from "./types";
 
-const initialState: UserType | {} = {};
+const initialState: UserType = {
+  firstName: "",
+  lastName: "",
+  email: "",
+  role: "",
+  id: "",
+  userName: "",
+  password: "",
+};
 
 const usersReducer = (
   state = initialState,
   action: UsersActions
-): UserType | {} => {
+): UserType | LoginType | RegisterType => {
   switch (action.type) {
     case UsersActionTypes.ADD_USER:
+      return action.payload;
+    case UsersActionTypes.GET_USER_INFO:
       return action.payload;
     case UsersActionTypes.UPDATE_USER:
       return action.payload;

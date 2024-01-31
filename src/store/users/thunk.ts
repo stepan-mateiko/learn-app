@@ -1,16 +1,36 @@
-import { UsersActions, UserType, LoginType } from "./types";
+import { UsersActions, UserType, LoginType, RegisterType } from "./types";
 import { ThunkAction } from "redux-thunk";
 import { RootState } from "../index";
 import { userAPI } from "../services";
-import { addUser, loginUser, updateUser, deleteUser } from "./actions";
+import {
+  addUser,
+  loginUser,
+  updateUser,
+  deleteUser,
+  getUserInfo,
+} from "./actions";
 
 export const registerUserAsync =
-  (credentials: UserType): ThunkAction<void, RootState, null, UsersActions> =>
+  (
+    credentials: RegisterType
+  ): ThunkAction<void, RootState, null, UsersActions> =>
   async (dispatch) => {
     try {
       await userAPI.addUserToServer(credentials);
 
       dispatch(addUser(credentials));
+    } catch (error) {
+      console.error("Error registering user:", error);
+    }
+  };
+
+export const fetchUser =
+  (userName: string): ThunkAction<void, RootState, null, UsersActions> =>
+  async (dispatch) => {
+    try {
+      const res = await userAPI.getUserInfo(userName);
+
+      dispatch(getUserInfo(res?.data));
     } catch (error) {
       console.error("Error registering user:", error);
     }

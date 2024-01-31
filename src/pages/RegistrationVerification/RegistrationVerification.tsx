@@ -1,26 +1,13 @@
 import RoutePaths from "../../constants/routes";
-import axios from "axios";
+import { useSelector } from "react-redux";
+
+import { RootState } from "../../store";
 
 import { RegistrationSuccess } from "../../components/Icon/Icon";
 import Button from "../../components/Button/Button";
-import { useState } from "react";
 
-interface User {
-  userName: string;
-  password: string;
-}
 const RegistrationVerification: React.FC = () => {
-  const [user, setUser] = useState<User>({ userName: "", password: "" });
-  const getData = async () => {
-    try {
-      const userName = localStorage.getItem("user");
-      const result = await axios.get(
-        `http://localhost:3080/api/users/${userName}`
-      );
-      setUser(result.data);
-    } catch (error) {}
-  };
-  getData();
+  const user = useSelector((state: RootState) => state.user);
   return (
     <div style={{ textAlign: "center" }}>
       <h2>Registration</h2>

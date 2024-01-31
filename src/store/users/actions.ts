@@ -1,7 +1,18 @@
-import { UsersActions, UsersActionTypes, UserType } from "./types";
+import {
+  UsersActions,
+  UsersActionTypes,
+  UserType,
+  LoginType,
+  RegisterType,
+} from "./types";
 
-export const addUser = (user: UserType): UsersActions => ({
+export const addUser = (user: RegisterType): UsersActions => ({
   type: UsersActionTypes.ADD_USER,
+  payload: user,
+});
+
+export const getUserInfo = (user: UserType): UsersActions => ({
+  type: UsersActionTypes.GET_USER_INFO,
   payload: user,
 });
 
@@ -10,7 +21,7 @@ export const updateUser = (user: UserType): UsersActions => ({
   payload: user,
 });
 
-export const loginUser = (user: UserType): UsersActions => ({
+export const loginUser = (user: LoginType): UsersActions => ({
   type: UsersActionTypes.LOGIN_USER,
   payload: user,
 });

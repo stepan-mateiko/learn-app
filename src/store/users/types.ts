@@ -16,8 +16,21 @@ export interface LoginType {
   password: string;
 }
 
+export interface RegisterType {
+  firstName: string;
+  lastName: string;
+  email: string;
+  role: string;
+  userName: string;
+  password: string;
+  dob?: string;
+  address?: string;
+  specialization?: string;
+}
+
 export const enum UsersActionTypes {
   ADD_USER = "ADD_USER",
+  GET_USER_INFO = "GET_USER_INFO",
   UPDATE_USER = "UPDATE_USER",
   LOGIN_USER = "LOGIN_USER",
   LOGOUT_USER = "LOGOUT_USER",
@@ -26,9 +39,12 @@ export const enum UsersActionTypes {
 
 interface AddUserAction {
   type: UsersActionTypes.ADD_USER;
+  payload: RegisterType;
+}
+interface GetUserInfoAction {
+  type: UsersActionTypes.GET_USER_INFO;
   payload: UserType;
 }
-
 interface UpdateUserAction {
   type: UsersActionTypes.UPDATE_USER;
   payload: UserType;
@@ -36,7 +52,7 @@ interface UpdateUserAction {
 
 interface LoginUserAction {
   type: UsersActionTypes.LOGIN_USER;
-  payload: UserType;
+  payload: LoginType;
 }
 
 interface LogoutUserAction {
@@ -50,6 +66,7 @@ interface DeleteUserAction {
 
 export type UsersActions =
   | AddUserAction
+  | GetUserInfoAction
   | UpdateUserAction
   | LoginUserAction
   | LogoutUserAction

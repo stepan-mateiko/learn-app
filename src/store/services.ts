@@ -1,20 +1,28 @@
 import axios from "axios";
 
-import { LoginType, UserType } from "./users/types";
+import { LoginType, UserType, RegisterType } from "./users/types";
 import { TrainingsType } from "./trainings/types";
 
 const baseURL = "http://localhost:3080/api";
 
 export const userAPI = {
-  addUserToServer: async (credentials: UserType) => {
+  addUserToServer: async (credentials: RegisterType) => {
     try {
       return await axios.post(`${baseURL}/users`, credentials);
     } catch (error) {
-      console.error("Login error:", error);
+      console.error("Registration error:", error);
       throw error;
     }
   },
-  updateUserOnServer: async (id: string, credentials: any) => {
+  getUserInfo: async (userName: string) => {
+    try {
+      const result = await axios.get(`${baseURL}/users/${userName}`);
+      return result;
+    } catch (error) {
+      console.error("Registration error:", error);
+    }
+  },
+  updateUserOnServer: async (id: string, credentials: UserType) => {
     try {
       return await axios.put(`${baseURL}/users/${id}`, credentials);
     } catch (error) {
