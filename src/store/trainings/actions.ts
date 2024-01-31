@@ -1,18 +1,11 @@
 import { TrainingsActionTypes, TrainingsType } from "./types";
 
-export interface GetTrainings {
-  type: TrainingsActionTypes.GET_TRAININGS;
-  payload: TrainingsType[];
-}
+export const GetTrainings = (trainings: TrainingsType[]) => ({
+  type: TrainingsActionTypes.GET_TRAININGS,
+  payload: trainings,
+});
 
-export interface AddTrainings {
-  type: TrainingsActionTypes.ADD_TRAINING;
-  payload: TrainingsType;
-}
-
-export interface DeleteTrainings {
-  type: TrainingsActionTypes.DELETE_TRAINING;
-  payload: string;
-}
-
-export type TrainingssAction = GetTrainings | AddTrainings | DeleteTrainings;
+export const AddTraining = (training: TrainingsType) => ({
+  type: TrainingsActionTypes.ADD_TRAINING,
+  payload: training,
+});

@@ -19,12 +19,17 @@ import {
 import { fetchAllSpecializations } from "../../store/specializations/thunk";
 import { loginUserAsync, updateUserAsync } from "../../store/users/thunk";
 import { fetchAllTrainingTypes } from "../../store/trainingTypes/thunk";
+import {
+  fetchAllTrainings,
+  addTrainingOnServer,
+} from "../../store/trainings/thunk";
 import { RootState } from "../../store";
 
 const HomePage: React.FC = () => {
   const user = JSON.parse(localStorage.getItem("user") || "null");
-  const userStore = useSelector((state: RootState) => state.user);
+  const userStore = useSelector((state: RootState) => state.trainings);
   const dispatch = useDispatch();
+  console.log(userStore);
 
   const test = {
     firstName: "Iryna",
@@ -34,6 +39,17 @@ const HomePage: React.FC = () => {
     id: "e2db5979-4a52-4bb3-9bc7-ad13cbb1d956",
     userName: "iryna-mateiko",
     password: "Stark99",
+  };
+
+  const test2 = {
+    name: "Angular",
+    duration: "110",
+    date: "2023-07-02",
+    student: "29833a19-e909-4e5c-97ff-2ceee8bd476e",
+    trainer: "2fa290da-318d-416d-b3b8-a717e081b27d",
+    type: "Full course",
+    description: "gfgffdfdfffffffff",
+    id: "f40ef939-5803-49f2-9481-30684a944ef5",
   };
 
   const renderWelcomeSection = () => {
@@ -94,6 +110,8 @@ const HomePage: React.FC = () => {
     dispatch(fetchAllTrainers() as any);
     dispatch(fetchAllTrainingTypes() as any);
     dispatch(fetchAllSpecializations() as any);
+    dispatch(fetchAllTrainings() as any);
+    dispatch(addTrainingOnServer(test2) as any);
   };
 
   return (

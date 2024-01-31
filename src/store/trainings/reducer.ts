@@ -1,19 +1,13 @@
-import { TrainingssAction } from "./actions";
 import { TrainingsType, TrainingsActionTypes } from "./types";
 
-const trainersInitialState: TrainingsType[] = [];
+const initialState: TrainingsType[] = [];
 
-const trainingsReducer = (
-  state = trainersInitialState,
-  action: TrainingssAction
-) => {
+const trainingsReducer = (state = initialState, action: any) => {
   switch (action.type) {
     case TrainingsActionTypes.GET_TRAININGS:
-      return [...state, action.payload];
+      return action.payload;
     case TrainingsActionTypes.ADD_TRAINING:
       return [...state, action.payload];
-    case TrainingsActionTypes.DELETE_TRAINING:
-      return state.filter((training) => training.id !== action.payload);
     default:
       return state;
   }
