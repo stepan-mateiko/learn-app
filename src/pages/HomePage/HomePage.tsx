@@ -25,7 +25,6 @@ const HomePage: React.FC = () => {
   const user = JSON.parse(localStorage.getItem("user") || "null");
   const userStore = useSelector((state: RootState) => state.user);
   const dispatch = useDispatch();
-  console.log(userStore);
 
   const test = {
     firstName: "Iryna",
