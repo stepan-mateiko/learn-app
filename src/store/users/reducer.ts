@@ -19,7 +19,7 @@ const initialState: UserType = {
 const usersReducer = (
   state = initialState,
   action: UsersActions
-): UserType | LoginType | RegisterType => {
+): LoginType | RegisterType | UserType => {
   switch (action.type) {
     case UsersActionTypes.ADD_USER:
       return action.payload;
@@ -32,7 +32,7 @@ const usersReducer = (
     case UsersActionTypes.LOGOUT_USER:
       return initialState;
     case UsersActionTypes.DELETE_USER:
-      return state;
+      return initialState;
     default:
       return state;
   }

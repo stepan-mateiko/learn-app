@@ -5,6 +5,8 @@ import ReactModal from "react-modal";
 import Button from "../Button/Button";
 
 import RoutePaths from "../../constants/routes";
+import { useDispatch } from "react-redux";
+import { deleteUserAsync } from "../../store/users/thunk";
 
 interface ModalBoxProps {
   id: string;
@@ -17,15 +19,12 @@ const ModalBox: React.FC<ModalBoxProps> = ({
   id,
 }) => {
   const navigate = useNavigate();
-  const deleteAccount = async () => {
-    try {
-      await axios.delete(`http://localhost:3080/api/users/${id}`);
-      handleModalClose();
-      navigate(RoutePaths.LOGIN);
-      localStorage.removeItem("user");
-    } catch (error) {
-      console.error("Error fetching data:", error);
-    }
+  const dispatch = useDispatch();
+  const deleteAccount = () => {
+    dispatch(deleteUserAsync(id) as any);
+    handleModalClose();
+    navigate(RoutePaths.LOGIN);
+    localStorage.removeItem("user");
   };
   return (
     <ReactModal
