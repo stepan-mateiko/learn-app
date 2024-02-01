@@ -1,40 +1,24 @@
 import Logo from "../Logo/Logo";
 import Navigation from "../Navigation/Navigation";
 import { TwitterIcon, FacebookIcon, YouTubeIcon } from "../Icon/Icon";
+import { navigationLinks } from "../../constants/navigationLinks";
 
 const Footer: React.FC = () => {
-  const productNavigation = [
-    { to: "/features", label: "Features" },
-    { to: "/pricing", label: "Pricing" },
-  ];
-  const resoursesLinks = [
-    { to: "/blog", label: "Blog" },
-    { to: "/user-guides", label: "User Guides" },
-    { to: "/webinars", label: "Webinars" },
-  ];
-  const companyLinks = [
-    { to: "/about-us", label: "About Us" },
-    { to: "/contact-us", label: "Contact Us" },
-  ];
-  const copyrightLinks = [
-    { to: "/privacy", label: "Privacy" },
-    { to: "/terms", label: "Terms" },
-  ];
   return (
     <footer style={{ marginTop: 200 }}>
       <div style={{ display: "flex" }}>
         <Logo />
         <div>
           <h3>Product</h3>
-          <Navigation links={productNavigation} />
+          <Navigation links={navigationLinks.FOOTER_LINKS_PRODUCTS} />
         </div>
         <div>
           <h3>Resourses</h3>
-          <Navigation links={resoursesLinks} />
+          <Navigation links={navigationLinks.FOOTER_LINKS_RESOURSES} />
         </div>
         <div>
           <h3>Company</h3>
-          <Navigation links={companyLinks} />
+          <Navigation links={navigationLinks.FOOTER_LINKS_COMPANY} />
         </div>
         <div>
           <h3>Subscribe to our Newsletter</h3>
@@ -48,7 +32,8 @@ const Footer: React.FC = () => {
       <div style={{ display: "flex" }}>
         <div>English</div>
         <div style={{ display: "flex" }}>
-          © 2023 Learn, Inc. <Navigation links={copyrightLinks} />
+          © 2023 Learn, Inc.
+          <Navigation links={navigationLinks.FOOTER_LINKS_COPYRIGHT} />
         </div>
         <div>
           <TwitterIcon />

@@ -30,7 +30,7 @@ const usersReducer = (
     case UsersActionTypes.LOGIN_USER:
       return action.payload;
     case UsersActionTypes.LOGOUT_USER:
-      return state;
+      return initialState;
     case UsersActionTypes.DELETE_USER:
       return state;
     default:

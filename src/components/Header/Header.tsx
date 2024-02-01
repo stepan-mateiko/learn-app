@@ -1,7 +1,10 @@
 import { Link } from "react-router-dom";
-import { useState, useEffect } from "react";
+import { useState } from "react";
+import { useSelector } from "react-redux";
 
 import RoutePaths from "../../constants/routes";
+import { navigationLinks } from "../../constants/navigationLinks";
+import { RootState } from "../../store";
 
 import Logo from "../Logo/Logo";
 import Navigation from "../Navigation/Navigation";
@@ -9,22 +12,9 @@ import Button from "../Button/Button";
 import MiniProfile from "../MiniProfile/MiniProfile";
 import ProfilePic from "../../assets/images/student-profile-img.png";
 
-interface User {
-  userName: string;
-  email: string;
-}
-
 const Header: React.FC = () => {
+  const user = useSelector((state: RootState) => state.user);
   const [isMiniProfile, setIsMiniProfile] = useState<boolean>(false);
-  const navigationLinks = [
-    { to: RoutePaths.TRAINING, label: "Training" },
-    { to: RoutePaths.MY_ACCOUNT, label: "My Account" },
-  ];
-  const [storedUser, setStoredUser] = useState<any>({});
-
-  useEffect(() => {
-    setStoredUser(JSON.parse(localStorage.getItem("user") || "null"));
-  }, []);
 
   const showMiniProfile = () => {
     setIsMiniProfile(true);
@@ -40,8 +30,8 @@ const Header: React.FC = () => {
         <Logo />
       </Link>
 
-      <Navigation links={navigationLinks} />
-      {!storedUser && (
+      <Navigation links={navigationLinks.HEADER_LINKS} />
+      {!user.userName && (
         <div>
           <Button buttonText="Sign In" isLink={true} path={RoutePaths.LOGIN} />
           <Button
@@ -51,20 +41,16 @@ const Header: React.FC = () => {
           />
         </div>
       )}
-      {!isMiniProfile && storedUser && (
+      {!isMiniProfile && user.userName && (
         <div onClick={showMiniProfile}>
-          {storedUser.userName}{" "}
-          <img
-            src={ProfilePic}
-            alt={`${storedUser.userName}'s profile`}
-            width={50}
-          />
+          {user.userName}{" "}
+          <img src={ProfilePic} alt={`${user.userName}'s profile`} width={50} />
         </div>
       )}
       {isMiniProfile && (
         <MiniProfile
-          name={storedUser.userName}
-          email={storedUser.email}
+          name={user.userName}
+          email={user.email}
           isMiniProfile={isMiniProfile}
           hideMiniProfile={hideMiniProfile}
         />
