@@ -1,10 +1,4 @@
-import {
-  LoginType,
-  RegisterType,
-  UsersActions,
-  UsersActionTypes,
-  UserType,
-} from "./types";
+import { UsersActionTypes, UserType } from "./types";
 
 const initialState: UserType = {
   firstName: "",
@@ -16,10 +10,7 @@ const initialState: UserType = {
   password: "",
 };
 
-const usersReducer = (
-  state = initialState,
-  action: UsersActions
-): LoginType | RegisterType | UserType => {
+const usersReducer = (state = initialState, action: any) => {
   switch (action.type) {
     case UsersActionTypes.ADD_USER:
       return action.payload;
