@@ -26,7 +26,8 @@ import {
 import { RootState } from "../../store";
 
 const HomePage: React.FC = () => {
-  const user = JSON.parse(localStorage.getItem("user") || "null");
+  const user = useSelector((state: RootState) => state.user);
+  localStorage.setItem("user", JSON.stringify(user));
   const userStore = useSelector((state: RootState) => state.trainings);
   const dispatch = useDispatch();
   console.log(userStore);

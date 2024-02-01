@@ -11,7 +11,7 @@ import { RootState } from "../../store";
 import { registerUserAsync } from "../../store/users/thunk";
 import { RegisterType } from "../../store/users/types";
 import { SpecializationsType } from "../../store/specializations/types";
-import { generatePassword } from "../../helpers/helpers";
+import { generatePassword, handleInputChange } from "../../helpers/helpers";
 import { fetchAllSpecializations } from "../../store/specializations/thunk";
 
 interface RegistrationFormProps {
@@ -37,20 +37,10 @@ const RegistrationForm: React.FC<RegistrationFormProps> = ({ role }) => {
     dispatch(fetchAllSpecializations() as any);
   }, [dispatch]);
 
-  const handleInputChange =
-    (setter: React.Dispatch<React.SetStateAction<string>>) =>
-    (newValue: string | number | boolean) => {
-      if (typeof newValue === "string") {
-        setter(newValue);
-      }
-    };
-
   const handlePostRequest = async () => {
-    const userName = `${userFirstName}-${userLastName}`.toLowerCase();
-    const password = generatePassword(8);
     let newUser: RegisterType = {
-      userName,
-      password,
+      userName: `${userFirstName}-${userLastName}`.toLowerCase(),
+      password: generatePassword(8),
       firstName: userFirstName,
       lastName: userLastName,
       email: userEmail,
@@ -65,6 +55,7 @@ const RegistrationForm: React.FC<RegistrationFormProps> = ({ role }) => {
       )[0].specialization;
     }
     dispatch(registerUserAsync(newUser) as any);
+
     localStorage.setItem("user", JSON.stringify(newUser));
   };
 

@@ -14,6 +14,7 @@ export interface UserType {
 export interface LoginType {
   userName: string;
   password: string;
+  firstName?: string;
 }
 
 export interface RegisterType {
