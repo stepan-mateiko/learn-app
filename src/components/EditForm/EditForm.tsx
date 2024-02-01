@@ -16,6 +16,7 @@ import { fetchAllStudents } from "../../store/students/thunk";
 import { updateUserAsync } from "../../store/users/thunk";
 import { StudentsType } from "../../store/students/types";
 import { TrainersType } from "../../store/trainers/types";
+import { UserType } from "../../store/users/types";
 
 const EditForm: React.FC = () => {
   const dispatch = useDispatch();
@@ -60,8 +61,9 @@ const EditForm: React.FC = () => {
     }
   };
 
-  const handlePostRequest = async () => {
-    let updatedUser = {
+  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    const updatedUser: UserType = {
       ...user,
       userName,
       firstName,
@@ -73,12 +75,7 @@ const EditForm: React.FC = () => {
       address,
     };
     dispatch(updateUserAsync(user.id, updatedUser) as any);
-    localStorage.setItem("user", JSON.stringify(updatedUser));
-  };
-
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    handlePostRequest();
+    localStorage.setItem("user", JSON.stringify(updatedUser)); //delete later
     navigate(RoutePaths.MY_ACCOUNT);
   };
   return (
