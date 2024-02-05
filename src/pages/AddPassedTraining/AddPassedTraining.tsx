@@ -2,82 +2,66 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
-import axios from "axios";
+
+import { handleInputChange } from "../../helpers/helpers";
 
 import RoutePaths from "../../constants/routes";
 import Input from "../../components/Input/Input";
 import Button from "../../components/Button/Button";
 import Breadcrumb from "../../components/Breadcrumbs/Breadcrumbs";
-import { Trainer } from "../../helpers/mockedTrainers";
-
-interface TrainingType {
-  id: string;
-  trainingType: string;
-}
+import { useDispatch, useSelector } from "react-redux";
+import { RootState } from "../../store";
+import { fetchAllTrainers } from "../../store/trainers/thunk";
+import { fetchAllTrainingTypes } from "../../store/trainingTypes/thunk";
+import { TrainersType } from "../../store/trainers/types";
+import { TrainingTypesType } from "../../store/trainingTypes/types";
+import { addTrainingOnServer } from "../../store/trainings/thunk";
+import { TrainingsType } from "../../store/trainings/types";
 
 const AddPassedTraining: React.FC = () => {
-  const user = JSON.parse(localStorage.getItem("user") || "null");
+  const dispatch = useDispatch();
   const navigate = useNavigate();
-  const notify = () => toast.success("Training added!");
-  const [trainingName, setTrainingName] = useState<string>("");
-  const [trainingsDate, setTrainingsDate] = useState<string>("");
-  const [trainingDuration, setTrainingDuration] = useState<string>("0");
-  const [trainingType, setTrainingType] = useState<string>("");
-  const [trainingDescription, setTrainingDescription] = useState<string>("");
-  const [trainingTrainer, setTrainingTrainer] = useState<string>("");
-  const [trainersList, setTrainersList] = useState<Trainer[]>([]);
-  const [trainingTypesList, setTrainingTypesList] = useState<string[]>([]);
 
-  const getData = async () => {
-    const trainersfromBack = (
-      await axios.get("http://localhost:3080/api/trainers")
-    ).data.trainers;
-    const trainingTypesfromBack = (
-      await axios.get("http://localhost:3080/api/trainingTypes")
-    ).data.trainingTypes;
-    setTrainersList(trainersfromBack);
-    setTrainingTrainer(
-      `${trainersfromBack[0].firstName} ${trainersfromBack[0].lastName}`
-    );
-    setTrainingTypesList(
-      trainingTypesfromBack.map((item: TrainingType) => item.trainingType)
-    );
-    setTrainingType(trainingTypesfromBack[0].trainingType);
-  };
-
-  useEffect(() => {
-    getData();
-  }, []);
+  const user = useSelector((state: RootState) => state.user);
+  const trainersList = useSelector((state: RootState) => state.trainers);
+  const trainingTypesList = useSelector(
+    (state: RootState) => state.trainingTypes
+  ).map((item: TrainingTypesType) => item.trainingType);
   const formattedTrainers = trainersList.map(
-    (trainer) => `${trainer.firstName} ${trainer.lastName}`
+    (trainer: TrainersType) => `${trainer.firstName} ${trainer.lastName}`
+  );
+  const notify = () => toast.success("Training added!");
+
+  const [name, setName] = useState<string>("");
+  const [date, setDate] = useState<string>("");
+  const [duration, setDuration] = useState<string>("0");
+  const [type, setType] = useState<string>(
+    trainingTypesList ? trainingTypesList[0] : ""
+  );
+  const [description, setDescription] = useState<string>("");
+  const [selectedTrainer, setSelectedTrainer] = useState<string>(
+    formattedTrainers ? formattedTrainers[0] : ""
   );
 
-  const handleInputChange =
-    (setter: React.Dispatch<React.SetStateAction<string>>) =>
-    (newValue: string | number | boolean) => {
-      if (typeof newValue === "string") {
-        setter(newValue);
-      }
-    };
-
-  const handlePostRequest = async () => {
-    let newTraining = {
-      duration: trainingDuration,
-      trainer: trainersList.filter(
-        (trainer) =>
-          `${trainer.firstName} ${trainer.lastName}` === trainingTrainer
-      )[0].id,
-      type: trainingType,
-      date: trainingsDate,
-      name: trainingName,
-      description: trainingDescription,
-      student: user.id,
-    };
-    await axios.post("http://localhost:3080/api/trainings", newTraining);
-  };
+  useEffect(() => {
+    dispatch(fetchAllTrainers() as any);
+    dispatch(fetchAllTrainingTypes() as any);
+  }, [dispatch]);
 
   const handleSubmit = () => {
-    handlePostRequest();
+    let newTraining: TrainingsType = {
+      duration,
+      trainer: trainersList.filter(
+        (trainer: TrainersType) =>
+          `${trainer.firstName} ${trainer.lastName}` === selectedTrainer
+      )[0].id,
+      type,
+      date,
+      name,
+      description,
+      student: user.id,
+    };
+    dispatch(addTrainingOnServer(newTraining) as any);
     notify();
     setTimeout(() => navigate(RoutePaths.TRAINING), 3000);
   };
@@ -96,40 +80,40 @@ const AddPassedTraining: React.FC = () => {
         <h3>Training</h3>
         <Input
           type="text"
-          value={trainingName}
+          value={name}
           label="Name"
-          onChange={handleInputChange(setTrainingName)}
+          onChange={handleInputChange(setName)}
         />
         <Input
           type="date"
-          value={trainingsDate}
+          value={date}
           label="Training start date"
-          onChange={handleInputChange(setTrainingsDate)}
+          onChange={handleInputChange(setDate)}
         />
         <Input
           type="number"
-          value={trainingDuration}
+          value={duration}
           label="Duration"
-          onChange={handleInputChange(setTrainingDuration)}
+          onChange={handleInputChange(setDuration)}
         />
         <Input
           type="select"
-          value={trainingType}
+          value={type}
           label="Type"
-          onChange={handleInputChange(setTrainingType)}
+          onChange={handleInputChange(setType)}
           options={trainingTypesList}
         />
         <Input
           type="textarea"
-          value={trainingDescription}
+          value={description}
           label="Description"
-          onChange={handleInputChange(setTrainingDescription)}
+          onChange={handleInputChange(setDescription)}
         />
         <Input
           type="select"
-          value={trainingTrainer}
+          value={selectedTrainer}
           label="Add trainers"
-          onChange={handleInputChange(setTrainingTrainer)}
+          onChange={handleInputChange(setSelectedTrainer)}
           options={formattedTrainers}
         />
         <div>

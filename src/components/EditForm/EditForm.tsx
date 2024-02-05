@@ -1,6 +1,8 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 import RoutePaths from "../../constants/routes";
 
@@ -21,6 +23,8 @@ import { UserType } from "../../store/users/types";
 const EditForm: React.FC = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+
+  const notify = () => toast.success("Account info changed");
 
   const specializationOptions = useSelector<RootState, SpecializationsType[]>(
     (state) => state.specializations
@@ -76,7 +80,8 @@ const EditForm: React.FC = () => {
     };
     dispatch(updateUserAsync(user.id, updatedUser) as any);
     localStorage.setItem("user", JSON.stringify(updatedUser)); //delete later
-    navigate(RoutePaths.MY_ACCOUNT);
+    notify();
+    setTimeout(() => navigate(RoutePaths.MY_ACCOUNT), 2000);
   };
   return (
     <form action="#" method="post" onSubmit={handleSubmit}>
@@ -144,6 +149,18 @@ const EditForm: React.FC = () => {
         />
         <Button buttonText="Save changes" isSubmit={true} />
       </div>
+      <ToastContainer
+        position="top-right"
+        autoClose={3000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="colored"
+      />
     </form>
   );
 };
