@@ -6,3 +6,5 @@ export const trainingsHeadings: string[] = [
   "Student",
   "Duration",
 ];
+
+export const addTrainerHeadings: string[] = ["", "Name", "Specialization"];

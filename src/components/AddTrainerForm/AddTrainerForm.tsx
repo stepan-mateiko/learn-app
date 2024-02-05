@@ -1,13 +1,8 @@
+// TrainerForm.tsx
 import React, { useState, useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-
-import RoutePaths from "../../constants/routes";
-import { addTrainerHeadings } from "../../constants/headings";
-
 import Table from "../../components/Table/Table";
 import Button from "../../components/Button/Button";
-import Breadcrumb from "../../components/Breadcrumbs/Breadcrumbs";
-
+import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../store";
 import {
   fetchAllTrainers,
@@ -20,17 +15,22 @@ import {
 import { StudentsType } from "../../store/students/types";
 import { TrainersType } from "../../store/trainers/types";
 
-const AddTrainer: React.FC = () => {
+interface TrainerFormProps {
+  onCancel: () => void;
+}
+
+const TrainerForm: React.FC<TrainerFormProps> = ({ onCancel }) => {
   const dispatch = useDispatch();
   const user = useSelector((state: RootState) => state.user);
+  const { id: studentId } = user;
   const trainers = useSelector((state: RootState) => state.trainers);
   const students = useSelector((state: RootState) => state.students);
-
+  const headings = ["", "Name", "Specialization"];
   const myData = students.filter(
     (student: StudentsType) => student.id === user.id
   )[0];
 
-  const [myTrainers, setMyTrainers] = useState<string[][]>([]);
+  const [myTrainers, setMyTrainers] = useState<any[][]>([]);
   const [checkedTrainers, setCheckedTrainers] = useState<
     Record<string, boolean>
   >({});
@@ -94,22 +94,22 @@ const AddTrainer: React.FC = () => {
       )
       .map((item: TrainersType) => [item.id, item.students]);
     dispatch(
-      updateStudentOnServer(user.id, {
+      updateStudentOnServer(studentId, {
         trainers: myOldtrainers.concat(selectedIds),
       }) as any
     );
 
-    selectedIds.map(async (trainerId: string) => {
+    selectedIds.map(async (item: string) => {
       const existingStudents =
         trainersOldStudents
-          .filter((e: string[]) => e[0] === trainerId)
-          .map((e: string[]) => e[1])[0] || [];
+          .filter((e: string) => e[0] === item)
+          .map((e: string) => e[1])[0] || [];
 
       const updatedStudents = Array.from(
-        new Set([...existingStudents, user.id])
+        new Set([...existingStudents, studentId])
       );
       dispatch(
-        updateTrainerOnServer(trainerId, {
+        updateTrainerOnServer(item, {
           students: updatedStudents,
         }) as any
       );
@@ -123,45 +123,24 @@ const AddTrainer: React.FC = () => {
       const uniqueSelectedTrainers = selectedTrainers.filter(
         (trainer: string) => !existingTrainersSet.has(trainer[0])
       );
+      console.log(uniqueSelectedTrainers);
       setCheckedTrainers({});
       return [...prevMyTrainers, ...uniqueSelectedTrainers];
     });
   };
 
   return (
-    <div>
-      <Breadcrumb
-        links={[RoutePaths.MY_ACCOUNT, RoutePaths.ADD_TRAINER]}
-        labels={["My Account", "Add Trainer"]}
+    <form action="#" method="post" onSubmit={handleSubmit}>
+      <Table title="All trainers" headings={headings} data={allTrainers} />
+      <Button buttonText="Cancel" isLink={true} onClick={onCancel} />
+      <Button buttonText="Add" isSubmit={true} />
+      <Table
+        title="My Trainers"
+        headings={headings.slice(1)}
+        data={myTrainers}
       />
-      <h2>Add Trainer</h2>
-      <div>
-        <p>Please select trainers for adding them into your trainers list</p>
-        <p>* - There is no possibility to remove the trainer.</p>
-      </div>
-      <div style={{ display: "flex" }}>
-        <form action="#" method="post" onSubmit={handleSubmit}>
-          <Table
-            title="All trainers"
-            headings={addTrainerHeadings}
-            data={allTrainers}
-          />
-          <Button
-            buttonText="Cancel"
-            isLink={true}
-            path={RoutePaths.MY_ACCOUNT}
-          />
-          <Button buttonText="Add" isSubmit={true} />
-        </form>
-
-        <Table
-          title="My Trainers"
-          headings={addTrainerHeadings.slice(1)}
-          data={myTrainers}
-        />
-      </div>
-    </div>
+    </form>
   );
 };
 
-export default AddTrainer;
+export default TrainerForm;
