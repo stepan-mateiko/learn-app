@@ -1,26 +1,20 @@
 import { useState } from "react";
 
+import { handleInputChange } from "../../helpers/helpers";
+
 import Input from "../Input/Input";
 import Button from "../Button/Button";
 
 interface SearchProps {
   role: string;
-  data: any[][];
-  update: (data: any[][]) => void;
+  data: string[][];
+  update: (data: string[][]) => void;
 }
 
 const Search: React.FC<SearchProps> = ({ role, data, update }) => {
   const [trainer, setTrainer] = useState("");
   const [name, setName] = useState("");
   const [student, setStudent] = useState("");
-
-  const handleInputChange =
-    (setter: React.Dispatch<React.SetStateAction<string>>) =>
-    (newValue: string | number | boolean) => {
-      if (typeof newValue === "string") {
-        setter(newValue);
-      }
-    };
 
   const handleTrainersSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();

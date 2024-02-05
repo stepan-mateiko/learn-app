@@ -1,92 +1,55 @@
-import axios from "axios";
 import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+
 import RoutePaths from "../../constants/routes";
-import { Trainer } from "../../helpers/mockedTrainers";
-import {
-  trainingsHeadings,
-  TrainingInterface,
-} from "../../helpers/mockedTrainings";
-import { Student } from "../../helpers/mockedStudents";
+import { trainingsHeadings } from "../../constants/headings";
 import Button from "../../components/Button/Button";
 import Table from "../../components/Table/Table";
 import MyDatePicker from "../../components/DatePicker/DatePicker";
 import Search from "../../components/Search/Search";
 import Breadcrumb from "../../components/Breadcrumbs/Breadcrumbs";
-
-interface User {
-  userName: string;
-  email: string;
-  userPassword: string;
-  role: string;
-  id: string;
-}
+import { RootState } from "../../store";
+import { TrainingsType } from "../../store/trainings/types";
+import { fetchAllStudents } from "../../store/students/thunk";
+import { fetchAllTrainers } from "../../store/trainers/thunk";
+import { fetchAllTrainings } from "../../store/trainings/thunk";
+import { formatTrainingData } from "../../helpers/helpers";
 
 const Training: React.FC = () => {
-  const [trainers, setTrainers] = useState<Trainer[]>([]);
-  const [students, setStudents] = useState<Student[]>([]);
-  const [trainings, setTrainings] = useState<TrainingInterface[]>([]);
-  const [filteredTrainings, setFilteredTrainings] = useState<any[][]>([]);
-  const [selectedStartDate, setSelectedStartDate] = useState<Date | null>(null);
-  const [selectedEndDate, setSelectedEndDate] = useState<Date | null>(null);
-
-  const user = JSON.parse(localStorage.getItem("user") || "null") as User;
+  const dispatch = useDispatch();
+  const user = useSelector((state: RootState) => state.user);
   const { role } = user;
   const formattedHeading =
     role === "student"
-      ? trainingsHeadings.filter((training) => training !== "Students")
+      ? trainingsHeadings.filter((training) => training !== "Student")
       : trainingsHeadings.filter((training) => training !== "Trainer");
+  const trainers = useSelector((state: RootState) => state.trainers);
+  const students = useSelector((state: RootState) => state.students);
+  const trainings = useSelector((state: RootState) => state.trainings);
 
-  const getData = async () => {
-    const trainersfromBack = (
-      await axios.get("http://localhost:3080/api/trainers")
-    ).data.trainers;
-    const studentsfromBack = (
-      await axios.get("http://localhost:3080/api/students")
-    ).data.students;
-    const trainingsFromBack = (
-      await axios.get("http://localhost:3080/api/trainings")
-    ).data.trainings;
-    setStudents(studentsfromBack);
-    setTrainers(trainersfromBack);
-    setTrainings(trainingsFromBack);
-    setFilteredTrainings(
-      trainingsFromBack
-        .filter(
-          (item: any) => item.student === user.id || item.trainer === user.id
-        )
-        .map((training: any) => [
-          training.date,
-          training.name,
-          training.type,
-          role === "student"
-            ? `${
-                trainersfromBack.find(
-                  (item: Trainer) => item.id === training.trainer
-                )?.firstName
-              } ${
-                trainersfromBack.find(
-                  (item: Trainer) => item.id === training.trainer
-                )?.lastName
-              }`
-            : `${
-                studentsfromBack.find(
-                  (item: Student) => item.id === training.student
-                )?.firstName
-              } ${
-                studentsfromBack.find(
-                  (item: Student) => item.id === training.student
-                )?.lastName
-              }`,
-          training.duration,
-        ])
-    );
-  };
+  const [filteredTrainings, setFilteredTrainings] = useState<string[][]>([]);
+  const [selectedStartDate, setSelectedStartDate] = useState<Date | null>(null);
+  const [selectedEndDate, setSelectedEndDate] = useState<Date | null>(null);
 
   useEffect(() => {
-    getData();
-  }, []);
+    dispatch(fetchAllStudents() as any);
+    dispatch(fetchAllTrainers() as any);
+    dispatch(fetchAllTrainings() as any);
 
-  const handleFilterChange = (filteredData: any[][]) => {
+    setFilteredTrainings(
+      formatTrainingData(
+        role,
+        trainings.filter(
+          (item: TrainingsType) =>
+            item.student === user.id || item.trainer === user.id
+        ),
+        trainers,
+        students
+      )
+    );
+  }, [dispatch]);
+
+  const handleFilterChange = (filteredData: string[][]) => {
     setFilteredTrainings(filteredData);
   };
 
@@ -95,8 +58,11 @@ const Training: React.FC = () => {
     setSelectedEndDate(endDate);
 
     const filteredByDate = trainings
-      .filter((item) => item.student === user.id || item.trainer === user.id)
-      .filter((training) => {
+      .filter(
+        (item: TrainingsType) =>
+          item.student === user.id || item.trainer === user.id
+      )
+      .filter((training: TrainingsType) => {
         const trainingDate = new Date(training.date);
         return (
           (!startDate || trainingDate >= startDate) &&
@@ -104,20 +70,12 @@ const Training: React.FC = () => {
         );
       });
 
-    const formattedFilteredData = filteredByDate.map((training) => [
-      training.date,
-      training.name,
-      training.type,
-      role === "student"
-        ? `${
-            trainers.find((item) => item.id === training.trainer)?.firstName
-          } ${trainers.find((item) => item.id === training.trainer)?.lastName}`
-        : `${
-            students.find((item) => item.id === training.student)?.firstName
-          } ${students.find((item) => item.id === training.student)?.lastName}`,
-
-      training.duration,
-    ]);
+    const formattedFilteredData = formatTrainingData(
+      role,
+      filteredByDate,
+      trainers,
+      students
+    );
 
     setFilteredTrainings(formattedFilteredData);
   };

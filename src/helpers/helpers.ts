@@ -1,3 +1,7 @@
+import { StudentsType } from "../store/students/types";
+import { TrainersType } from "../store/trainers/types";
+import { TrainingsType } from "../store/trainings/types";
+
 export const generatePassword = (length: number) => {
   const charset =
     "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
@@ -14,3 +18,33 @@ export const handleInputChange =
       setter(newValue);
     }
   };
+
+export const formatTrainingData = (
+  role: string,
+  array: TrainingsType[],
+  trainers: TrainersType[],
+  students: StudentsType[]
+): string[][] => {
+  return array.map((training: TrainingsType) => [
+    training.date,
+    training.name,
+    training.type,
+    role === "student"
+      ? `${
+          trainers.find((item: TrainersType) => item.id === training.trainer)
+            ?.firstName
+        } ${
+          trainers.find((item: TrainersType) => item.id === training.trainer)
+            ?.lastName
+        }`
+      : `${
+          students.find((item: StudentsType) => item.id === training.student)
+            ?.firstName
+        } ${
+          students.find((item: StudentsType) => item.id === training.student)
+            ?.lastName
+        }`,
+
+    training.duration,
+  ]);
+};
