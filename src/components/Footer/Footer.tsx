@@ -5,8 +5,8 @@ import { navigationLinks } from "../../constants/navigationLinks";
 
 const Footer: React.FC = () => {
   return (
-    <footer style={{ marginTop: 200 }}>
-      <div style={{ display: "flex" }}>
+    <footer className="footer">
+      <div className="footer__wrapper-top">
         <Logo />
         <div>
           <h3>Product</h3>
@@ -21,7 +21,10 @@ const Footer: React.FC = () => {
           <Navigation links={navigationLinks.FOOTER_LINKS_COMPANY} />
         </div>
         <div>
-          <h3>Subscribe to our Newsletter</h3>
+          <h3 className="footer__subscribe-title">
+            Subscribe to our Newsletter
+          </h3>
+          <p>For product announcements and exclusive insights</p>
           <form>
             <input type="text" name="subscribeEmail" />
             <button type="submit">Subscribe</button>
@@ -29,7 +32,7 @@ const Footer: React.FC = () => {
         </div>
       </div>
       <hr />
-      <div style={{ display: "flex" }}>
+      <div className="footer__wrapper-bottom">
         <div>English</div>
         <div style={{ display: "flex" }}>
           © 2023 Learn, Inc.
