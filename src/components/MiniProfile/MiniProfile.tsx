@@ -4,6 +4,7 @@ import RoutePaths from "../../constants/routes";
 import ProfilePic from "../../assets/images/student-profile-img.png";
 import { useDispatch } from "react-redux";
 import { logoutUser } from "../../store/users/actions";
+import { AccountIcon, SignOutIcon } from "../Icon/Icon";
 
 interface MiniProfileProps {
   name: string;
@@ -19,19 +20,24 @@ const MiniProfile: React.FC<MiniProfileProps> = ({
   const dispatch = useDispatch();
   const handleLogOut = () => {
     dispatch(logoutUser() as any);
-    localStorage.removeItem("user");
   };
   return (
-    <div onClick={hideMiniProfile}>
-      <img src={ProfilePic} alt="profile" width={50} />
-      <div>
+    <div onClick={hideMiniProfile} className="header__miniProfile">
+      <div className="header__miniProfile-header">
+        <img src={ProfilePic} alt="profile" width={50} />
         <h4>{name}</h4>
         <p>{email}</p>
       </div>
-      <Link to={RoutePaths.MY_ACCOUNT}>My Account</Link>
-      <Link to={RoutePaths.LOGIN} onClick={handleLogOut}>
-        Sign Out
+      <Link to={RoutePaths.MY_ACCOUNT}>
+        <AccountIcon />
+        My Account
       </Link>
+      <div className="header__miniProfile-footer">
+        <Link to={RoutePaths.LOGIN} onClick={handleLogOut}>
+          <SignOutIcon />
+          Sign Out
+        </Link>
+      </div>
     </div>
   );
 };

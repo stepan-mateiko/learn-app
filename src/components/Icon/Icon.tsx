@@ -102,3 +102,74 @@ export const Lock: React.FC = () => {
     </svg>
   );
 };
+
+export const AccountIcon: React.FC = () => {
+  return (
+    <svg
+      width="24"
+      height="24"
+      viewBox="0 0 24 24"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        d="M17.9902 19.2812C17.8744 17.2344 16.707 16.5847 14.9996 16.0155C13.695 15.5809 13.3359 14.2112 13.2373 13.4844"
+        stroke="#565E6C"
+        strokeWidth="2.05714"
+        strokeMiterlimit="10"
+      />
+      <path
+        d="M10.7615 13.4839C10.6647 14.2073 10.3124 15.5787 9.0001 16.0159C7.29267 16.585 6.12353 17.233 6.00781 19.2799"
+        stroke="#565E6C"
+        strokeWidth="2.05714"
+        strokeMiterlimit="10"
+      />
+      <path
+        d="M11.9999 13.7143C10.1064 13.7143 8.57129 12.1791 8.57129 10.2857L8.57129 9.42857C8.57129 7.53514 10.1064 6 11.9999 6C13.8933 6 15.4284 7.53514 15.4284 9.42857V10.2857C15.4284 12.1791 13.8933 13.7143 11.9999 13.7143Z"
+        stroke="#565E6C"
+        strokeWidth="2.05714"
+        strokeMiterlimit="10"
+        strokeLinecap="square"
+      />
+      <path
+        d="M11.9999 21.4284C17.2071 21.4284 21.4284 17.2071 21.4284 11.9999C21.4284 6.7926 17.2071 2.57129 11.9999 2.57129C6.7926 2.57129 2.57129 6.7926 2.57129 11.9999C2.57129 17.2071 6.7926 21.4284 11.9999 21.4284Z"
+        stroke="#565E6C"
+        strokeWidth="2.05714"
+        strokeMiterlimit="10"
+        strokeLinecap="square"
+      />
+    </svg>
+  );
+};
+export const SignOutIcon: React.FC = () => {
+  return (
+    <svg
+      width="24"
+      height="24"
+      viewBox="0 0 24 24"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        d="M2.57129 12L15.4284 12"
+        stroke="#565E6C"
+        strokeWidth="2.05714"
+        strokeMiterlimit="10"
+      />
+      <path
+        d="M11.1426 7.71436L15.4283 12.0001L11.1426 16.2858"
+        stroke="#565E6C"
+        strokeWidth="2.05714"
+        strokeMiterlimit="10"
+        strokeLinecap="square"
+      />
+      <path
+        d="M10.2861 2.57129L18.8576 2.57129C19.3122 2.57129 19.7483 2.7519 20.0697 3.07339C20.3912 3.39488 20.5718 3.83092 20.5718 4.28557L20.5718 19.7141C20.5718 20.1688 20.3912 20.6048 20.0697 20.9263C19.7483 21.2478 19.3122 21.4284 18.8576 21.4284L10.2861 21.4284"
+        stroke="#565E6C"
+        strokeWidth="2.05714"
+        strokeMiterlimit="10"
+        strokeLinecap="square"
+      />
+    </svg>
+  );
+};

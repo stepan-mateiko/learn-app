@@ -4,6 +4,9 @@ export const navigationLinks = {
   HEADER_LINKS: [
     { to: RoutePaths.TRAINING, label: "Training" },
     { to: RoutePaths.MY_ACCOUNT, label: "My Account" },
+    { to: RoutePaths.NOT_FOUND, label: "Blog" },
+    { to: RoutePaths.NOT_FOUND, label: "Pricing" },
+    { to: RoutePaths.NOT_FOUND, label: "About Us" },
   ],
   FOOTER_LINKS_PRODUCTS: [
     { to: "/features", label: "Features" },

@@ -1,8 +1,8 @@
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { useState } from "react";
 import { useSelector } from "react-redux";
 
-import RoutePaths from "../../constants/routes";
+import RoutePaths, { pathsWithoutButtons } from "../../constants/routes";
 import { navigationLinks } from "../../constants/navigationLinks";
 import { RootState } from "../../store";
 
@@ -13,6 +13,8 @@ import MiniProfile from "../MiniProfile/MiniProfile";
 import ProfilePic from "../../assets/images/student-profile-img.png";
 
 const Header: React.FC = () => {
+  const page = useLocation().pathname;
+  const isButtons = !pathsWithoutButtons.includes(page);
   const user = useSelector((state: RootState) => state.user);
   const [isMiniProfile, setIsMiniProfile] = useState<boolean>(false);
 
@@ -31,18 +33,24 @@ const Header: React.FC = () => {
       </Link>
 
       <Navigation links={navigationLinks.HEADER_LINKS} />
-      {!user.userName && (
+      {!user.userName && isButtons && (
         <div>
-          <Button buttonText="Sign In" isLink={true} path={RoutePaths.LOGIN} />
+          <Button
+            buttonText="Sign In"
+            isLink={true}
+            path={RoutePaths.LOGIN}
+            classOfBtn="header__sign-"
+          />
           <Button
             buttonText="Join Us"
             isLink={true}
             path={RoutePaths.JOIN_US}
+            classOfBtn="header__join-"
           />
         </div>
       )}
       {!isMiniProfile && user.userName && (
-        <div onClick={showMiniProfile}>
+        <div className="header__box" onClick={showMiniProfile}>
           {user.userName}{" "}
           <img src={ProfilePic} alt={`${user.userName}'s profile`} width={50} />
         </div>

@@ -12,3 +12,19 @@
   flex-wrap: $wrap;
   flex-direction: $direction;
 }
+
+@mixin button-styles(
+  $background,
+  $text: #fff,
+  $size: 1.14em,
+  $padding: 16px,
+  $line: 26px
+) {
+  background-color: $background;
+  color: $text;
+  border: none;
+  font-size: $size;
+  border-radius: 6px;
+  padding: 0 $padding;
+  line-height: $line;
+}

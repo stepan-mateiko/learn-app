@@ -13,3 +13,10 @@ const RoutePaths = {
   NOT_FOUND: "*",
 };
 export default RoutePaths;
+
+export const pathsWithoutButtons = [
+  RoutePaths.LOGIN,
+  RoutePaths.JOIN_US,
+  "/registration/trainer",
+  "/registration/student",
+];

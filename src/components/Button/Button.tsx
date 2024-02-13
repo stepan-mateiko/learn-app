@@ -7,6 +7,7 @@ interface ButtonProps {
   isLink?: boolean;
   path?: string;
   isSubmit?: boolean;
+  classOfBtn?: string;
 }
 
 const Button: React.FC<ButtonProps> = ({
@@ -15,10 +16,11 @@ const Button: React.FC<ButtonProps> = ({
   isLink,
   path,
   isSubmit,
+  classOfBtn,
 }) => {
   return (
     <button
-      className="btn"
+      className={`${classOfBtn}btn`}
       onClick={onClick}
       type={isSubmit ? "submit" : "button"}
     >
