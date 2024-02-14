@@ -8,8 +8,8 @@ interface JoinUsBoxProps {
 }
 const JoinUsBox: React.FC<JoinUsBoxProps> = ({ role }) => {
   return (
-    <div style={{ display: "flex" }}>
-      <div>
+    <div className="join__box">
+      <div className="join__box-info">
         <h3>Register as {role}</h3>
         <p>
           Do consectetur proident proident id eiusmod deserunt consequat
@@ -19,9 +19,10 @@ const JoinUsBox: React.FC<JoinUsBoxProps> = ({ role }) => {
           buttonText="Join Us"
           isLink={true}
           path={`${RoutePaths.REGISTRATION}/${role}`}
+          classOfBtn="join__"
         />
       </div>
-      <div>
+      <div className="join__box-image">
         <img
           src={role === "trainer" ? JoinUsImage1 : JoinUsImage2}
           alt="join us"

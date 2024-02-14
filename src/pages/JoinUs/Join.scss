@@ -1,0 +1,46 @@
+@import "../../styles/variables";
+@import "../../styles/mixins";
+
+.join {
+  @include flex-type($direction: column);
+  h2 {
+    font-family: $montserrat;
+    font-size: 4em;
+    line-height: 3.55em;
+  }
+  &__box {
+    width: 82%;
+    margin: 0 auto;
+    @include flex-type();
+    background-color: $footer-background;
+    border-radius: 12px;
+    h3 {
+      font-family: $montserrat;
+      font-size: 3.43em;
+      line-height: 2.09em;
+    }
+    p {
+      font-size: 1.29em;
+      line-height: 1.27em;
+    }
+    &-info {
+      width: 50%;
+      padding-left: 5%;
+    }
+    &-image {
+      width: 50%;
+      img {
+        width: 100%;
+      }
+    }
+  }
+  &__btn {
+    @include button-styles(
+      $background: $primary-btn,
+      $size: 18px,
+      $line: 28px,
+      $padding: 20px
+    );
+    margin-top: 5%;
+  }
+}
