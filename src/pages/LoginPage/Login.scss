@@ -63,6 +63,12 @@
     @include button-styles($background: $primary-btn);
     width: 100%;
     padding: 2%;
+    &:hover {
+      background-color: $primary-btn-hovered;
+    }
+    &:active {
+      background-color: $primary-btn-pressed;
+    }
   }
   &__footer {
     p:first-child {

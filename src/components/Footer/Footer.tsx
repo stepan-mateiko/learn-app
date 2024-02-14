@@ -2,6 +2,7 @@ import Logo from "../Logo/Logo";
 import Navigation from "../Navigation/Navigation";
 import { TwitterIcon, FacebookIcon, YouTubeIcon } from "../Icon/Icon";
 import { navigationLinks } from "../../constants/navigationLinks";
+import { Link } from "react-router-dom";
 
 const Footer: React.FC = () => {
   return (
@@ -25,8 +26,17 @@ const Footer: React.FC = () => {
             Subscribe to our Newsletter
           </h3>
           <p>For product announcements and exclusive insights</p>
-          <form>
-            <input type="text" name="subscribeEmail" />
+          <form
+            onSubmit={(e) => {
+              e.preventDefault();
+            }}
+          >
+            <input
+              type="email"
+              name="subscribeEmail"
+              placeholder="Input your email"
+              required
+            />
             <button type="submit">Subscribe</button>
           </form>
         </div>
@@ -34,14 +44,20 @@ const Footer: React.FC = () => {
       <hr />
       <div className="footer__wrapper-bottom">
         <div>English</div>
-        <div style={{ display: "flex" }}>
+        <div>
           © 2023 Learn, Inc.
           <Navigation links={navigationLinks.FOOTER_LINKS_COPYRIGHT} />
         </div>
         <div>
-          <TwitterIcon />
-          <FacebookIcon />
-          <YouTubeIcon />
+          <Link to={"*"}>
+            <TwitterIcon />
+          </Link>
+          <Link to={"*"}>
+            <FacebookIcon />
+          </Link>
+          <Link to={"*"}>
+            <YouTubeIcon />
+          </Link>
         </div>
       </div>
     </footer>

@@ -43,8 +43,13 @@ export const loginUserAsync =
       const response = await userAPI.login(credentials);
 
       dispatch(loginUser(response.data));
-    } catch (error) {
-      console.error("Error logging in:", error);
+    } catch (error: any) {
+      console.error(
+        "Error logging in:",
+        error.response.status,
+        error.response.data.message
+      );
+      alert(error.response.data.message);
     }
   };
 

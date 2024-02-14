@@ -17,6 +17,8 @@ const LoginForm: React.FC = () => {
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     dispatch(loginUserAsync({ userName, password }) as any);
+    setUserName("");
+    setPassword("");
   };
 
   return (
@@ -32,6 +34,7 @@ const LoginForm: React.FC = () => {
         placeholder="Enter user name"
         value={userName}
         onChange={handleInputChange(setUserName)}
+        isRequired={true}
       />
       <Input
         type="password"
@@ -39,6 +42,7 @@ const LoginForm: React.FC = () => {
         placeholder="Enter password"
         value={password}
         onChange={handleInputChange(setPassword)}
+        isRequired={true}
       />
       <Button buttonText="Sign In" isSubmit={true} classOfBtn="login__" />
     </form>
