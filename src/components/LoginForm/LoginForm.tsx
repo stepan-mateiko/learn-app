@@ -1,8 +1,5 @@
-import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
-
-import RoutePaths from "../../constants/routes";
 
 import { handleInputChange } from "../../helpers/helpers";
 
@@ -12,7 +9,6 @@ import Button from "../Button/Button";
 import { loginUserAsync } from "../../store/users/thunk";
 
 const LoginForm: React.FC = () => {
-  const navigate = useNavigate();
   const dispatch = useDispatch();
 
   const [userName, setUserName] = useState<string>("");
@@ -21,11 +17,15 @@ const LoginForm: React.FC = () => {
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     dispatch(loginUserAsync({ userName, password }) as any);
-    navigate(RoutePaths.HOME); //later can be deleted
   };
 
   return (
-    <form action="#" method="post" onSubmit={handleSubmit}>
+    <form
+      className="login__form"
+      action="#"
+      method="post"
+      onSubmit={handleSubmit}
+    >
       <Input
         type="text"
         label="User name"
@@ -40,7 +40,7 @@ const LoginForm: React.FC = () => {
         value={password}
         onChange={handleInputChange(setPassword)}
       />
-      <Button buttonText="Sign In" isSubmit={true} />
+      <Button buttonText="Sign In" isSubmit={true} classOfBtn="login__" />
     </form>
   );
 };

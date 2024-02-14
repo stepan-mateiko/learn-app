@@ -1,0 +1,80 @@
+@import "../../styles/variables";
+@import "../../styles/mixins";
+
+.login {
+  width: 25%;
+  margin: 10% auto;
+  text-align: center;
+
+  &__header {
+    font-family: $montserrat;
+    h2 {
+      font-size: 2.29em;
+      line-height: 2.19em;
+    }
+    p {
+      font-size: 1.43em;
+      line-height: 1.36em;
+      color: $subheading-color;
+    }
+  }
+  &__form {
+    margin: 2% auto;
+    @include flex-type($direction: column);
+
+    .input-block {
+      @include flex-type($direction: column, $align: stretch, $gap: 2px);
+      width: 100%;
+      label {
+        font-size: 0.86em;
+        line-height: 0.91em;
+        font-weight: 700;
+        align-self: baseline;
+      }
+      input {
+        font-size: 1.14em;
+        line-height: 1.18em;
+        background-color: $input-background;
+        border-radius: 6px;
+        border-width: 0px;
+        outline: none;
+        padding: 3%;
+        padding-left: 30px;
+        background-image: url(../../assets/images/icons/user.svg);
+        background-repeat: no-repeat;
+        background-position: left;
+        &:hover {
+          color: $input-hover;
+        }
+        &:focus {
+          color: $text-color;
+          background-color: #fff;
+        }
+      }
+      &:last-of-type {
+        input {
+          background-image: url(../../assets/images/icons/lock.svg);
+          background-repeat: no-repeat;
+        }
+      }
+    }
+  }
+  &__btn {
+    @include button-styles($background: $primary-btn);
+    width: 100%;
+    padding: 2%;
+  }
+  &__footer {
+    p:first-child {
+      margin: 5% auto;
+      color: $subheading-color;
+      font-size: 0.86em;
+      line-height: 0.91em;
+      font-weight: 700;
+    }
+    a {
+      color: $primary-btn;
+      font-weight: 700;
+    }
+  }
+}

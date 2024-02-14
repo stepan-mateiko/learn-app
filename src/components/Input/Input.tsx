@@ -18,7 +18,7 @@ interface InputProps {
   title?: string;
   options?: string[] | number[];
   checked?: boolean;
-  error?: string;
+  isRequired?: boolean;
 }
 
 const Input: React.FC<InputProps> = ({
@@ -31,7 +31,7 @@ const Input: React.FC<InputProps> = ({
   title,
   options,
   checked,
-  error,
+  isRequired,
 }) => {
   const handleChange = (
     event: ChangeEvent<
@@ -47,7 +47,6 @@ const Input: React.FC<InputProps> = ({
         value={value as string}
         onChange={handleChange}
         placeholder={placeholder}
-        required
       />
     ) : type === "select" && options ? (
       <select value={value as string} onChange={handleChange} required>
@@ -73,7 +72,7 @@ const Input: React.FC<InputProps> = ({
         placeholder={placeholder}
         pattern={pattern}
         title={title}
-        required
+        required={isRequired}
       />
     );
 
@@ -81,9 +80,6 @@ const Input: React.FC<InputProps> = ({
     <div className="input-block">
       <label>{label}</label>
       {inputElement}
-      <div className="error-message" id={`${label.toLowerCase()}-error`}>
-        {error}
-      </div>
     </div>
   );
 };
