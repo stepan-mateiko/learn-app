@@ -13,7 +13,7 @@ const RegistrationVerification: React.FC = () => {
   const { userName, password } = user;
 
   return (
-    <div style={{ textAlign: "center" }}>
+    <div className="registration__verification">
       <h2>Registration</h2>
       <div>
         <RegistrationSuccess />
@@ -30,6 +30,7 @@ const RegistrationVerification: React.FC = () => {
         buttonText="My account"
         isLink={true}
         path={RoutePaths.MY_ACCOUNT}
+        classOfBtn="registration__verification-"
         onClick={() => {
           dispatch(loginUserAsync({ userName, password }) as any);
         }}

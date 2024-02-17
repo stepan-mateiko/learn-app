@@ -8,11 +8,11 @@ const Registration: React.FC = () => {
   const { role = "student" } = useParams<{ role?: string }>();
 
   return (
-    <div style={{ display: "flex" }}>
-      <div>
-        <h2>Registration</h2>
-        <p>{role}</p>
-        <div>
+    <div className="registration">
+      <h2>Registration</h2>
+      <p>{role}</p>
+      <div className="registration__wrapper">
+        <div className="registration__image">
           <img
             src={
               role === "student"
@@ -22,8 +22,8 @@ const Registration: React.FC = () => {
             alt={`registration as ${role}`}
           />
         </div>
+        <RegistrationForm role={role} />
       </div>
-      <RegistrationForm role={role} />
     </div>
   );
 };

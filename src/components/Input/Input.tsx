@@ -1,4 +1,5 @@
 import React, { ChangeEvent } from "react";
+import { formatDate } from "../../helpers/helpers";
 
 interface InputProps {
   type:
@@ -57,7 +58,12 @@ const Input: React.FC<InputProps> = ({
         ))}
       </select>
     ) : type === "date" ? (
-      <input type={type} value={value as string} onChange={handleChange} />
+      <input
+        type={type}
+        value={value as string}
+        onChange={handleChange}
+        max={formatDate()}
+      />
     ) : type === "checkbox" ? (
       <input
         type={type}

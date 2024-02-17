@@ -24,7 +24,6 @@ const ModalBox: React.FC<ModalBoxProps> = ({
     dispatch(deleteUserAsync(id) as any);
     handleModalClose();
     navigate(RoutePaths.LOGIN);
-    localStorage.removeItem("user");
   };
   return (
     <ReactModal
