@@ -1,0 +1,118 @@
+@import "../../styles/variables";
+@import "../../styles/mixins";
+
+.home {
+  width: 90%;
+  margin: 5% auto;
+  text-align: center;
+  &__welcome {
+    @include flex-type($direction: column);
+    h1 {
+      font-family: $montserrat;
+      font-size: 4em;
+      line-height: 2.55em;
+      margin: 0;
+    }
+    p {
+      width: 50%;
+      font-size: 1.43em;
+      line-height: 1.36em;
+      color: $footer-input;
+    }
+  }
+  &__join {
+    @include flex-type($direction: column, $gap: 0);
+    background-image: url(./../../assets/images/home-join.png);
+    background-size: cover;
+    padding: 2%;
+    h2 {
+      font-family: $montserrat;
+      font-size: 3.43em;
+      line-height: 2.55em;
+      color: $primary-btn;
+    }
+    p {
+      width: 40%;
+      font-size: 1.29em;
+      line-height: 1.27em;
+    }
+    &-btn {
+      margin: 2% auto;
+      @include button-styles(
+        $background: $primary-btn,
+        $size: 1.29em,
+        $line: 28px
+      );
+
+      &:hover {
+        background-color: $primary-btn-hovered;
+      }
+      &:active {
+        background-color: $primary-btn-pressed;
+      }
+    }
+  }
+  &__image {
+    margin: 10% auto;
+  }
+  &__new {
+    @include flex-type($direction: column);
+    h2 {
+      font-family: $montserrat;
+      font-size: 3.43em;
+      line-height: 2.55em;
+    }
+    &-tag {
+      width: 40%;
+      font-size: 1.29em;
+      line-height: 1.27em;
+      color: $footer-input;
+    }
+    &-wrapper {
+      @include flex-type();
+    }
+    &-btn {
+      margin-top: 5%;
+      @include button-styles(
+        $background: $primary-btn,
+        $size: 1.14em,
+        $line: 26px
+      );
+
+      &:hover {
+        background-color: $primary-btn-hovered;
+      }
+      &:active {
+        background-color: $primary-btn-pressed;
+      }
+    }
+  }
+}
+
+.box {
+  text-align: left;
+  padding-right: 5%;
+  &__tag {
+    color: $primary-btn;
+    font-size: 1.14em;
+    line-height: 1.18em;
+  }
+  h4 {
+    font-family: $montserrat;
+    font-size: 1.71em;
+    line-height: 1.64em;
+  }
+  &__info {
+    @include flex-type($justify: space-between);
+    span:first-child {
+      color: $footer-input;
+    }
+    span:last-child {
+      font-size: 0.86em;
+      line-height: 0.91em;
+      border-radius: 14px;
+      background-color: $input-background;
+      padding: 2%;
+    }
+  }
+}

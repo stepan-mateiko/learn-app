@@ -3,9 +3,8 @@ import { useSelector } from "react-redux";
 
 import Box from "../../components/Box/Box";
 import Button from "../../components/Button/Button";
-import boxImg1 from "../../assets/images/box-img-1.png";
-import boxImg2 from "../../assets/images/box-img-2.png";
-import boxImg3 from "../../assets/images/box-img-3.png";
+import { articles } from "../../constants/articles";
+
 import homeImg from "../../assets/images/home-img.png";
 
 import { RootState } from "../../store";
@@ -15,7 +14,7 @@ const HomePage: React.FC = () => {
 
   const renderWelcomeSection = () => {
     return (
-      <div>
+      <div className="home__welcome">
         {!user.firstName && <h1>Let's start learning</h1>}
         {user.firstName && <h1>{`Hi, ${user.firstName}`}</h1>}
         <p>
@@ -29,47 +28,52 @@ const HomePage: React.FC = () => {
 
   const renderJoinUsSection = () => {
     return (
-      <div style={{ textAlign: "center" }}>
+      <div className="home__join">
         <h2>Join Us</h2>
         <p>
           Qui ut exercitation officia proident enim non tempor tempor ipsum ex
           nulla ea adipisicing sit consequat enim elit cupidatat o
         </p>
-        <Button buttonText="Join Us" isLink={true} path={RoutePaths.JOIN_US} />
+        <Button
+          buttonText="Join Us"
+          isLink={true}
+          path={RoutePaths.JOIN_US}
+          classOfBtn="home__join-"
+        />
       </div>
     );
   };
 
   const renderWhatsNewSection = () => {
     return (
-      <div>
+      <div className="home__new">
         <h2>What's new?</h2>
-        <p>
+        <p className="home__new-tag">
           Do consectetur proident proident id eiusmod deserunt consequat
           pariatur ad ex velit do Lorem reprehenderit.
         </p>
-        <div style={{ display: "flex" }}>
-          {[boxImg1, boxImg2, boxImg3].map((imgSrc, index) => (
+        <div className="home__new-wrapper">
+          {articles.map((item, index) => (
             <Box
               key={index}
-              imgSrc={imgSrc}
-              tag={`Tag ${index + 1}`}
-              title={`Title ${index + 1}`}
-              date="Dec 24, 2022"
-              time={`${index + 1}`}
+              imgSrc={item.imgSrc}
+              tag={item.tag}
+              title={item.title}
+              date={item.date}
+              time={item.time}
             />
           ))}
         </div>
-        <Button buttonText="Read more articles" />
+        <Button buttonText="Read more articles" classOfBtn="home__new-" />
       </div>
     );
   };
 
   return (
-    <div>
+    <div className="home">
       {renderWelcomeSection()}
       {!user.firstName && (
-        <div>
+        <div className="home__image">
           <img src={homeImg} alt="home" />
         </div>
       )}

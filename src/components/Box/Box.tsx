@@ -3,15 +3,15 @@ interface BoxProps {
   tag: string;
   title: string;
   date: string;
-  time: string;
+  time: number;
 }
 const Box: React.FC<BoxProps> = ({ imgSrc, tag, title, date, time }) => {
   return (
-    <div>
+    <div className="box">
       <img src={imgSrc} alt={`${title} box img`} />
-      <p>{tag}</p>
+      <p className="box__tag">{tag}</p>
       <h4>{title}</h4>
-      <p>
+      <p className="box__info">
         <span>{date}</span> <span>{`${time} min to read`}</span>
       </p>
     </div>
