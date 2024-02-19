@@ -4,7 +4,7 @@ import Button from "../Button/Button";
 
 const AccountBox: React.FC = () => {
   return (
-    <div style={{ textAlign: "center" }}>
+    <div className="account__box">
       <h2>My Trainings</h2>
       <p>
         The Training Section is interactive, allowing you to engage with
@@ -16,6 +16,7 @@ const AccountBox: React.FC = () => {
         buttonText="View trainings"
         isLink={true}
         path={RoutePaths.TRAINING}
+        classOfBtn="account__box-"
       />
     </div>
   );

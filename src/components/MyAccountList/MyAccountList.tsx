@@ -29,12 +29,14 @@ const MyAccountList: React.FC<{ user: MyAccountListProps }> = ({ user }) => {
   } = user;
 
   return (
-    <div>
+    <div className="list">
       <h3>My Profile</h3>
-      <div style={{ display: "flex" }}>
-        <img src={studentImg} alt="" width={100} />
+      <div className="list__header">
+        <img src={studentImg} alt="profile" />
         <h4>Status</h4>
-        <p>{isActive ? "Active" : "Not active"}</p>
+        <p className={`list__status-${isActive ? "active" : "notActive"}`}>
+          {isActive ? "Active" : "Not active"}
+        </p>
       </div>
       <h4>First name</h4>
       <p>{firstName}</p>
@@ -48,7 +50,7 @@ const MyAccountList: React.FC<{ user: MyAccountListProps }> = ({ user }) => {
       {role === "student" && <p>{address}</p>}
       <h4>Email</h4>
       <p>{email}</p>
-      <div>
+      <div className="list__footer">
         <Button
           buttonText="Edit profile"
           isLink={true}

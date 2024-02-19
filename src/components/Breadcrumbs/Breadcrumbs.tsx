@@ -9,7 +9,7 @@ interface BreadcrumbProps {
 
 const Breadcrumb: React.FC<BreadcrumbProps> = ({ links, labels }) => {
   return (
-    <div role="presentation">
+    <div role="presentation" className="presentation">
       <Breadcrumbs aria-label="breadcrumb">
         {links.map((link, key) => (
           <Link key={key} underline="hover" color="inherit" href={link}>

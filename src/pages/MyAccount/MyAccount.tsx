@@ -96,21 +96,30 @@ const MyAccount: React.FC = () => {
     setModalOpen(false);
   };
   return (
-    <div>
+    <div className="account">
       <Breadcrumb links={[RoutePaths.MY_ACCOUNT]} labels={["My Account"]} />
-      <div style={{ display: "flex" }}>
+      <h2>My Account</h2>
+      <div className="account__wrapper">
         {myData && <MyAccountList user={myData} />}
-        <Table title={tableTitle} headings={headings} data={formattedData} />
-        {role === "student" && (
-          <div>
-            <Button buttonText="Delete account" onClick={handleModalOpen} />
+        <div className="account__wrapper-table">
+          <Table title={tableTitle} headings={headings} data={formattedData} />
+          {role === "student" && (
             <Button
               buttonText="Add trainer"
               isLink={true}
               path={RoutePaths.ADD_TRAINER}
+              classOfBtn="account__add-"
             />
-          </div>
-        )}
+          )}
+        </div>
+
+        <div className="account__wrapper-delete">
+          <Button
+            buttonText="Delete account"
+            onClick={handleModalOpen}
+            classOfBtn="account__delete-"
+          />
+        </div>
       </div>
       <AccountBox />
       {isModalOpen && (

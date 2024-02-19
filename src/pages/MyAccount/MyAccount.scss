@@ -1,0 +1,162 @@
+@import "../../styles/variables";
+@import "../../styles/mixins";
+
+.account {
+  width: 90%;
+  margin: 0 auto;
+  position: relative;
+  h2 {
+    text-align: center;
+    font-family: $montserrat;
+    font-size: 4em;
+    line-height: 3.54em;
+  }
+  &__wrapper {
+    @include flex-type($align: flex-start, $justify: space-between);
+    &-table {
+      position: relative;
+      width: 40%;
+    }
+    &-delete {
+      width: 15%;
+      align-self: flex-end;
+    }
+  }
+  .table {
+    width: 100%;
+    text-align: left;
+    border-radius: 6px;
+    border-collapse: collapse;
+    &__title {
+      font-family: $montserrat;
+      font-size: 2.29em;
+      line-height: 2.18em;
+    }
+    &__heading {
+      text-transform: uppercase;
+      font-family: $montserrat;
+      &-line {
+        background-color: $footer-background;
+        border: 1px solid $input-background;
+      }
+    }
+    tbody {
+      border: 1px solid $input-background;
+      tr {
+        border: 1px solid $input-background;
+        td:first-child {
+          font-weight: 700;
+        }
+      }
+    }
+    td,
+    th {
+      padding: 5%;
+    }
+  }
+  &__add-btn {
+    position: absolute;
+    top: 7%;
+    right: 0;
+    @include button-styles($background: $primary-btn);
+
+    &:hover {
+      background-color: $primary-btn-hovered;
+    }
+    &:active {
+      background-color: $primary-btn-pressed;
+    }
+  }
+  &__delete-btn {
+    @include button-styles($background: $important-btn);
+    padding: 5%;
+    &:hover {
+      background-color: $important-btn-hovered;
+    }
+    &:active {
+      background-color: $important-btn-pressed;
+    }
+  }
+  &__box {
+    text-align: center;
+    width: 65%;
+    margin: 0 auto;
+    p {
+      font-size: 1.14em;
+      line-height: 1.18em;
+    }
+    &-btn {
+      @include button-styles($background: $primary-btn);
+      margin-top: 10%;
+      &:hover {
+        background-color: $primary-btn-hovered;
+      }
+      &:active {
+        background-color: $primary-btn-pressed;
+      }
+    }
+  }
+}
+
+.list {
+  width: 40%;
+  @include flex-type($direction: column, $align: flex-start);
+  padding: 2%;
+  h3 {
+    font-family: $montserrat;
+    font-size: 2.29em;
+    line-height: 2.18em;
+  }
+  &__header {
+    @include flex-type($justify: flex-start);
+    img {
+      width: 30%;
+    }
+  }
+  &__status {
+    &-active {
+      color: $secondary-btn;
+      padding-left: 20px;
+      background-image: url(./../../assets/images/icons/active.svg);
+      background-repeat: no-repeat;
+    }
+    &-notActive {
+      color: $important-btn;
+      padding-left: 20px;
+      background-image: url(./../../assets/images/icons/notActive.svg);
+      background-repeat: no-repeat;
+      background-size: contain;
+    }
+  }
+  h4 {
+    font-size: 1.14em;
+    line-height: 1.18em;
+  }
+  p {
+    font-size: 1.14em;
+    line-height: 1.18em;
+  }
+  &__footer {
+    @include flex-type($justify: space-between);
+    button:first-child {
+      @include button-styles($background: $primary-btn);
+      padding: 2% 16px;
+      &:hover {
+        background-color: $primary-btn-hovered;
+      }
+      &:active {
+        background-color: $primary-btn-pressed;
+      }
+    }
+    button:last-child {
+      @include button-styles($background: $secondary-btn);
+      padding: 2% 16px;
+      &:hover {
+        background-color: $secondary-btn-hovered;
+      }
+      &:active {
+        background-color: $secondary-btn-pressed;
+      }
+    }
+  }
+}

@@ -1,7 +1,7 @@
 interface TableProps {
   title: string;
   headings: string[];
-  data: any[][];
+  data: string[][];
 }
 
 const Table: React.FC<TableProps> = ({ title, headings, data }) => {
@@ -9,11 +9,15 @@ const Table: React.FC<TableProps> = ({ title, headings, data }) => {
     <table className="table">
       <thead>
         <tr>
-          <th colSpan={headings.length}>{title}</th>
+          <th colSpan={headings.length} className="table__title">
+            {title}
+          </th>
         </tr>
-        <tr>
+        <tr className="table__heading-line">
           {headings.map((heading, index) => (
-            <th key={index}>{heading}</th>
+            <th key={index} className="table__heading">
+              {heading}
+            </th>
           ))}
         </tr>
       </thead>
