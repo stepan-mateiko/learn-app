@@ -1,0 +1,101 @@
+@import "../../styles/variables";
+@import "../../styles/mixins";
+
+.edit {
+  width: 100%;
+  margin: 0 auto;
+  padding: 5%;
+  h2 {
+    text-align: center;
+    font-family: $montserrat;
+    font-size: 4em;
+    line-height: 3.54em;
+  }
+  h3 {
+    font-family: $montserrat;
+    font-size: 2.28em;
+    line-height: 2.18em;
+  }
+  &__header {
+    @include flex-type($justify: flex-start);
+    margin-top: 2%;
+    img {
+      border-radius: 12px;
+    }
+  }
+  &__form {
+    margin-top: 2%;
+    width: 50%;
+    @include flex-type($direction: column, $gap: 15px);
+
+    .input-block {
+      @include flex-type($direction: column, $align: stretch, $gap: 2px);
+      width: 100%;
+      label {
+        font-size: 1.14em;
+        line-height: 1.18em;
+        font-weight: 700;
+        align-self: baseline;
+      }
+      input,
+      select {
+        width: 75%;
+        font-size: 1.14em;
+        line-height: 1.18em;
+        border-radius: 6px;
+        outline: none;
+        padding: 3%;
+        border: none;
+        background-color: $input-background;
+        &:hover {
+          color: $input-hover;
+        }
+        &:focus {
+          color: $text-color;
+        }
+      }
+    }
+    &-check {
+      align-self: flex-start;
+      font-size: 1.14em;
+      line-height: 1.18em;
+      font-weight: 700;
+      display: flex;
+      gap: 10px;
+    }
+    &-btns {
+      margin-top: 2%;
+      align-self: flex-end;
+      @include flex-type();
+      button:first-child {
+        @include button-styles(
+          $background: #fff,
+          $text: $primary-btn,
+          $size: 1.14em,
+          $padding: 12px,
+          $line: 26px
+        );
+        &:hover {
+          background-color: $sign-btn-hovered;
+        }
+        &:active {
+          background-color: $sign-btn-pressed;
+        }
+      }
+      button:last-child {
+        @include button-styles(
+          $background: $primary-btn,
+          $size: 1.14em,
+          $padding: 12px,
+          $line: 26px
+        );
+        &:hover {
+          background-color: $primary-btn-hovered;
+        }
+        &:active {
+          background-color: $primary-btn-pressed;
+        }
+      }
+    }
+  }
+}

@@ -5,6 +5,7 @@
   width: 90%;
   margin: 0 auto;
   position: relative;
+  padding: 5%;
   h2 {
     text-align: center;
     font-family: $montserrat;
@@ -111,6 +112,7 @@
     @include flex-type($justify: flex-start);
     img {
       width: 30%;
+      border-radius: 12px;
     }
   }
   &__status {

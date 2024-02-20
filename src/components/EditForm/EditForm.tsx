@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import Switch from "@mui/material/Switch";
 
 import RoutePaths from "../../constants/routes";
 
@@ -19,6 +20,7 @@ import { updateUserAsync } from "../../store/users/thunk";
 import { StudentsType } from "../../store/students/types";
 import { TrainersType } from "../../store/trainers/types";
 import { UserType } from "../../store/users/types";
+import { AntSwitch } from "../Switch/Switch";
 
 const EditForm: React.FC = () => {
   const dispatch = useDispatch();
@@ -79,29 +81,42 @@ const EditForm: React.FC = () => {
       address,
     };
     dispatch(updateUserAsync(user.id, updatedUser) as any);
-    localStorage.setItem("user", JSON.stringify(updatedUser)); //delete later
     notify();
     setTimeout(() => navigate(RoutePaths.MY_ACCOUNT), 2000);
   };
   return (
-    <form action="#" method="post" onSubmit={handleSubmit}>
+    <form
+      action="#"
+      method="post"
+      onSubmit={handleSubmit}
+      className="edit__form"
+    >
       <Input
         type="text"
         label="First name"
         value={firstName}
         onChange={handleInputChange(setFirstName)}
+        isRequired={true}
+        pattern="[A-Z][a-zA-Z]*"
+        title="Please enter a single word starting with a capital letter"
       />
       <Input
         type="text"
         label="Last name"
         value={lastName}
         onChange={handleInputChange(setLastName)}
+        isRequired={true}
+        pattern="[A-Z][a-zA-Z]*"
+        title="Please enter a single word starting with a capital letter"
       />
       <Input
         type="text"
         label="User name"
         value={userName}
         onChange={handleInputChange(setUserName)}
+        pattern="[a-z\-]+"
+        title="Please enter only lowercase Latin letters and/or '-' symbol"
+        isRequired={true}
       />
       {role === "student" && (
         <Input
@@ -124,14 +139,12 @@ const EditForm: React.FC = () => {
         label="Email"
         value={email}
         onChange={handleInputChange(setEmail)}
+        isRequired={true}
       />
-      <Input
-        type="checkbox"
-        label="Active"
-        checked={isActive}
-        value={isActive}
-        onChange={handleCheckboxChange}
-      />
+      <label className="edit__form-check">
+        Active <AntSwitch checked={isActive} onChange={handleCheckboxChange} />
+      </label>
+
       {role === "trainer" && (
         <Input
           type="select"
@@ -141,7 +154,7 @@ const EditForm: React.FC = () => {
           options={specializationOptions}
         />
       )}
-      <div>
+      <div className="edit__form-btns">
         <Button
           buttonText="Cancel"
           isLink={true}

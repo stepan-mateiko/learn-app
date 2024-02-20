@@ -50,6 +50,9 @@
   &__box {
     @include flex-type();
     font-weight: 700;
+    img {
+      border-radius: 50%;
+    }
   }
   &__miniProfile {
     position: absolute;
@@ -66,8 +69,10 @@
       grid-template-areas:
         "a b b"
         "a c c";
+      gap: 10px;
       img {
         grid-area: a;
+        border-radius: 50%;
       }
       h4 {
         grid-area: b;

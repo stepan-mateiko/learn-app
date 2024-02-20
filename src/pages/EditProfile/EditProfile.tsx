@@ -3,9 +3,10 @@ import studentImg from "../../assets/images/student-profile-img.png";
 
 const EditProfile: React.FC = () => {
   return (
-    <div>
+    <div className="edit">
+      <h2>My Account</h2>
       <h3>Edit Profile</h3>
-      <div style={{ display: "flex" }}>
+      <div className="edit__header">
         <img src={studentImg} alt="" width={100} />
         <h4>Upload your photo</h4>
       </div>
