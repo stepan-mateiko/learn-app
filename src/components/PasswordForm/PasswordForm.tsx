@@ -9,7 +9,6 @@ import Button from "../../components/Button/Button";
 
 import { RootState } from "../../store";
 import { updateUserAsync } from "../../store/users/thunk";
-import { logoutUser } from "../../store/users/actions";
 
 interface PasswordFormProps {
   setIsSuccess: (isSuccess: boolean) => void;
@@ -29,10 +28,12 @@ const PasswordForm: React.FC<PasswordFormProps> = ({ setIsSuccess }) => {
       dispatch(
         updateUserAsync(user.id, { ...user, password: newPassword }) as any
       );
-      setTimeout(() => {
-        dispatch(logoutUser() as any);
-      }, 1000);
       setIsSuccess(true);
+    } else if (newPassword !== confirmPassword) {
+      console.log("New password doesn't match confirmed password");
+      setConfirmPassword("");
+      setNewPassword("");
+      setCurrentPassword("");
     } else {
       console.log("Wrong password");
       setConfirmPassword("");
@@ -41,26 +42,34 @@ const PasswordForm: React.FC<PasswordFormProps> = ({ setIsSuccess }) => {
     }
   };
   return (
-    <form action="#" method="post" onSubmit={handleSubmit}>
+    <form
+      action="#"
+      method="post"
+      onSubmit={handleSubmit}
+      className="change-password__form"
+    >
       <Input
         type="password"
         value={currentPassword}
         label="Current password"
         onChange={handleInputChange(setCurrentPassword)}
+        placeholder="Enter current password"
       />
       <Input
         type="password"
         value={newPassword}
         label="New password"
         onChange={handleInputChange(setNewPassword)}
+        placeholder="Enter new password"
       />
       <Input
         type="password"
         value={confirmPassword}
         label="Confirm new password"
         onChange={handleInputChange(setConfirmPassword)}
+        placeholder="Confirm new password"
       />
-      <div>
+      <div className="change-password__btns">
         <Button
           buttonText="Cancel"
           isLink={true}

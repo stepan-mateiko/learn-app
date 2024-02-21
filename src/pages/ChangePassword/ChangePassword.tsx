@@ -10,12 +10,12 @@ const ChangePassword: React.FC = () => {
   return (
     <>
       {!isSuccess && (
-        <div>
+        <div className="change-password">
           <h3>Security</h3>
-          <div style={{ display: "flex" }}>
-            <div>
+          <div className="change-password__wrapper">
+            <h4>
               <Lock /> Change password
-            </div>
+            </h4>
             <PasswordForm setIsSuccess={setIsSuccess} />
           </div>
         </div>
