@@ -162,3 +162,41 @@
     }
   }
 }
+.delete {
+  width: 38%;
+  margin: 20% auto;
+  padding: 2%;
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0px 4px 9px #171a1f, 0px 0px 2px #171a1f;
+  @include flex-type($direction: column, $align: flex-start, $gap: 20px);
+  h3 {
+    font-family: $montserrat;
+    font-size: 1.71em;
+    line-height: 1.64em;
+  }
+  &__btns {
+    align-self: flex-end;
+    @include flex-type();
+    button:first-child {
+      @include button-styles($background: transparent, $text: $footer-input);
+      padding: 5%;
+      &:hover {
+        background-color: $modal-btn-hovered;
+      }
+      &:active {
+        background-color: $modal-btn-pressed;
+      }
+    }
+    button:last-child {
+      @include button-styles($background: $important-btn);
+      padding: 5%;
+      &:hover {
+        background-color: $important-btn-hovered;
+      }
+      &:active {
+        background-color: $important-btn-pressed;
+      }
+    }
+  }
+}

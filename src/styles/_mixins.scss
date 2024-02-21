@@ -1,7 +1,7 @@
 @mixin flex-type(
   $justify: space-around,
   $align: center,
-  $gap: 10px,
+  $gap: 20px,
   $wrap: nowrap,
   $direction: row
 ) {
