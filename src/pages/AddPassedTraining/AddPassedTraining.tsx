@@ -48,7 +48,8 @@ const AddPassedTraining: React.FC = () => {
     dispatch(fetchAllTrainingTypes() as any);
   }, [dispatch]);
 
-  const handleSubmit = () => {
+  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
     let newTraining: TrainingsType = {
       duration,
       trainer: trainersList.filter(
@@ -66,7 +67,7 @@ const AddPassedTraining: React.FC = () => {
     setTimeout(() => navigate(RoutePaths.TRAINING), 3000);
   };
   return (
-    <div>
+    <div className="add-training">
       <Breadcrumb
         links={[
           RoutePaths.MY_ACCOUNT,
@@ -76,25 +77,36 @@ const AddPassedTraining: React.FC = () => {
         labels={["My Account", "Trainings", "Add Passed Training"]}
       />
       <h2>Add passed training</h2>
-      <form action="#" method="post">
+      <form
+        action="#"
+        method="post"
+        className="add-training__form"
+        onSubmit={handleSubmit}
+      >
         <h3>Training</h3>
         <Input
           type="text"
           value={name}
           label="Name"
           onChange={handleInputChange(setName)}
+          placeholder="Enter training name"
+          pattern="[A-Z][a-zA-Z]*"
+          title="Please start with capital letter"
+          isRequired={true}
         />
         <Input
           type="date"
           value={date}
           label="Training start date"
           onChange={handleInputChange(setDate)}
+          isRequired={true}
         />
         <Input
           type="number"
           value={duration}
           label="Duration"
           onChange={handleInputChange(setDuration)}
+          isRequired={true}
         />
         <Input
           type="select"
@@ -108,35 +120,39 @@ const AddPassedTraining: React.FC = () => {
           value={description}
           label="Description"
           onChange={handleInputChange(setDescription)}
+          placeholder="Enter training description"
         />
-        <Input
-          type="select"
-          value={selectedTrainer}
-          label="Add trainers"
-          onChange={handleInputChange(setSelectedTrainer)}
-          options={formattedTrainers}
-        />
-        <div>
+        <div className="select-trainer">
+          <Input
+            type="select"
+            value={selectedTrainer}
+            label="Add trainers"
+            onChange={handleInputChange(setSelectedTrainer)}
+            options={formattedTrainers}
+          />
+        </div>
+
+        <div className="add-training__btns">
           <Button
             buttonText="Cancel"
             isLink={true}
             path={RoutePaths.TRAINING}
           />
-          <Button buttonText="Add" onClick={handleSubmit} />
-          <ToastContainer
-            position="top-right"
-            autoClose={3000}
-            hideProgressBar={false}
-            newestOnTop={false}
-            closeOnClick
-            rtl={false}
-            pauseOnFocusLoss
-            draggable
-            pauseOnHover
-            theme="colored"
-          />
+          <Button buttonText="Add" isSubmit={true} />
         </div>
       </form>
+      <ToastContainer
+        position="top-right"
+        autoClose={3000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="colored"
+      />
     </div>
   );
 };

@@ -107,6 +107,7 @@ const RegistrationForm: React.FC<RegistrationFormProps> = ({ role }) => {
           label="Date of birth (Optional)"
           value={dob}
           onChange={handleInputChange(setDob)}
+          name="dob"
         />
       )}
       {role === "student" && (

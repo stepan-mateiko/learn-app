@@ -20,6 +20,7 @@ interface InputProps {
   options?: string[] | number[];
   checked?: boolean;
   isRequired?: boolean;
+  name?: string;
 }
 
 const Input: React.FC<InputProps> = ({
@@ -33,6 +34,7 @@ const Input: React.FC<InputProps> = ({
   options,
   checked,
   isRequired,
+  name,
 }) => {
   const handleChange = (
     event: ChangeEvent<
@@ -57,7 +59,7 @@ const Input: React.FC<InputProps> = ({
           </option>
         ))}
       </select>
-    ) : type === "date" ? (
+    ) : type === "date" && name === "dob" ? (
       <input
         type={type}
         value={value as string}
@@ -79,6 +81,7 @@ const Input: React.FC<InputProps> = ({
         pattern={pattern}
         title={title}
         required={isRequired}
+        min="1"
       />
     );
 
