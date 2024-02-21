@@ -83,12 +83,7 @@
         }
       }
       button:last-child {
-        @include button-styles(
-          $background: $primary-btn,
-          $size: 1.14em,
-          $padding: 12px,
-          $line: 26px
-        );
+        @include button-styles($background: $primary-btn, $padding: 12px);
         &:hover {
           background-color: $primary-btn-hovered;
         }

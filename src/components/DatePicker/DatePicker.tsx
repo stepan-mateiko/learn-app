@@ -14,13 +14,15 @@ const MyDatePicker: React.FC<MyDatePickerProps> = ({
   onDateChange,
 }) => {
   return (
-    <>
+    <div className="date-picker">
       <DatePicker
         selected={selectedStartDate}
         onChange={(date: Date) => onDateChange(date, selectedEndDate)}
         selectsStart
         startDate={selectedStartDate}
         endDate={selectedEndDate}
+        dateFormat="dd MMM yyyy"
+        showIcon
       />
       <DatePicker
         selected={selectedEndDate}
@@ -29,8 +31,10 @@ const MyDatePicker: React.FC<MyDatePickerProps> = ({
         startDate={selectedStartDate}
         endDate={selectedEndDate}
         minDate={selectedStartDate}
+        dateFormat="dd MMM yyyy"
+        showIcon
       />
-    </>
+    </div>
   );
 };
 

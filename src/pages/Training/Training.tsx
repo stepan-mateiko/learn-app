@@ -81,7 +81,7 @@ const Training: React.FC = () => {
   };
 
   return (
-    <div>
+    <div className="training">
       <Breadcrumb
         links={[RoutePaths.MY_ACCOUNT, RoutePaths.TRAINING]}
         labels={["My Account", "Trainings"]}
@@ -92,23 +92,21 @@ const Training: React.FC = () => {
           buttonText="Add training"
           isLink={true}
           path={RoutePaths.ADD_PASSED_TRAINING}
+          classOfBtn="training__add-"
         />
       )}
-      <div style={{ display: "flex" }}>
-        <div>
-          <Search
-            role={role}
-            data={filteredTrainings}
-            update={handleFilterChange}
-          />
-        </div>
-        <div>
-          <MyDatePicker
-            selectedStartDate={selectedStartDate}
-            selectedEndDate={selectedEndDate}
-            onDateChange={handleDateChange}
-          />
-        </div>
+      <h3>Search Trainings</h3>
+      <div className="training__wrapper">
+        <Search
+          role={role}
+          data={filteredTrainings}
+          update={handleFilterChange}
+        />
+        <MyDatePicker
+          selectedStartDate={selectedStartDate}
+          selectedEndDate={selectedEndDate}
+          onDateChange={handleDateChange}
+        />
       </div>
       <Table
         title={role === "student" ? "My passed trainings" : "Results"}
