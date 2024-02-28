@@ -129,29 +129,31 @@ const AddTrainer: React.FC = () => {
   };
 
   return (
-    <div>
+    <div className="add-trainer">
       <Breadcrumb
         links={[RoutePaths.MY_ACCOUNT, RoutePaths.ADD_TRAINER]}
         labels={["My Account", "Add Trainer"]}
       />
       <h2>Add Trainer</h2>
-      <div>
+      <div className="add-trainer__caption">
         <p>Please select trainers for adding them into your trainers list</p>
         <p>* - There is no possibility to remove the trainer.</p>
       </div>
-      <div style={{ display: "flex" }}>
+      <div className="add-trainer__wrapper">
         <form action="#" method="post" onSubmit={handleSubmit}>
           <Table
             title="All trainers"
             headings={addTrainerHeadings}
             data={allTrainers}
           />
-          <Button
-            buttonText="Cancel"
-            isLink={true}
-            path={RoutePaths.MY_ACCOUNT}
-          />
-          <Button buttonText="Add" isSubmit={true} />
+          <div className="add-trainer__btns">
+            <Button
+              buttonText="Cancel"
+              isLink={true}
+              path={RoutePaths.MY_ACCOUNT}
+            />
+            <Button buttonText="Add" isSubmit={true} />
+          </div>
         </form>
 
         <Table

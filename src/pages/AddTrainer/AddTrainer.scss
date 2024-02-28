@@ -1,0 +1,94 @@
+@import "../../styles/variables";
+@import "../../styles/mixins";
+
+.add-trainer {
+  position: relative;
+  width: 90%;
+  margin: 0 auto;
+  h2 {
+    font-family: $montserrat;
+    font-size: 4em;
+    line-height: 3.55em;
+    text-align: center;
+  }
+  &__caption {
+    font-size: 1.14em;
+    line-height: 1.18em;
+  }
+  &__wrapper {
+    @include flex-type($align: flex-start);
+  }
+  .table {
+    width: 40%;
+    text-align: left;
+    border-radius: 6px;
+    border-collapse: collapse;
+    &__title {
+      font-family: $montserrat;
+      font-size: 2.29em;
+      line-height: 2.18em;
+    }
+    &__heading {
+      text-transform: uppercase;
+      font-family: $montserrat;
+      &-line {
+        background-color: $footer-background;
+        border: 1px solid $input-background;
+      }
+    }
+    tbody {
+      border: 1px solid $input-background;
+      tr {
+        border: 1px solid $input-background;
+        td:first-child {
+          font-weight: 700;
+        }
+      }
+    }
+    td,
+    th {
+      padding: 1%;
+    }
+  }
+  form {
+    width: 40%;
+    @include flex-type($direction: column);
+    .table {
+      width: 100%;
+      tr {
+        td:nth-child(2) {
+          font-weight: 700;
+        }
+      }
+    }
+  }
+  &__btns {
+    margin-top: 2%;
+    align-self: flex-start;
+    @include flex-type($justify: flex-start);
+    button:first-child {
+      @include button-styles(
+        $background: #fff,
+        $text: $primary-btn,
+        $size: 1.14em,
+        $padding: 12px,
+        $line: 26px
+      );
+      &:hover {
+        background-color: $sign-btn-hovered;
+      }
+      &:active {
+        background-color: $sign-btn-pressed;
+      }
+    }
+    button:last-child {
+      @include button-styles($background: $primary-btn, $padding: 12px);
+      &:hover {
+        background-color: $primary-btn-hovered;
+      }
+      &:active {
+        background-color: $primary-btn-pressed;
+      }
+    }
+  }
+}
