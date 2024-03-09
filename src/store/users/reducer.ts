@@ -5,7 +5,7 @@ const initialState: UserType = {
   lastName: "",
   email: "",
   role: "",
-  id: "",
+  ID: "",
   userName: "",
   password: "",
 };

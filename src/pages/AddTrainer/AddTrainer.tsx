@@ -27,7 +27,7 @@ const AddTrainer: React.FC = () => {
   const students = useSelector((state: RootState) => state.students);
 
   const myData = students.filter(
-    (student: StudentsType) => student.id === user.id
+    (student: StudentsType) => student.ID === user.ID
   )[0];
 
   const [myTrainers, setMyTrainers] = useState<string[][]>([]);
@@ -48,12 +48,12 @@ const AddTrainer: React.FC = () => {
   };
 
   const allTrainers = trainers
-    .filter((item: TrainersType) => !myData.trainers.includes(item.id))
+    .filter((item: TrainersType) => !myData.trainers.includes(item.ID))
     .map((trainer: TrainersType) => [
       <input
         type="checkbox"
-        checked={checkedTrainers[trainer.id]}
-        onChange={() => handleCheckboxChange(trainer.id)}
+        checked={checkedTrainers[trainer.ID]}
+        onChange={() => handleCheckboxChange(trainer.ID)}
       />,
       `${trainer.firstName} ${trainer.lastName}`,
       trainer.specialization,
@@ -62,7 +62,7 @@ const AddTrainer: React.FC = () => {
   useEffect(() => {
     setMyTrainers(
       trainers
-        .filter((item: TrainersType) => myData.trainers.includes(item.id))
+        .filter((item: TrainersType) => myData.trainers.includes(item.ID))
         .map((trainer: TrainersType) => [
           `${trainer.firstName} ${trainer.lastName}`,
           trainer.specialization,
@@ -75,13 +75,13 @@ const AddTrainer: React.FC = () => {
 
     const selectedIds = trainers
       .filter((item: TrainersType) =>
-        Object.keys(checkedTrainers).includes(item.id)
+        Object.keys(checkedTrainers).includes(item.ID)
       )
-      .map((item: TrainersType) => item.id);
+      .map((item: TrainersType) => item.ID);
 
     const selectedTrainers = trainers
       .filter((item: TrainersType) =>
-        Object.keys(checkedTrainers).includes(item.id)
+        Object.keys(checkedTrainers).includes(item.ID)
       )
       .map((trainer: TrainersType) => [
         `${trainer.firstName} ${trainer.lastName}`,
@@ -90,11 +90,11 @@ const AddTrainer: React.FC = () => {
     const myOldtrainers = myData.trainers;
     const trainersOldStudents = trainers
       .filter((item: TrainersType) =>
-        Object.keys(checkedTrainers).includes(item.id)
+        Object.keys(checkedTrainers).includes(item.ID)
       )
-      .map((item: TrainersType) => [item.id, item.students]);
+      .map((item: TrainersType) => [item.ID, item.students]);
     dispatch(
-      updateStudentOnServer(user.id, {
+      updateStudentOnServer(user.ID, {
         trainers: myOldtrainers.concat(selectedIds),
       }) as any
     );
@@ -106,7 +106,7 @@ const AddTrainer: React.FC = () => {
           .map((e: string[]) => e[1])[0] || [];
 
       const updatedStudents = Array.from(
-        new Set([...existingStudents, user.id])
+        new Set([...existingStudents, user.ID])
       );
       dispatch(
         updateTrainerOnServer(trainerId, {

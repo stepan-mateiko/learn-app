@@ -1,5 +1,5 @@
 export type TrainingsType = {
-  id?: string;
+  ID?: string;
   duration: string;
   trainer: string;
   type: string;

@@ -55,12 +55,12 @@ export const loginUserAsync =
 
 export const updateUserAsync =
   (
-    id: string,
+    ID: string,
     credentials: UserType
   ): ThunkAction<void, RootState, null, UsersActions> =>
   async (dispatch) => {
     try {
-      const res = await userAPI.updateUserOnServer(id, credentials);
+      const res = await userAPI.updateUserOnServer(ID, credentials);
 
       dispatch(updateUser(res?.data));
     } catch (error) {

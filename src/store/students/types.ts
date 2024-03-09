@@ -6,7 +6,7 @@ export type StudentsType = {
   address?: string;
   trainers?: string[];
   trainings?: string[];
-  id: string;
+  ID: string;
   isActive: boolean;
 };
 

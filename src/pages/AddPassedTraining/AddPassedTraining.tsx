@@ -42,7 +42,6 @@ const AddPassedTraining: React.FC = () => {
   const [selectedTrainer, setSelectedTrainer] = useState<string>(
     formattedTrainers ? formattedTrainers[0] : ""
   );
-
   useEffect(() => {
     dispatch(fetchAllTrainers() as any);
     dispatch(fetchAllTrainingTypes() as any);
@@ -55,12 +54,12 @@ const AddPassedTraining: React.FC = () => {
       trainer: trainersList.filter(
         (trainer: TrainersType) =>
           `${trainer.firstName} ${trainer.lastName}` === selectedTrainer
-      )[0].id,
+      )[0].ID,
       type,
       date,
       name,
       description,
-      student: user.id,
+      student: user.ID,
     };
     dispatch(addTrainingOnServer(newTraining) as any);
     notify();

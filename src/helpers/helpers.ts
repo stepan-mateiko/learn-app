@@ -31,17 +31,17 @@ export const formatTrainingData = (
     training.type,
     role === "student"
       ? `${
-          trainers.find((item: TrainersType) => item.id === training.trainer)
+          trainers.find((item: TrainersType) => item.ID === training.trainer)
             ?.firstName
         } ${
-          trainers.find((item: TrainersType) => item.id === training.trainer)
+          trainers.find((item: TrainersType) => item.ID === training.trainer)
             ?.lastName
         }`
       : `${
-          students.find((item: StudentsType) => item.id === training.student)
+          students.find((item: StudentsType) => item.ID === training.student)
             ?.firstName
         } ${
-          students.find((item: StudentsType) => item.id === training.student)
+          students.find((item: StudentsType) => item.ID === training.student)
             ?.lastName
         }`,
 

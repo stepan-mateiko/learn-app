@@ -9,7 +9,7 @@ const studentsReducer = (state = initialState, action: any) => {
 
     case StudentsActionTypes.UPDATE_STUDENT:
       return state.map((student) =>
-        student.id === action.payload.id ? action.payload : student
+        student.ID === action.payload.ID ? action.payload : student
       );
 
     default:

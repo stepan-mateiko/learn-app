@@ -41,8 +41,10 @@ const RegistrationForm: React.FC<RegistrationFormProps> = ({ role }) => {
   }, [dispatch]);
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    const { v4: uuidv4 } = require("uuid");
     event.preventDefault();
     const newUser: RegisterType = {
+      ID: uuidv4(),
       userName: `${firstName}-${lastName}`.toLowerCase(),
       password: generatePassword(8),
       firstName,

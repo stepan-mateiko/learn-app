@@ -8,6 +8,7 @@ const baseURL = "http://localhost:3080/api";
 export const userAPI = {
   addUserToServer: async (credentials: RegisterType) => {
     try {
+      console.log(credentials);
       return await axios.post(`${baseURL}/users`, credentials);
     } catch (error) {
       console.error("Registration error:", error);
@@ -22,9 +23,9 @@ export const userAPI = {
       console.error("Registration error:", error);
     }
   },
-  updateUserOnServer: async (id: string, credentials: UserType) => {
+  updateUserOnServer: async (ID: string, credentials: UserType) => {
     try {
-      return await axios.put(`${baseURL}/users/${id}`, credentials);
+      return await axios.put(`${baseURL}/users/${ID}`, credentials);
     } catch (error) {
       console.error("Error updating user:", error);
     }
@@ -41,9 +42,9 @@ export const userAPI = {
       throw error;
     }
   },
-  deleteUserFromTheServer: async (id: string) => {
+  deleteUserFromTheServer: async (ID: string) => {
     try {
-      return await axios.delete(`${baseURL}/users/${id}`);
+      return await axios.delete(`${baseURL}/users/${ID}`);
     } catch (error) {
       console.error("Deleting user error:", error);
       throw error;
@@ -55,15 +56,15 @@ export const studentsAPI = {
   fetchAllStudents: async () => {
     try {
       const response = await axios.get(`${baseURL}/students`);
-      return response.data.students;
+      return response.data;
     } catch (error) {
       console.error("Error fetching students:", error);
       throw error;
     }
   },
-  updateStudentOnServer: async (id: string, credentials: any) => {
+  updateStudentOnServer: async (ID: string, credentials: any) => {
     try {
-      return await axios.put(`${baseURL}/students/${id}`, credentials);
+      return await axios.put(`${baseURL}/students/${ID}`, credentials);
     } catch (error) {
       console.error("Error updating student:", error);
     }
@@ -74,15 +75,15 @@ export const trainersAPI = {
   fetchAllTrainers: async () => {
     try {
       const response = await axios.get(`${baseURL}/trainers`);
-      return response.data.trainers;
+      return response.data;
     } catch (error) {
       console.error("Error fetching trainers:", error);
       throw error;
     }
   },
-  updateTrainerOnServer: async (id: string, credentials: any) => {
+  updateTrainerOnServer: async (ID: string, credentials: any) => {
     try {
-      return await axios.put(`${baseURL}/trainers/${id}`, credentials);
+      return await axios.put(`${baseURL}/trainers/${ID}`, credentials);
     } catch (error) {
       console.error("Error updating trainer:", error);
     }
@@ -93,7 +94,7 @@ export const trainingsAPI = {
   fetchAllTrainings: async () => {
     try {
       const response = await axios.get(`${baseURL}/trainings`);
-      return response.data.trainings;
+      return response.data;
     } catch (error) {
       console.error("Error fetching trainings:", error);
       throw error;
@@ -113,7 +114,7 @@ export const specializationsAPI = {
   fetchAllSpecializations: async () => {
     try {
       const response = await axios.get(`${baseURL}/specializations`);
-      return response.data.specializations;
+      return response.data;
     } catch (error) {
       console.error("Error fetching specializations:", error);
       throw error;
@@ -125,7 +126,7 @@ export const trainingTypesAPI = {
   fetchAllTrainingTypes: async () => {
     try {
       const response = await axios.get(`${baseURL}/trainingTypes`);
-      return response.data.trainingTypes;
+      return response.data;
     } catch (error) {
       console.error("Error fetching training types:", error);
       throw error;

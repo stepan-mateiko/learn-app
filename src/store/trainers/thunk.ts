@@ -14,10 +14,10 @@ export const fetchAllTrainers =
   };
 
 export const updateTrainerOnServer =
-  (id: string, credentials: any): ThunkAction<void, RootState, unknown, any> =>
+  (ID: string, credentials: any): ThunkAction<void, RootState, unknown, any> =>
   async (dispatch) => {
     try {
-      const response = await trainersAPI.updateTrainerOnServer(id, credentials);
+      const response = await trainersAPI.updateTrainerOnServer(ID, credentials);
       const updatedTrainer = response?.data;
       if (updatedTrainer) {
         dispatch(updateTrainer(updatedTrainer));

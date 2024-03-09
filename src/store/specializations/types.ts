@@ -1,5 +1,5 @@
 export type SpecializationsType = {
-  id: string;
+  ID: string;
   specialization: string;
 };
 

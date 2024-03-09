@@ -3,7 +3,7 @@ export interface UserType {
   lastName: string;
   email: string;
   role: string;
-  id: string;
+  ID: string;
   userName: string;
   password: string;
   dob?: string;
@@ -26,6 +26,7 @@ export interface RegisterType {
   dob?: string;
   address?: string;
   specialization?: string;
+  ID: string;
 }
 
 export const enum UsersActionTypes {

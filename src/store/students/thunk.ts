@@ -14,10 +14,10 @@ export const fetchAllStudents =
   };
 
 export const updateStudentOnServer =
-  (id: string, credentials: any): ThunkAction<void, RootState, unknown, any> =>
+  (ID: string, credentials: any): ThunkAction<void, RootState, unknown, any> =>
   async (dispatch) => {
     try {
-      const response = await studentsAPI.updateStudentOnServer(id, credentials);
+      const response = await studentsAPI.updateStudentOnServer(ID, credentials);
       const updatedStudent = response?.data;
       if (updatedStudent) {
         dispatch(updateStudent(updatedStudent));

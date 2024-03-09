@@ -5,7 +5,7 @@ export type TrainersType = {
   specialization: string;
   students?: string[];
   trainings?: string[];
-  id: string;
+  ID: string;
   isActive: boolean;
 };
 

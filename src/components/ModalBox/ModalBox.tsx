@@ -1,4 +1,3 @@
-import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
 import ReactModal from "react-modal";
@@ -9,19 +8,19 @@ import { useDispatch } from "react-redux";
 import { deleteUserAsync } from "../../store/users/thunk";
 
 interface ModalBoxProps {
-  id: string;
+  ID: string;
   isModalOpen: boolean;
   handleModalClose: () => void;
 }
 const ModalBox: React.FC<ModalBoxProps> = ({
   isModalOpen,
   handleModalClose,
-  id,
+  ID,
 }) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const deleteAccount = () => {
-    dispatch(deleteUserAsync(id) as any);
+    dispatch(deleteUserAsync(ID) as any);
     handleModalClose();
     navigate(RoutePaths.LOGIN);
   };

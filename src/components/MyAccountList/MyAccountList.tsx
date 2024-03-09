@@ -3,7 +3,7 @@ import Button from "../Button/Button";
 import studentImg from "../../assets/images/student-profile-img.png";
 
 interface MyAccountListProps {
-  id: string;
+  ID: string;
   userName: string;
   firstName: string;
   lastName: string;

@@ -41,7 +41,7 @@ const Training: React.FC = () => {
         role,
         trainings.filter(
           (item: TrainingsType) =>
-            item.student === user.id || item.trainer === user.id
+            item.student === user.ID || item.trainer === user.ID
         ),
         trainers,
         students
@@ -60,7 +60,7 @@ const Training: React.FC = () => {
     const filteredByDate = trainings
       .filter(
         (item: TrainingsType) =>
-          item.student === user.id || item.trainer === user.id
+          item.student === user.ID || item.trainer === user.ID
       )
       .filter((training: TrainingsType) => {
         const trainingDate = new Date(training.date);

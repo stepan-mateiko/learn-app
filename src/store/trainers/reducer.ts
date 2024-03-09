@@ -9,7 +9,7 @@ const trainersReducer = (state = initialState, action: any) => {
 
     case TrainersActionTypes.UPDATE_TRAINER:
       return state.map((trainer) =>
-        trainer.id === action.payload.id ? action.payload : trainer
+        trainer.ID === action.payload.ID ? action.payload : trainer
       );
 
     default:

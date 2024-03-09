@@ -38,8 +38,8 @@ const EditForm: React.FC = () => {
 
   const myData =
     role === "student"
-      ? students.filter((item: StudentsType) => item.id === user.id)[0]
-      : trainers.filter((item: TrainersType) => item.id === user.id)[0];
+      ? students.filter((item: StudentsType) => item.ID === user.ID)[0]
+      : trainers.filter((item: TrainersType) => item.ID === user.ID)[0];
 
   const [firstName, setFirstName] = useState<string>(myData.firstName);
   const [lastName, setLastName] = useState<string>(myData.lastName);
@@ -79,7 +79,7 @@ const EditForm: React.FC = () => {
       dob,
       address,
     };
-    dispatch(updateUserAsync(user.id, updatedUser) as any);
+    dispatch(updateUserAsync(user.ID, updatedUser) as any);
     notify();
     setTimeout(() => navigate(RoutePaths.MY_ACCOUNT), 2000);
   };

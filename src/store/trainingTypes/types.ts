@@ -1,5 +1,5 @@
 export type TrainingTypesType = {
-  id: string;
+  ID: string;
   trainingType: string;
 };
 

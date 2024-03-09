@@ -40,13 +40,13 @@ const MyAccount: React.FC = () => {
       ? {
           ...user,
           ...students.filter(
-            (student: StudentsType) => student.id === user.id
+            (student: StudentsType) => student.ID === user.ID
           )[0],
         }
       : {
           ...user,
           ...trainers.filter(
-            (trainer: TrainersType) => trainer.id === user.id
+            (trainer: TrainersType) => trainer.ID === user.ID
           )[0],
         };
 
@@ -57,7 +57,7 @@ const MyAccount: React.FC = () => {
         formattedData = myData.trainers
           .map((trainerId: string) => {
             const trainer = trainers.find(
-              (t: TrainersType) => t.id === trainerId
+              (t: TrainersType) => t.ID === trainerId
             );
             return trainer
               ? [
@@ -74,7 +74,7 @@ const MyAccount: React.FC = () => {
         formattedData = myData.students
           .map((studentId: string) => {
             const student = students.find(
-              (s: StudentsType) => s.id === studentId
+              (s: StudentsType) => s.ID === studentId
             );
             return student
               ? [
@@ -124,7 +124,7 @@ const MyAccount: React.FC = () => {
       <AccountBox />
       {isModalOpen && (
         <ModalBox
-          id={user.id ? user.id : ""}
+          ID={user.ID ? user.ID : ""}
           isModalOpen={isModalOpen}
           handleModalClose={handleModalClose}
         />
