@@ -9,12 +9,14 @@ import { AccountIcon, SignOutIcon } from "../Icon/Icon";
 interface MiniProfileProps {
   name: string;
   email: string | undefined;
+  photo: string;
   isMiniProfile: boolean;
   hideMiniProfile: () => void;
 }
 const MiniProfile: React.FC<MiniProfileProps> = ({
   name,
   email,
+  photo,
   hideMiniProfile,
 }) => {
   const dispatch = useDispatch();
@@ -24,7 +26,7 @@ const MiniProfile: React.FC<MiniProfileProps> = ({
   return (
     <div onClick={hideMiniProfile} className="header__miniProfile">
       <div className="header__miniProfile-header">
-        <img src={ProfilePic} alt="profile" width={50} />
+        <img src={photo ? photo : ProfilePic} alt="profile" width={50} />
         <h4>{name}</h4>
         <p>{email}</p>
       </div>

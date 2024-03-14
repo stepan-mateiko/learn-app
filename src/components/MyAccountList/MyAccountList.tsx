@@ -13,6 +13,7 @@ interface MyAccountListProps {
   specialization: string;
   isActive: boolean;
   role: string;
+  photo: string;
 }
 
 const MyAccountList: React.FC<{ user: MyAccountListProps }> = ({ user }) => {
@@ -26,13 +27,14 @@ const MyAccountList: React.FC<{ user: MyAccountListProps }> = ({ user }) => {
     isActive,
     specialization,
     role,
+    photo,
   } = user;
 
   return (
     <div className="list">
       <h3>My Profile</h3>
       <div className="list__header">
-        <img src={studentImg} alt="profile" />
+        <img src={photo ? photo : studentImg} alt="profile" />
         <h4>Status</h4>
         <p className={`list__status-${isActive ? "active" : "notActive"}`}>
           {isActive ? "Active" : "Not active"}

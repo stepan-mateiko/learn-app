@@ -16,9 +16,8 @@ export const registerUserAsync =
   ): ThunkAction<void, RootState, null, UsersActions> =>
   async (dispatch) => {
     try {
-      await userAPI.addUserToServer(credentials);
-
       dispatch(addUser(credentials));
+      await userAPI.register(credentials);
     } catch (error) {
       console.error("Error registering user:", error);
     }
@@ -41,7 +40,6 @@ export const loginUserAsync =
   async (dispatch) => {
     try {
       const response = await userAPI.login(credentials);
-
       dispatch(loginUser(response.data));
     } catch (error: any) {
       console.error(
@@ -68,13 +66,28 @@ export const updateUserAsync =
     }
   };
 
+export const addPhotoAsync =
+  (
+    ID: string,
+    credentials: UserType,
+    formData: FormData
+  ): ThunkAction<void, RootState, null, UsersActions> =>
+  async (dispatch) => {
+    try {
+      await userAPI.addPhotoOnServer(formData);
+      const res = await userAPI.updateUserOnServer(ID, credentials);
+      dispatch(updateUser(res?.data));
+    } catch (error) {
+      console.error("Error adding photo", error);
+    }
+  };
+
 export const deleteUserAsync =
   (id: string): ThunkAction<void, RootState, null, UsersActions> =>
   async (dispatch) => {
     try {
-      await userAPI.deleteUserFromTheServer(id);
-
       dispatch(deleteUser(id));
+      await userAPI.deleteUserFromTheServer(id);
     } catch (error) {
       console.error("Error deleting user:", error);
     }

@@ -11,7 +11,6 @@ const RegistrationVerification: React.FC = () => {
   const dispatch = useDispatch();
   const user = useSelector((state: RootState) => state.user);
   const { userName, password } = user;
-
   return (
     <div className="registration__verification">
       <h2>Registration</h2>

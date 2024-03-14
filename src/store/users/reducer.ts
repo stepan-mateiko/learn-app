@@ -8,6 +8,7 @@ const initialState: UserType = {
   ID: "",
   userName: "",
   password: "",
+  token: "",
 };
 
 const usersReducer = (state = initialState, action: any) => {

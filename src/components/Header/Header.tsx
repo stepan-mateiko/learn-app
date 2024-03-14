@@ -52,13 +52,18 @@ const Header: React.FC = () => {
       {!isMiniProfile && user.userName && (
         <div className="header__box" onClick={showMiniProfile}>
           {user.userName}{" "}
-          <img src={ProfilePic} alt={`${user.userName}'s profile`} width={50} />
+          <img
+            src={user.photo ? user.photo : ProfilePic}
+            alt={`${user.userName}'s profile`}
+            width={50}
+          />
         </div>
       )}
       {isMiniProfile && (
         <MiniProfile
           name={user.userName}
           email={user.email}
+          photo={user.photo}
           isMiniProfile={isMiniProfile}
           hideMiniProfile={hideMiniProfile}
         />

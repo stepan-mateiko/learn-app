@@ -9,6 +9,8 @@ export interface UserType {
   dob?: string;
   address?: string;
   specialization?: string;
+  photo?: string;
+  token?: string;
 }
 
 export interface LoginType {
