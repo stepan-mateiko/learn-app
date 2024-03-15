@@ -4,9 +4,10 @@ import { trainersAPI } from "../services";
 import { getTrainers, updateTrainer } from "./actions";
 
 export const fetchAllTrainers =
-  (): ThunkAction<void, RootState, unknown, any> => async (dispatch) => {
+  (token: string): ThunkAction<void, RootState, unknown, any> =>
+  async (dispatch) => {
     try {
-      const trainers = await trainersAPI.fetchAllTrainers();
+      const trainers = await trainersAPI.fetchAllTrainers(token);
       dispatch(getTrainers(trainers));
     } catch (error) {
       console.error("Error fetching trainers:", error);
@@ -14,10 +15,18 @@ export const fetchAllTrainers =
   };
 
 export const updateTrainerOnServer =
-  (ID: string, credentials: any): ThunkAction<void, RootState, unknown, any> =>
+  (
+    ID: string,
+    credentials: any,
+    token: string
+  ): ThunkAction<void, RootState, unknown, any> =>
   async (dispatch) => {
     try {
-      const response = await trainersAPI.updateTrainerOnServer(ID, credentials);
+      const response = await trainersAPI.updateTrainerOnServer(
+        ID,
+        credentials,
+        token
+      );
       const updatedTrainer = response?.data;
       if (updatedTrainer) {
         dispatch(updateTrainer(updatedTrainer));

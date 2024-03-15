@@ -32,9 +32,9 @@ const Training: React.FC = () => {
   const [selectedEndDate, setSelectedEndDate] = useState<Date | null>(null);
 
   useEffect(() => {
-    dispatch(fetchAllStudents() as any);
-    dispatch(fetchAllTrainers() as any);
-    dispatch(fetchAllTrainings() as any);
+    dispatch(fetchAllStudents(user.token) as any);
+    dispatch(fetchAllTrainers(user.token) as any);
+    dispatch(fetchAllTrainings(user.token) as any);
 
     setFilteredTrainings(
       formatTrainingData(

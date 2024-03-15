@@ -9,6 +9,7 @@ import { deleteUserAsync } from "../../store/users/thunk";
 
 interface ModalBoxProps {
   ID: string;
+  token: string;
   isModalOpen: boolean;
   handleModalClose: () => void;
 }
@@ -16,11 +17,12 @@ const ModalBox: React.FC<ModalBoxProps> = ({
   isModalOpen,
   handleModalClose,
   ID,
+  token,
 }) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const deleteAccount = () => {
-    dispatch(deleteUserAsync(ID) as any);
+    dispatch(deleteUserAsync(ID, token) as any);
     handleModalClose();
     navigate(RoutePaths.LOGIN);
   };

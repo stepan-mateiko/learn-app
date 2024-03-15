@@ -28,7 +28,8 @@ const ImageUpload: React.FC = () => {
       addPhotoAsync(
         user.ID,
         { ...user, photo: `${baseURL}/uploads/${selectedFile.name}` },
-        formData
+        formData,
+        user.token
       ) as any
     );
   };

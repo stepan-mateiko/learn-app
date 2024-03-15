@@ -26,8 +26,8 @@ const MyAccount: React.FC = () => {
   const [isModalOpen, setModalOpen] = useState<boolean>(false);
 
   useEffect(() => {
-    dispatch(fetchAllTrainers() as any);
-    dispatch(fetchAllStudents() as any);
+    dispatch(fetchAllTrainers(user.token) as any);
+    dispatch(fetchAllStudents(user.token) as any);
   }, [dispatch]);
 
   const tableTitle = role === "student" ? "My Trainers" : "My students";
@@ -125,6 +125,7 @@ const MyAccount: React.FC = () => {
       {isModalOpen && (
         <ModalBox
           ID={user.ID ? user.ID : ""}
+          token={user.token}
           isModalOpen={isModalOpen}
           handleModalClose={handleModalClose}
         />

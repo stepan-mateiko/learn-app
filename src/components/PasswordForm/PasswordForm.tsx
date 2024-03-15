@@ -26,7 +26,11 @@ const PasswordForm: React.FC<PasswordFormProps> = ({ setIsSuccess }) => {
     event.preventDefault();
     if (user.password === currentPassword && newPassword === confirmPassword) {
       dispatch(
-        updateUserAsync(user.ID, { ...user, password: newPassword }) as any
+        updateUserAsync(
+          user.ID,
+          { ...user, password: newPassword },
+          user.token
+        ) as any
       );
       setIsSuccess(true);
     } else if (newPassword !== confirmPassword) {

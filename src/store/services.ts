@@ -22,26 +22,38 @@ export const userAPI = {
       throw error;
     }
   },
-  getUserInfo: async (userName: string) => {
+  getUserInfo: async (userName: string, token: string) => {
     try {
-      const result = await axios.get(`${baseURL}/api/users/${userName}`);
+      const result = await axios.get(`${baseURL}/api/users/${userName}`, {
+        headers: {
+          Authorization: token,
+        },
+      });
       return result;
     } catch (error) {
       console.error("Registration error:", error);
     }
   },
-  updateUserOnServer: async (ID: string, credentials: UserType) => {
+  updateUserOnServer: async (
+    ID: string,
+    credentials: UserType,
+    token: string
+  ) => {
     try {
-      return await axios.put(`${baseURL}/api/users/${ID}`, credentials);
+      return await axios.put(`${baseURL}/api/users/${ID}`, credentials, {
+        headers: {
+          Authorization: token,
+        },
+      });
     } catch (error) {
       console.error("Error updating user:", error);
     }
   },
-  addPhotoOnServer: async (formData: FormData) => {
+  addPhotoOnServer: async (formData: FormData, token: string) => {
     try {
       await axios.post(`${baseURL}/upload`, formData, {
         headers: {
-          "Content-Type": "multipart/form-data",
+          Authorization: token,
         },
       });
       console.log("File uploaded successfully");
@@ -49,9 +61,13 @@ export const userAPI = {
       console.error("Error uploading file: ", error);
     }
   },
-  deleteUserFromTheServer: async (ID: string) => {
+  deleteUserFromTheServer: async (ID: string, token: string) => {
     try {
-      return await axios.delete(`${baseURL}/api/users/${ID}`);
+      return await axios.delete(`${baseURL}/api/users/${ID}`, {
+        headers: {
+          Authorization: token,
+        },
+      });
     } catch (error) {
       console.error("Deleting user error:", error);
       throw error;
@@ -60,18 +76,30 @@ export const userAPI = {
 };
 
 export const studentsAPI = {
-  fetchAllStudents: async () => {
+  fetchAllStudents: async (token: string) => {
     try {
-      const response = await axios.get(`${baseURL}/api/students`);
+      const response = await axios.get(`${baseURL}/api/students`, {
+        headers: {
+          Authorization: token,
+        },
+      });
       return response.data;
     } catch (error) {
       console.error("Error fetching students:", error);
       throw error;
     }
   },
-  updateStudentOnServer: async (ID: string, credentials: any) => {
+  updateStudentOnServer: async (
+    ID: string,
+    credentials: any,
+    token: string
+  ) => {
     try {
-      return await axios.put(`${baseURL}/api/students/${ID}`, credentials);
+      return await axios.put(`${baseURL}/api/students/${ID}`, credentials, {
+        headers: {
+          Authorization: token,
+        },
+      });
     } catch (error) {
       console.error("Error updating student:", error);
     }
@@ -79,18 +107,30 @@ export const studentsAPI = {
 };
 
 export const trainersAPI = {
-  fetchAllTrainers: async () => {
+  fetchAllTrainers: async (token: string) => {
     try {
-      const response = await axios.get(`${baseURL}/api/trainers`);
+      const response = await axios.get(`${baseURL}/api/trainers`, {
+        headers: {
+          Authorization: token,
+        },
+      });
       return response.data;
     } catch (error) {
       console.error("Error fetching trainers:", error);
       throw error;
     }
   },
-  updateTrainerOnServer: async (ID: string, credentials: any) => {
+  updateTrainerOnServer: async (
+    ID: string,
+    credentials: any,
+    token: string
+  ) => {
     try {
-      return await axios.put(`${baseURL}/api/trainers/${ID}`, credentials);
+      return await axios.put(`${baseURL}/api/trainers/${ID}`, credentials, {
+        headers: {
+          Authorization: token,
+        },
+      });
     } catch (error) {
       console.error("Error updating trainer:", error);
     }
@@ -98,18 +138,26 @@ export const trainersAPI = {
 };
 
 export const trainingsAPI = {
-  fetchAllTrainings: async () => {
+  fetchAllTrainings: async (token: string) => {
     try {
-      const response = await axios.get(`${baseURL}/api/trainings`);
+      const response = await axios.get(`${baseURL}/api/trainings`, {
+        headers: {
+          Authorization: token,
+        },
+      });
       return response.data;
     } catch (error) {
       console.error("Error fetching trainings:", error);
       throw error;
     }
   },
-  addTrainingToServer: async (credentials: TrainingsType) => {
+  addTrainingToServer: async (credentials: TrainingsType, token: string) => {
     try {
-      return await axios.post(`${baseURL}/api/trainings`, credentials);
+      return await axios.post(`${baseURL}/api/trainings`, credentials, {
+        headers: {
+          Authorization: token,
+        },
+      });
     } catch (error) {
       console.error("Error adding training:", error);
       throw error;

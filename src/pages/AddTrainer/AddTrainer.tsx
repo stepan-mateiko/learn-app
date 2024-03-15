@@ -36,8 +36,8 @@ const AddTrainer: React.FC = () => {
   >({});
 
   useEffect(() => {
-    dispatch(fetchAllStudents() as any);
-    dispatch(fetchAllTrainers() as any);
+    dispatch(fetchAllStudents(user.token) as any);
+    dispatch(fetchAllTrainers(user.token) as any);
   }, [dispatch]);
 
   const handleCheckboxChange = (trainerId: string) => {
@@ -94,9 +94,13 @@ const AddTrainer: React.FC = () => {
       )
       .map((item: TrainersType) => [item.ID, item.students]);
     dispatch(
-      updateStudentOnServer(user.ID, {
-        trainers: myOldtrainers.concat(selectedIds),
-      }) as any
+      updateStudentOnServer(
+        user.ID,
+        {
+          trainers: myOldtrainers.concat(selectedIds),
+        },
+        user.token
+      ) as any
     );
 
     selectedIds.map(async (trainerId: string) => {
@@ -109,9 +113,13 @@ const AddTrainer: React.FC = () => {
         new Set([...existingStudents, user.ID])
       );
       dispatch(
-        updateTrainerOnServer(trainerId, {
-          students: updatedStudents,
-        }) as any
+        updateTrainerOnServer(
+          trainerId,
+          {
+            students: updatedStudents,
+          },
+          user.token
+        ) as any
       );
     });
 

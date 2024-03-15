@@ -54,8 +54,8 @@ const EditForm: React.FC = () => {
 
   useEffect(() => {
     dispatch(fetchAllSpecializations() as any);
-    dispatch(fetchAllTrainers() as any);
-    dispatch(fetchAllStudents() as any);
+    dispatch(fetchAllTrainers(user.token) as any);
+    dispatch(fetchAllStudents(user.token) as any);
   }, [dispatch]);
 
   const handleCheckboxChange = () => {
@@ -79,7 +79,7 @@ const EditForm: React.FC = () => {
       dob,
       address,
     };
-    dispatch(updateUserAsync(user.ID, updatedUser) as any);
+    dispatch(updateUserAsync(user.ID, updatedUser, user.token) as any);
     notify();
     setTimeout(() => navigate(RoutePaths.MY_ACCOUNT), 2000);
   };

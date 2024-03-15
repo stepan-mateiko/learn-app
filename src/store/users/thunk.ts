@@ -24,10 +24,13 @@ export const registerUserAsync =
   };
 
 export const fetchUser =
-  (userName: string): ThunkAction<void, RootState, null, UsersActions> =>
+  (
+    userName: string,
+    token: string
+  ): ThunkAction<void, RootState, null, UsersActions> =>
   async (dispatch) => {
     try {
-      const res = await userAPI.getUserInfo(userName);
+      const res = await userAPI.getUserInfo(userName, token);
 
       dispatch(getUserInfo(res?.data));
     } catch (error) {
@@ -54,11 +57,12 @@ export const loginUserAsync =
 export const updateUserAsync =
   (
     ID: string,
-    credentials: UserType
+    credentials: UserType,
+    token: string
   ): ThunkAction<void, RootState, null, UsersActions> =>
   async (dispatch) => {
     try {
-      const res = await userAPI.updateUserOnServer(ID, credentials);
+      const res = await userAPI.updateUserOnServer(ID, credentials, token);
 
       dispatch(updateUser(res?.data));
     } catch (error) {
@@ -70,12 +74,13 @@ export const addPhotoAsync =
   (
     ID: string,
     credentials: UserType,
-    formData: FormData
+    formData: FormData,
+    token: string
   ): ThunkAction<void, RootState, null, UsersActions> =>
   async (dispatch) => {
     try {
-      await userAPI.addPhotoOnServer(formData);
-      const res = await userAPI.updateUserOnServer(ID, credentials);
+      await userAPI.addPhotoOnServer(formData, token);
+      const res = await userAPI.updateUserOnServer(ID, credentials, token);
       dispatch(updateUser(res?.data));
     } catch (error) {
       console.error("Error adding photo", error);
@@ -83,11 +88,14 @@ export const addPhotoAsync =
   };
 
 export const deleteUserAsync =
-  (id: string): ThunkAction<void, RootState, null, UsersActions> =>
+  (
+    id: string,
+    token: string
+  ): ThunkAction<void, RootState, null, UsersActions> =>
   async (dispatch) => {
     try {
       dispatch(deleteUser(id));
-      await userAPI.deleteUserFromTheServer(id);
+      await userAPI.deleteUserFromTheServer(id, token);
     } catch (error) {
       console.error("Error deleting user:", error);
     }

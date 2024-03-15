@@ -43,7 +43,7 @@ const AddPassedTraining: React.FC = () => {
     formattedTrainers ? formattedTrainers[0] : ""
   );
   useEffect(() => {
-    dispatch(fetchAllTrainers() as any);
+    dispatch(fetchAllTrainers(user.token) as any);
     dispatch(fetchAllTrainingTypes() as any);
   }, [dispatch]);
 
@@ -61,7 +61,7 @@ const AddPassedTraining: React.FC = () => {
       description,
       student: user.ID,
     };
-    dispatch(addTrainingOnServer(newTraining) as any);
+    dispatch(addTrainingOnServer(newTraining, user.token) as any);
     notify();
     setTimeout(() => navigate(RoutePaths.TRAINING), 3000);
   };
