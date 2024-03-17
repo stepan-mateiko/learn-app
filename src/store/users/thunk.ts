@@ -8,6 +8,7 @@ import {
   updateUser,
   deleteUser,
   getUserInfo,
+  logoutUser,
 } from "./actions";
 
 export const registerUserAsync =
@@ -43,7 +44,8 @@ export const loginUserAsync =
   async (dispatch) => {
     try {
       const response = await userAPI.login(credentials);
-      dispatch(loginUser(response.data));
+      localStorage.setItem("token", response.data.token);
+      dispatch(loginUser(response.data.existingUser));
     } catch (error: any) {
       console.error(
         "Error logging in:",
@@ -51,6 +53,18 @@ export const loginUserAsync =
         error.response.data.message
       );
       alert(error.response.data.message);
+    }
+  };
+
+export const logOutUserAsync =
+  (token: string): ThunkAction<void, RootState, null, UsersActions> =>
+  async (dispatch) => {
+    try {
+      localStorage.removeItem("token");
+      dispatch(logoutUser());
+      await userAPI.logOut(token);
+    } catch (error: any) {
+      console.error("Error logging out:", error.response.status, error);
     }
   };
 
@@ -95,6 +109,7 @@ export const deleteUserAsync =
   async (dispatch) => {
     try {
       dispatch(deleteUser(id));
+      localStorage.removeItem("token");
       await userAPI.deleteUserFromTheServer(id, token);
     } catch (error) {
       console.error("Error deleting user:", error);

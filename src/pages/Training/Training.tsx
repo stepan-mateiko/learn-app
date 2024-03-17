@@ -19,6 +19,7 @@ const Training: React.FC = () => {
   const dispatch = useDispatch();
   const user = useSelector((state: RootState) => state.user);
   const { role } = user;
+  const token = localStorage.getItem("token") || "";
   const formattedHeading =
     role === "student"
       ? trainingsHeadings.filter((training) => training !== "Student")
@@ -32,9 +33,9 @@ const Training: React.FC = () => {
   const [selectedEndDate, setSelectedEndDate] = useState<Date | null>(null);
 
   useEffect(() => {
-    dispatch(fetchAllStudents(user.token) as any);
-    dispatch(fetchAllTrainers(user.token) as any);
-    dispatch(fetchAllTrainings(user.token) as any);
+    dispatch(fetchAllStudents(token) as any);
+    dispatch(fetchAllTrainers(token) as any);
+    dispatch(fetchAllTrainings(token) as any);
 
     setFilteredTrainings(
       formatTrainingData(

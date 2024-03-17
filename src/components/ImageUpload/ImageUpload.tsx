@@ -8,6 +8,7 @@ const ImageUpload: React.FC = () => {
   const dispatch = useDispatch();
   const user = useSelector((state: RootState) => state.user);
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
+  const token = localStorage.getItem("token") || "";
 
   const handleFileChange = (event: ChangeEvent<HTMLInputElement>) => {
     if (event.target.files) {
@@ -29,7 +30,7 @@ const ImageUpload: React.FC = () => {
         user.ID,
         { ...user, photo: `${baseURL}/uploads/${selectedFile.name}` },
         formData,
-        user.token
+        token
       ) as any
     );
   };

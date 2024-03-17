@@ -30,6 +30,8 @@ const AddPassedTraining: React.FC = () => {
   const formattedTrainers = trainersList.map(
     (trainer: TrainersType) => `${trainer.firstName} ${trainer.lastName}`
   );
+  const token = localStorage.getItem("token") || "";
+
   const notify = () => toast.success("Training added!");
 
   const [name, setName] = useState<string>("");
@@ -43,7 +45,7 @@ const AddPassedTraining: React.FC = () => {
     formattedTrainers ? formattedTrainers[0] : ""
   );
   useEffect(() => {
-    dispatch(fetchAllTrainers(user.token) as any);
+    dispatch(fetchAllTrainers(token) as any);
     dispatch(fetchAllTrainingTypes() as any);
   }, [dispatch]);
 
@@ -61,7 +63,7 @@ const AddPassedTraining: React.FC = () => {
       description,
       student: user.ID,
     };
-    dispatch(addTrainingOnServer(newTraining, user.token) as any);
+    dispatch(addTrainingOnServer(newTraining, token) as any);
     notify();
     setTimeout(() => navigate(RoutePaths.TRAINING), 3000);
   };

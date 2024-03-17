@@ -17,6 +17,7 @@ interface PasswordFormProps {
 const PasswordForm: React.FC<PasswordFormProps> = ({ setIsSuccess }) => {
   const dispatch = useDispatch();
   const user = useSelector((state: RootState) => state.user);
+  const token = localStorage.getItem("token") || "";
 
   const [currentPassword, setCurrentPassword] = useState<string>("");
   const [newPassword, setNewPassword] = useState<string>("");
@@ -29,7 +30,7 @@ const PasswordForm: React.FC<PasswordFormProps> = ({ setIsSuccess }) => {
         updateUserAsync(
           user.ID,
           { ...user, password: newPassword },
-          user.token
+          token
         ) as any
       );
       setIsSuccess(true);

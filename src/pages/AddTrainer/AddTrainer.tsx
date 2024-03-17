@@ -25,6 +25,7 @@ const AddTrainer: React.FC = () => {
   const user = useSelector((state: RootState) => state.user);
   const trainers = useSelector((state: RootState) => state.trainers);
   const students = useSelector((state: RootState) => state.students);
+  const token = localStorage.getItem("token") || "";
 
   const myData = students.filter(
     (student: StudentsType) => student.ID === user.ID
@@ -36,8 +37,8 @@ const AddTrainer: React.FC = () => {
   >({});
 
   useEffect(() => {
-    dispatch(fetchAllStudents(user.token) as any);
-    dispatch(fetchAllTrainers(user.token) as any);
+    dispatch(fetchAllStudents(token) as any);
+    dispatch(fetchAllTrainers(token) as any);
   }, [dispatch]);
 
   const handleCheckboxChange = (trainerId: string) => {
@@ -99,7 +100,7 @@ const AddTrainer: React.FC = () => {
         {
           trainers: myOldtrainers.concat(selectedIds),
         },
-        user.token
+        token
       ) as any
     );
 
@@ -118,7 +119,7 @@ const AddTrainer: React.FC = () => {
           {
             students: updatedStudents,
           },
-          user.token
+          token
         ) as any
       );
     });

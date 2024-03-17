@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import RoutePaths from "../../constants/routes";
 import ProfilePic from "../../assets/images/student-profile-img.png";
 import { useDispatch } from "react-redux";
-import { logoutUser } from "../../store/users/actions";
+import { logOutUserAsync } from "../../store/users/thunk";
 import { AccountIcon, SignOutIcon } from "../Icon/Icon";
 
 interface MiniProfileProps {
@@ -20,8 +20,9 @@ const MiniProfile: React.FC<MiniProfileProps> = ({
   hideMiniProfile,
 }) => {
   const dispatch = useDispatch();
+  const token = localStorage.getItem("token") || "";
   const handleLogOut = () => {
-    dispatch(logoutUser() as any);
+    dispatch(logOutUserAsync(token) as any);
   };
   return (
     <div onClick={hideMiniProfile} className="header__miniProfile">

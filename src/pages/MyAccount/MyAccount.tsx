@@ -22,12 +22,12 @@ const MyAccount: React.FC = () => {
   const students = useSelector((state: RootState) => state.students);
   const user = useSelector((state: RootState) => state.user);
   const { role } = user;
-
+  const token = localStorage.getItem("token") || "";
   const [isModalOpen, setModalOpen] = useState<boolean>(false);
 
   useEffect(() => {
-    dispatch(fetchAllTrainers(user.token) as any);
-    dispatch(fetchAllStudents(user.token) as any);
+    dispatch(fetchAllTrainers(token) as any);
+    dispatch(fetchAllStudents(token) as any);
   }, [dispatch]);
 
   const tableTitle = role === "student" ? "My Trainers" : "My students";
@@ -125,7 +125,7 @@ const MyAccount: React.FC = () => {
       {isModalOpen && (
         <ModalBox
           ID={user.ID ? user.ID : ""}
-          token={user.token}
+          token={token}
           isModalOpen={isModalOpen}
           handleModalClose={handleModalClose}
         />

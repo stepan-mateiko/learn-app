@@ -22,6 +22,22 @@ export const userAPI = {
       throw error;
     }
   },
+  logOut: async (token: string) => {
+    try {
+      return await axios.post(
+        `${baseURL}/auth/logout`,
+        {},
+        {
+          headers: {
+            Authorization: token,
+          },
+        }
+      );
+    } catch (error) {
+      console.error("Logout error:", error);
+      throw error;
+    }
+  },
   getUserInfo: async (userName: string, token: string) => {
     try {
       const result = await axios.get(`${baseURL}/api/users/${userName}`, {

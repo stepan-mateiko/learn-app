@@ -35,6 +35,7 @@ const EditForm: React.FC = () => {
   const { role } = user;
   const trainers = useSelector((state: RootState) => state.trainers);
   const students = useSelector((state: RootState) => state.students);
+  const token = localStorage.getItem("token") || "";
 
   const myData =
     role === "student"
@@ -54,8 +55,8 @@ const EditForm: React.FC = () => {
 
   useEffect(() => {
     dispatch(fetchAllSpecializations() as any);
-    dispatch(fetchAllTrainers(user.token) as any);
-    dispatch(fetchAllStudents(user.token) as any);
+    dispatch(fetchAllTrainers(token) as any);
+    dispatch(fetchAllStudents(token) as any);
   }, [dispatch]);
 
   const handleCheckboxChange = () => {
@@ -79,7 +80,7 @@ const EditForm: React.FC = () => {
       dob,
       address,
     };
-    dispatch(updateUserAsync(user.ID, updatedUser, user.token) as any);
+    dispatch(updateUserAsync(user.ID, updatedUser, token) as any);
     notify();
     setTimeout(() => navigate(RoutePaths.MY_ACCOUNT), 2000);
   };
