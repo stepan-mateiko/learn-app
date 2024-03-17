@@ -1,9 +1,9 @@
 import { UsersActions, UserType, LoginType, RegisterType } from "./types";
 import { ThunkAction } from "redux-thunk";
 import { RootState } from "../index";
-import { userAPI } from "../services";
+import { authAPI, userAPI } from "../services";
 import {
-  addUser,
+  registerUser,
   loginUser,
   updateUser,
   deleteUser,
@@ -17,33 +17,17 @@ export const registerUserAsync =
   ): ThunkAction<void, RootState, null, UsersActions> =>
   async (dispatch) => {
     try {
-      dispatch(addUser(credentials));
-      await userAPI.register(credentials);
+      dispatch(registerUser(credentials));
+      await authAPI.register(credentials);
     } catch (error) {
       console.error("Error registering user:", error);
     }
   };
-
-export const fetchUser =
-  (
-    userName: string,
-    token: string
-  ): ThunkAction<void, RootState, null, UsersActions> =>
-  async (dispatch) => {
-    try {
-      const res = await userAPI.getUserInfo(userName, token);
-
-      dispatch(getUserInfo(res?.data));
-    } catch (error) {
-      console.error("Error registering user:", error);
-    }
-  };
-
 export const loginUserAsync =
   (credentials: LoginType): ThunkAction<void, RootState, null, UsersActions> =>
   async (dispatch) => {
     try {
-      const response = await userAPI.login(credentials);
+      const response = await authAPI.login(credentials);
       localStorage.setItem("token", response.data.token);
       dispatch(loginUser(response.data.existingUser));
     } catch (error: any) {
@@ -62,9 +46,24 @@ export const logOutUserAsync =
     try {
       localStorage.removeItem("token");
       dispatch(logoutUser());
-      await userAPI.logOut(token);
+      await authAPI.logOut(token);
     } catch (error: any) {
       console.error("Error logging out:", error.response.status, error);
+    }
+  };
+
+export const fetchUser =
+  (
+    userName: string,
+    token: string
+  ): ThunkAction<void, RootState, null, UsersActions> =>
+  async (dispatch) => {
+    try {
+      const res = await userAPI.getUserInfo(userName, token);
+
+      dispatch(getUserInfo(res?.data));
+    } catch (error) {
+      console.error("Error registering user:", error);
     }
   };
 

@@ -5,7 +5,7 @@ import { TrainingsType } from "./trainings/types";
 
 export const baseURL = "http://localhost:3080";
 
-export const userAPI = {
+export const authAPI = {
   login: async (credentials: LoginType) => {
     try {
       return axios.post(`${baseURL}/auth/login`, credentials);
@@ -38,6 +38,9 @@ export const userAPI = {
       throw error;
     }
   },
+};
+
+export const userAPI = {
   getUserInfo: async (userName: string, token: string) => {
     try {
       const result = await axios.get(`${baseURL}/api/users/${userName}`, {

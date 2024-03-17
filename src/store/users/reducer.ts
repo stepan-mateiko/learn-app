@@ -8,21 +8,20 @@ const initialState: UserType = {
   ID: "",
   userName: "",
   password: "",
-  token: "",
 };
 
 const usersReducer = (state = initialState, action: any) => {
   switch (action.type) {
-    case UsersActionTypes.ADD_USER:
-      return action.payload;
-    case UsersActionTypes.GET_USER_INFO:
-      return action.payload;
-    case UsersActionTypes.UPDATE_USER:
+    case UsersActionTypes.REGISTER_USER:
       return action.payload;
     case UsersActionTypes.LOGIN_USER:
       return action.payload;
     case UsersActionTypes.LOGOUT_USER:
       return initialState;
+    case UsersActionTypes.GET_USER_INFO:
+      return action.payload;
+    case UsersActionTypes.UPDATE_USER:
+      return action.payload;
     case UsersActionTypes.DELETE_USER:
       return initialState;
     default:
