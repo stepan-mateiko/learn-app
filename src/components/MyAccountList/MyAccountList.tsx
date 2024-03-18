@@ -35,22 +35,22 @@ const MyAccountList: React.FC<{ user: MyAccountListProps }> = ({ user }) => {
       <h3>My Profile</h3>
       <div className="list__header">
         <img src={photo ? photo : studentImg} alt="profile" />
-        <h4>Status</h4>
+        <h5>Status</h5>
         <p className={`list__status-${isActive ? "active" : "notActive"}`}>
           {isActive ? "Active" : "Not active"}
         </p>
       </div>
-      <h4>First name</h4>
+      <h5>First name</h5>
       <p>{firstName}</p>
-      <h4>Last name</h4>
+      <h5>Last name</h5>
       <p>{lastName}</p>
-      <h4>User name</h4>
+      <h5>User name</h5>
       <p> {userName}</p>
-      <h4>{role === "student" ? "Date of Birth" : "Specialization"}</h4>
+      <h5>{role === "student" ? "Date of Birth" : "Specialization"}</h5>
       <p>{role === "student" ? dob : specialization}</p>
-      {role === "student" && <h4>Address</h4>}
+      {role === "student" && <h5>Address</h5>}
       {role === "student" && <p>{address}</p>}
-      <h4>Email</h4>
+      <h5>Email</h5>
       <p>{email}</p>
       <div className="list__footer">
         <Button

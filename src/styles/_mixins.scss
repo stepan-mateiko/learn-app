@@ -1,3 +1,9 @@
+@mixin centerise($width: 90%, $margin: 0) {
+  width: $width;
+  margin: $margin auto;
+  position: relative;
+}
+
 @mixin flex-type(
   $justify: space-around,
   $align: center,
@@ -28,4 +34,10 @@
   padding: 1% $padding;
   line-height: $line;
   cursor: pointer;
+}
+
+@mixin heading-styles($size, $line) {
+  font-family: $montserrat;
+  font-size: $size;
+  line-height: $line;
 }

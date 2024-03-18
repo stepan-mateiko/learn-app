@@ -1,15 +1,6 @@
-@import "../../styles/variables";
-@import "../../styles/mixins";
-
 .registration {
-  width: 70%;
-  margin: 0 auto;
+  @include centerise($width: 70%);
   padding: 5%;
-  h2 {
-    font-size: 3.43em;
-    font-family: $montserrat;
-    line-height: 3.09em;
-  }
   p {
     font-size: 1.29em;
     line-height: 1.27em;
@@ -30,20 +21,9 @@
     @include flex-type($direction: column);
 
     .input-block {
-      @include flex-type($direction: column, $align: stretch, $gap: 2px);
-      width: 100%;
-      label {
-        font-weight: 700;
-        align-self: baseline;
-      }
       input,
       select {
-        font-size: 1.29em;
-        line-height: 1.27em;
         border: 1px $footer-input solid;
-        border-radius: 6px;
-        outline: none;
-        padding: 3%;
         &:hover {
           color: $input-hover;
           border-color: $footer-input-hover;
@@ -80,8 +60,7 @@
   &__verification {
     @include flex-type($direction: column);
     text-align: center;
-    width: 25%;
-    margin: 10% auto;
+    @include centerise($width: 25%, $margin: 10%);
     &-btn {
       @include button-styles(
         $background: $primary-btn,

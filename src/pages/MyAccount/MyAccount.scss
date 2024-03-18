@@ -1,16 +1,7 @@
-@import "../../styles/variables";
-@import "../../styles/mixins";
-
 .account {
-  width: 90%;
-  margin: 0 auto;
-  position: relative;
-  padding: 5%;
+  @include centerise();
   h2 {
     text-align: center;
-    font-family: $montserrat;
-    font-size: 4em;
-    line-height: 3.54em;
   }
   &__wrapper {
     @include flex-type($align: flex-start, $justify: space-between);
@@ -25,34 +16,12 @@
   }
   .table {
     width: 100%;
-    text-align: left;
-    border-radius: 6px;
-    border-collapse: collapse;
-    &__title {
-      font-family: $montserrat;
-      font-size: 2.29em;
-      line-height: 2.18em;
-    }
-    &__heading {
-      text-transform: uppercase;
-      font-family: $montserrat;
-      &-line {
-        background-color: $footer-background;
-        border: 1px solid $input-background;
-      }
-    }
     tbody {
-      border: 1px solid $input-background;
       tr {
-        border: 1px solid $input-background;
         td:first-child {
           font-weight: 700;
         }
       }
-    }
-    td,
-    th {
-      padding: 5%;
     }
   }
   &__add-btn {
@@ -103,11 +72,7 @@
   width: 40%;
   @include flex-type($direction: column, $align: flex-start);
   padding: 2%;
-  h3 {
-    font-family: $montserrat;
-    font-size: 2.29em;
-    line-height: 2.18em;
-  }
+
   &__header {
     @include flex-type($justify: flex-start);
     img {
@@ -129,10 +94,6 @@
       background-repeat: no-repeat;
       background-size: contain;
     }
-  }
-  h4 {
-    font-size: 1.14em;
-    line-height: 1.18em;
   }
   p {
     font-size: 1.14em;
@@ -163,18 +124,13 @@
   }
 }
 .delete {
-  width: 38%;
-  margin: 20% auto;
+  @include centerise($width: 38%, $margin: 20%);
   padding: 2%;
   background: #fff;
   border-radius: 8px;
   box-shadow: 0px 4px 9px #171a1f, 0px 0px 2px #171a1f;
   @include flex-type($direction: column, $align: flex-start, $gap: 20px);
-  h3 {
-    font-family: $montserrat;
-    font-size: 1.71em;
-    line-height: 1.64em;
-  }
+
   &__btns {
     align-self: flex-end;
     @include flex-type();

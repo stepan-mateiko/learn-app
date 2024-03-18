@@ -18,4 +18,64 @@ body {
   li {
     list-style-type: none;
   }
+  h1 {
+    @include heading-styles($size: 4em, $line: 2.55em);
+    margin: 0;
+  }
+  h2 {
+    @include heading-styles($size: 4em, $line: 3.55em);
+  }
+  h3 {
+    @include heading-styles($size: 2.29em, $line: 2.18em);
+  }
+  h4 {
+    @include heading-styles($size: 1.71em, $line: 1.64em);
+  }
+  h5 {
+    @include heading-styles($size: 1.14em, $line: 1.18em);
+  }
+  .input-block {
+    @include flex-type($direction: column, $align: stretch, $gap: 2px);
+    width: 100%;
+  }
+  label {
+    font-weight: 700;
+    align-self: baseline;
+    font-size: 1.14em;
+    line-height: 1.18em;
+  }
+  input,
+  select,
+  textarea {
+    border-radius: 6px;
+    font-size: 1.14em;
+    line-height: 1.18em;
+    outline: none;
+    padding: 3%;
+  }
+  table {
+    text-align: left;
+    border-radius: 6px;
+    border-collapse: collapse;
+  }
+  thead {
+    tr:first-child {
+      @include heading-styles($size: 2.29em, $line: 2.18em);
+    }
+    tr:last-child {
+      font-family: $montserrat;
+      text-transform: uppercase;
+      background-color: $footer-background;
+      border: 1px solid $input-background;
+    }
+  }
+  tbody {
+    tr {
+      border: 1px solid $input-background;
+    }
+  }
+  td,
+  th {
+    padding: 1%;
+  }
 }

@@ -1,20 +1,7 @@
-@import "../../styles/variables";
-@import "../../styles/mixins";
-
 .training {
-  width: 90%;
-  margin: 0 auto;
-  position: relative;
+  @include centerise();
   h2 {
     text-align: center;
-    font-family: $montserrat;
-    font-size: 4em;
-    line-height: 3.54em;
-  }
-  h3 {
-    font-family: $montserrat;
-    font-size: 2.28em;
-    line-height: 2.18em;
   }
   &__add-btn {
     @include button-styles($background: $secondary-btn, $padding: 20px);
@@ -35,21 +22,8 @@
       @include flex-type();
     }
     .input-block {
-      @include flex-type($direction: column, $align: stretch, $gap: 2px);
-      width: 100%;
-      label {
-        font-size: 1.14em;
-        line-height: 1.18em;
-        font-weight: 700;
-        align-self: baseline;
-      }
       input {
         width: 75%;
-        font-size: 1.14em;
-        line-height: 1.18em;
-        border-radius: 6px;
-        outline: none;
-        padding: 3%;
         border: none;
         background-color: $input-background;
         &:hover {
@@ -89,26 +63,8 @@
   }
   .table {
     width: 100%;
-    text-align: left;
-    border-radius: 6px;
-    border-collapse: collapse;
-    &__title {
-      font-family: $montserrat;
-      font-size: 2.29em;
-      line-height: 2.18em;
-    }
-    &__heading {
-      text-transform: uppercase;
-      font-family: $montserrat;
-      &-line {
-        background-color: $footer-background;
-        border: 1px solid $input-background;
-      }
-    }
     tbody {
-      border: 1px solid $input-background;
       tr {
-        border: 1px solid $input-background;
         td:nth-child(2) {
           font-weight: 700;
         }
@@ -120,10 +76,6 @@
           background-size: 40%;
         }
       }
-    }
-    td,
-    th {
-      padding: 1%;
     }
   }
 }

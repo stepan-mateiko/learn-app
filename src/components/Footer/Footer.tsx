@@ -10,21 +10,21 @@ const Footer: React.FC = () => {
       <div className="footer__wrapper-top">
         <Logo />
         <div>
-          <h3>Product</h3>
+          <h4>Product</h4>
           <Navigation links={navigationLinks.FOOTER_LINKS_PRODUCTS} />
         </div>
         <div>
-          <h3>Resourses</h3>
+          <h4>Resourses</h4>
           <Navigation links={navigationLinks.FOOTER_LINKS_RESOURSES} />
         </div>
         <div>
-          <h3>Company</h3>
+          <h4>Company</h4>
           <Navigation links={navigationLinks.FOOTER_LINKS_COMPANY} />
         </div>
         <div>
-          <h3 className="footer__subscribe-title">
+          <h4 className="footer__subscribe-title">
             Subscribe to our Newsletter
-          </h3>
+          </h4>
           <p>For product announcements and exclusive insights</p>
           <form
             onSubmit={(e) => {

@@ -1,43 +1,18 @@
-@import "../../styles/variables";
-@import "../../styles/mixins";
-
 .add-training {
-  width: 90%;
-  margin: 0 auto;
-  position: relative;
-
-  h2 {
-    font-family: $montserrat;
-    font-size: 4em;
-    line-height: 3.55em;
-  }
+  @include centerise();
   &__form {
     @include flex-type($direction: column);
     width: 35%;
     position: relative;
     h3 {
-      font-family: $montserrat;
-      font-size: 1.71em;
-      line-height: 1.63em;
       align-self: flex-start;
     }
 
     .input-block {
-      @include flex-type($direction: column, $align: stretch, $gap: 2px);
-      width: 100%;
-      label {
-        font-weight: 700;
-        align-self: baseline;
-      }
       input,
       select,
       textarea {
-        font-size: 1.14em;
-        line-height: 1.18em;
         border: 1px $primary-btn solid;
-        border-radius: 6px;
-        outline: none;
-        padding: 3%;
         &:hover {
           color: $input-hover;
           border-color: $footer-input-hover;

@@ -1,14 +1,6 @@
-@import "../../styles/variables";
-@import "../../styles/mixins";
-
 .add-trainer {
-  position: relative;
-  width: 90%;
-  margin: 0 auto;
+  @include centerise();
   h2 {
-    font-family: $montserrat;
-    font-size: 4em;
-    line-height: 3.55em;
     text-align: center;
   }
   &__caption {
@@ -20,34 +12,12 @@
   }
   .table {
     width: 40%;
-    text-align: left;
-    border-radius: 6px;
-    border-collapse: collapse;
-    &__title {
-      font-family: $montserrat;
-      font-size: 2.29em;
-      line-height: 2.18em;
-    }
-    &__heading {
-      text-transform: uppercase;
-      font-family: $montserrat;
-      &-line {
-        background-color: $footer-background;
-        border: 1px solid $input-background;
-      }
-    }
     tbody {
-      border: 1px solid $input-background;
       tr {
-        border: 1px solid $input-background;
         td:first-child {
           font-weight: 700;
         }
       }
-    }
-    td,
-    th {
-      padding: 1%;
     }
   }
   form {
