@@ -1,15 +1,10 @@
 import { useState } from "react";
 
 import { handleInputChange } from "../../helpers/helpers";
+import { SearchProps } from "../../constants/props";
 
 import Input from "../Input/Input";
 import Button from "../Button/Button";
-
-interface SearchProps {
-  role: string;
-  data: string[][];
-  update: (data: string[][]) => void;
-}
 
 const Search: React.FC<SearchProps> = ({ role, data, update }) => {
   const [trainer, setTrainer] = useState("");

@@ -3,6 +3,12 @@ import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 
 import RoutePaths from "../../constants/routes";
+import { RegistrationFormProps } from "../../constants/props";
+import {
+  formatDate,
+  generatePassword,
+  handleInputChange,
+} from "../../helpers/helpers";
 
 import Button from "../Button/Button";
 import Input from "../Input/Input";
@@ -11,16 +17,9 @@ import { RootState } from "../../store";
 import { registerUserAsync } from "../../store/users/thunk";
 import { RegisterType } from "../../store/users/types";
 import { SpecializationsType } from "../../store/specializations/types";
-import {
-  formatDate,
-  generatePassword,
-  handleInputChange,
-} from "../../helpers/helpers";
+
 import { fetchAllSpecializations } from "../../store/specializations/thunk";
 
-interface RegistrationFormProps {
-  role: string;
-}
 const RegistrationForm: React.FC<RegistrationFormProps> = ({ role }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();

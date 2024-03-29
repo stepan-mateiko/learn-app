@@ -1,8 +1,6 @@
 import { Link } from "react-router-dom";
 
-interface NavigationProps {
-  links: { to: string; label: string }[];
-}
+import { NavigationProps } from "../../constants/props";
 
 const Navigation: React.FC<NavigationProps> = ({ links }) => {
   return (

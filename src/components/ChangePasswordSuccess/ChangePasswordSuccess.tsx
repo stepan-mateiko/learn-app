@@ -1,8 +1,9 @@
 import RoutePaths from "../../constants/routes";
+import { useDispatch } from "react-redux";
 
 import { RegistrationSuccess } from "../Icon/Icon";
 import Button from "../Button/Button";
-import { useDispatch } from "react-redux";
+
 import { logoutUser } from "../../store/users/actions";
 
 const ChangePasswordSuccess: React.FC = () => {

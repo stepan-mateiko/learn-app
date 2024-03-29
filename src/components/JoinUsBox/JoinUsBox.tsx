@@ -1,11 +1,11 @@
 import RoutePaths from "../../constants/routes";
+
 import Button from "../Button/Button";
 import JoinUsImage1 from "../../assets/images/join-us-img-1.png";
 import JoinUsImage2 from "../../assets/images/join-us-img-2.png";
 
-interface JoinUsBoxProps {
-  role: string;
-}
+import { JoinUsBoxProps } from "../../constants/props";
+
 const JoinUsBox: React.FC<JoinUsBoxProps> = ({ role }) => {
   return (
     <div className="join__box">

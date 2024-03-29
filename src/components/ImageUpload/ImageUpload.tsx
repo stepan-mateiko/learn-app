@@ -1,6 +1,7 @@
 import React, { useState, ChangeEvent, FormEvent } from "react";
-import { baseURL } from "../../store/services";
 import { useDispatch, useSelector } from "react-redux";
+
+import { baseURL } from "../../store/services";
 import { RootState } from "../../store";
 import { addPhotoAsync } from "../../store/users/thunk";
 

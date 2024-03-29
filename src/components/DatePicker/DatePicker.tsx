@@ -2,13 +2,9 @@ import React from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 
-interface MyDatePickerProps {
-  selectedStartDate: Date | null;
-  selectedEndDate: Date | null;
-  onDateChange: (startDate: Date | null, endDate: Date | null) => void;
-}
+import { DatePickerProps } from "../../constants/props";
 
-const MyDatePicker: React.FC<MyDatePickerProps> = ({
+const MyDatePicker: React.FC<DatePickerProps> = ({
   selectedStartDate,
   selectedEndDate,
   onDateChange,

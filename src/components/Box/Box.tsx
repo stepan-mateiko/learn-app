@@ -1,10 +1,5 @@
-interface BoxProps {
-  imgSrc: string;
-  tag: string;
-  title: string;
-  date: string;
-  time: number;
-}
+import { BoxProps } from "../../constants/props";
+
 const Box: React.FC<BoxProps> = ({ imgSrc, tag, title, date, time }) => {
   return (
     <div className="box">

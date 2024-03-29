@@ -1,11 +1,8 @@
 import * as React from "react";
-import Breadcrumbs from "@mui/material/Breadcrumbs";
 import Link from "@mui/material/Link";
 
-interface BreadcrumbProps {
-  links: string[];
-  labels: string[];
-}
+import Breadcrumbs from "@mui/material/Breadcrumbs";
+import { BreadcrumbProps } from "../../constants/props";
 
 const Breadcrumb: React.FC<BreadcrumbProps> = ({ links, labels }) => {
   return (

@@ -1,8 +1,9 @@
+import { Link } from "react-router-dom";
+
 import Logo from "../Logo/Logo";
 import Navigation from "../Navigation/Navigation";
 import { TwitterIcon, FacebookIcon, YouTubeIcon } from "../Icon/Icon";
 import { navigationLinks } from "../../constants/navigationLinks";
-import { Link } from "react-router-dom";
 
 const Footer: React.FC = () => {
   return (

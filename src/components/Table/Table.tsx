@@ -1,8 +1,4 @@
-interface TableProps {
-  title: string;
-  headings: string[];
-  data: string[][];
-}
+import { TableProps } from "../../constants/props";
 
 const Table: React.FC<TableProps> = ({ title, headings, data }) => {
   return (

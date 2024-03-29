@@ -3,16 +3,13 @@ import { useDispatch, useSelector } from "react-redux";
 
 import RoutePaths from "../../constants/routes";
 import { handleInputChange } from "../../helpers/helpers";
+import { PasswordFormProps } from "../../constants/props";
 
 import Input from "../../components/Input/Input";
 import Button from "../../components/Button/Button";
 
 import { RootState } from "../../store";
 import { updateUserAsync } from "../../store/users/thunk";
-
-interface PasswordFormProps {
-  setIsSuccess: (isSuccess: boolean) => void;
-}
 
 const PasswordForm: React.FC<PasswordFormProps> = ({ setIsSuccess }) => {
   const dispatch = useDispatch();

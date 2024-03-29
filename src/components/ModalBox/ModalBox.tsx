@@ -1,18 +1,14 @@
 import { useNavigate } from "react-router-dom";
-
+import { useDispatch } from "react-redux";
 import ReactModal from "react-modal";
+
 import Button from "../Button/Button";
 
 import RoutePaths from "../../constants/routes";
-import { useDispatch } from "react-redux";
+import { ModalBoxProps } from "../../constants/props";
+
 import { deleteUserAsync } from "../../store/users/thunk";
 
-interface ModalBoxProps {
-  ID: string;
-  token: string;
-  isModalOpen: boolean;
-  handleModalClose: () => void;
-}
 const ModalBox: React.FC<ModalBoxProps> = ({
   isModalOpen,
   handleModalClose,

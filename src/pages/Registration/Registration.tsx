@@ -1,6 +1,7 @@
 import { useParams } from "react-router-dom";
 
 import RegistrationForm from "../../components/RegistrationForm/RegistrationForm";
+
 import registrationTrainerImg from "../../assets/images/registration-trainer.png";
 import registrationStudentImg from "../../assets/images/registration-student.png";
 

@@ -2,10 +2,10 @@ import RoutePaths from "../../constants/routes";
 import { useDispatch, useSelector } from "react-redux";
 
 import { RootState } from "../../store";
+import { loginUserAsync } from "../../store/users/thunk";
 
 import { RegistrationSuccess } from "../../components/Icon/Icon";
 import Button from "../../components/Button/Button";
-import { loginUserAsync } from "../../store/users/thunk";
 
 const RegistrationVerification: React.FC = () => {
   const dispatch = useDispatch();

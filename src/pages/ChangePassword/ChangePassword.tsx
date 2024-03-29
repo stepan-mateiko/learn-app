@@ -4,6 +4,7 @@ import ChangePasswordSuccess from "../../components/ChangePasswordSuccess/Change
 import PasswordForm from "../../components/PasswordForm/PasswordForm";
 import { Lock } from "../../components/Icon/Icon";
 import Breadcrumb from "../../components/Breadcrumbs/Breadcrumbs";
+
 import RoutePaths from "../../constants/routes";
 
 const ChangePassword: React.FC = () => {

@@ -1,20 +1,9 @@
 import RoutePaths from "../../constants/routes";
-import Button from "../Button/Button";
-import studentImg from "../../assets/images/student-profile-img.png";
+import { MyAccountListProps } from "../../constants/props";
 
-interface MyAccountListProps {
-  ID: string;
-  userName: string;
-  firstName: string;
-  lastName: string;
-  dob: string;
-  address: string;
-  email: string;
-  specialization: string;
-  isActive: boolean;
-  role: string;
-  photo: string;
-}
+import Button from "../Button/Button";
+
+import studentImg from "../../assets/images/student-profile-img.png";
 
 const MyAccountList: React.FC<{ user: MyAccountListProps }> = ({ user }) => {
   const {

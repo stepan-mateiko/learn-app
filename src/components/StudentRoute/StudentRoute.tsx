@@ -1,6 +1,8 @@
 import { Outlet, Navigate } from "react-router-dom";
-import RoutePaths from "../../constants/routes";
 import { useSelector } from "react-redux";
+
+import RoutePaths from "../../constants/routes";
+
 import { RootState } from "../../store";
 
 const StudentRoute: React.FC = () => {

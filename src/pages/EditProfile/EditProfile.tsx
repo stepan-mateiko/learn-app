@@ -2,9 +2,10 @@ import { useSelector } from "react-redux";
 import { RootState } from "../../store";
 
 import EditForm from "../../components/EditForm/EditForm";
-import studentImg from "../../assets/images/student-profile-img.png";
 import ImageUpload from "../../components/ImageUpload/ImageUpload";
 import Breadcrumb from "../../components/Breadcrumbs/Breadcrumbs";
+
+import studentImg from "../../assets/images/student-profile-img.png";
 
 import RoutePaths from "../../constants/routes";
 

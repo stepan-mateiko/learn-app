@@ -1,27 +1,7 @@
 import React, { ChangeEvent } from "react";
 import { formatDate } from "../../helpers/helpers";
 
-interface InputProps {
-  type:
-    | "text"
-    | "textarea"
-    | "select"
-    | "date"
-    | "checkbox"
-    | "email"
-    | "password"
-    | "number";
-  label: string;
-  value?: string | number | boolean;
-  onChange: (value: string | number | boolean) => void;
-  placeholder?: string;
-  pattern?: string;
-  title?: string;
-  options?: string[] | number[];
-  checked?: boolean;
-  isRequired?: boolean;
-  name?: string;
-}
+import { InputProps } from "../../constants/props";
 
 const Input: React.FC<InputProps> = ({
   type,

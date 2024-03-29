@@ -2,14 +2,15 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 
 import { handleInputChange } from "../../helpers/helpers";
-
 import RoutePaths from "../../constants/routes";
+
 import Input from "../../components/Input/Input";
 import Button from "../../components/Button/Button";
 import Breadcrumb from "../../components/Breadcrumbs/Breadcrumbs";
-import { useDispatch, useSelector } from "react-redux";
+
 import { RootState } from "../../store";
 import { fetchAllTrainers } from "../../store/trainers/thunk";
 import { fetchAllTrainingTypes } from "../../store/trainingTypes/thunk";

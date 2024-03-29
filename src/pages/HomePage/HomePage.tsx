@@ -1,8 +1,9 @@
-import RoutePaths from "../../constants/routes";
 import { useSelector } from "react-redux";
 
 import Box from "../../components/Box/Box";
 import Button from "../../components/Button/Button";
+
+import RoutePaths from "../../constants/routes";
 import { articles } from "../../constants/articles";
 
 import homeImg from "../../assets/images/home-img.png";

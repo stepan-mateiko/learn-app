@@ -1,18 +1,14 @@
 import { Link } from "react-router-dom";
+import { useDispatch } from "react-redux";
 
 import RoutePaths from "../../constants/routes";
+import { MiniProfileProps } from "../../constants/props";
+
 import ProfilePic from "../../assets/images/student-profile-img.png";
-import { useDispatch } from "react-redux";
-import { logOutUserAsync } from "../../store/users/thunk";
 import { AccountIcon, SignOutIcon } from "../Icon/Icon";
 
-interface MiniProfileProps {
-  name: string;
-  email: string | undefined;
-  photo: string;
-  isMiniProfile: boolean;
-  hideMiniProfile: () => void;
-}
+import { logOutUserAsync } from "../../store/users/thunk";
+
 const MiniProfile: React.FC<MiniProfileProps> = ({
   name,
   email,

@@ -3,17 +3,19 @@ import { useDispatch, useSelector } from "react-redux";
 
 import RoutePaths from "../../constants/routes";
 import { trainingsHeadings } from "../../constants/headings";
+import { formatTrainingData } from "../../helpers/helpers";
+
 import Button from "../../components/Button/Button";
 import Table from "../../components/Table/Table";
 import MyDatePicker from "../../components/DatePicker/DatePicker";
 import Search from "../../components/Search/Search";
 import Breadcrumb from "../../components/Breadcrumbs/Breadcrumbs";
+
 import { RootState } from "../../store";
 import { TrainingsType } from "../../store/trainings/types";
 import { fetchAllStudents } from "../../store/students/thunk";
 import { fetchAllTrainers } from "../../store/trainers/thunk";
 import { fetchAllTrainings } from "../../store/trainings/thunk";
-import { formatTrainingData } from "../../helpers/helpers";
 
 const Training: React.FC = () => {
   const dispatch = useDispatch();
