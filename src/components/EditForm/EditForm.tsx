@@ -10,6 +10,7 @@ import { handleInputChange } from "../../helpers/helpers";
 
 import Input from "../../components/Input/Input";
 import Button from "../../components/Button/Button";
+import { AntSwitch } from "../Switch/Switch";
 
 import { RootState } from "../../store";
 import { SpecializationsType } from "../../store/specializations/types";
@@ -20,7 +21,6 @@ import { updateUserAsync } from "../../store/users/thunk";
 import { StudentsType } from "../../store/students/types";
 import { TrainersType } from "../../store/trainers/types";
 import { UserType } from "../../store/users/types";
-import { AntSwitch } from "../Switch/Switch";
 
 const EditForm: React.FC = () => {
   const dispatch = useDispatch();

@@ -18,12 +18,12 @@ const Search: React.FC<SearchProps> = ({ role, data, update }) => {
 
     if (trainer && name) {
       filteredData = data
-        .filter((item: any) => item.includes(trainer))
-        .filter((item: any) => item.includes(name));
+        .filter((item: string[]) => item.includes(trainer))
+        .filter((item: string[]) => item.includes(name));
     } else if (trainer && !name) {
-      filteredData = data.filter((item: any) => item.includes(trainer));
+      filteredData = data.filter((item: string[]) => item.includes(trainer));
     } else if (!trainer && name) {
-      filteredData = data.filter((item: any) => item.includes(name));
+      filteredData = data.filter((item: string[]) => item.includes(name));
     }
 
     update(filteredData);
@@ -34,7 +34,9 @@ const Search: React.FC<SearchProps> = ({ role, data, update }) => {
   const handleStudentsSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
-    const filteredData = data.filter((item: any) => item.includes(student));
+    const filteredData = data.filter((item: string[]) =>
+      item.includes(student)
+    );
 
     update(filteredData);
     setStudent("");

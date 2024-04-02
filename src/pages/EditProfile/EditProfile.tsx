@@ -22,6 +22,7 @@ const EditProfile: React.FC = () => {
       <div className="edit__header">
         <img src={user.photo ? user.photo : studentImg} alt="" width={100} />
         <h5>Upload your photo</h5>
+        <p>Your photo must be in JPG and PNG format with Latin name</p>
         <ImageUpload />
       </div>
       <EditForm />

@@ -1,7 +1,8 @@
 import { Outlet, Navigate } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 import RoutePaths from "../../constants/routes";
-import { useSelector } from "react-redux";
+
 import { RootState } from "../../store";
 
 const AuthRoute: React.FC = () => {

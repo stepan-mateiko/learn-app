@@ -20,7 +20,7 @@ const ImageUpload: React.FC = () => {
     event.preventDefault();
 
     if (!selectedFile) {
-      console.error("No file selected");
+      alert("No file selected");
       return;
     }
 
@@ -38,7 +38,10 @@ const ImageUpload: React.FC = () => {
 
   return (
     <form onSubmit={handleSubmit}>
-      <input type="file" onChange={handleFileChange} />
+      <label htmlFor="file-upload" className="custom-file-upload">
+        Choose image
+      </label>
+      <input type="file" id="file-upload" onChange={handleFileChange} />
       <button type="submit">Upload</button>
     </form>
   );
