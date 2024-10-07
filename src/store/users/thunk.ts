@@ -17,6 +17,7 @@ export const registerUserAsync =
   ): ThunkAction<void, RootState, null, UsersActions> =>
   async (dispatch) => {
     try {
+      localStorage.setItem("token", "test-token");
       dispatch(registerUser(credentials));
       await authAPI.register(credentials);
     } catch (error) {
