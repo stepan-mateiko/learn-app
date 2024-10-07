@@ -1,0 +1,19 @@
+@import "./fonts";
+@import "./mixins";
+@import "./normalize";
+@import "./variables";
+@import "./body";
+
+@import "../components/Footer/Footer.scss";
+@import "../components/Header/Header.scss";
+@import "../pages/LoginPage/Login.scss";
+@import "../pages/JoinUs/Join.scss";
+@import "../pages/Registration/Registration.scss";
+@import "../pages/HomePage/HomePage.scss";
+@import "../pages/MyAccount/MyAccount.scss";
+@import "../components/Breadcrumbs/Breadcrumbs.scss";
+@import "../pages/EditProfile/EditProfile.scss";
+@import "../pages/Training/Training.scss";
+@import "../pages/ChangePassword/ChangePassword.scss";
+@import "../pages/AddPassedTraining/AddPassedTraining.scss";
+@import "../pages/AddTrainer/AddTrainer.scss";

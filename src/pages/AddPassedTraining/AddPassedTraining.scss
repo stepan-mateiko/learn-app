@@ -1,0 +1,61 @@
+.add-training {
+  @include centerise();
+  &__form {
+    @include flex-type($direction: column);
+    width: 35%;
+    position: relative;
+    h3 {
+      align-self: flex-start;
+    }
+
+    .input-block {
+      input,
+      select,
+      textarea {
+        border: 1px $primary-btn solid;
+        &:hover {
+          color: $input-hover;
+          border-color: $footer-input-hover;
+        }
+        &:focus {
+          color: $text-color;
+        }
+      }
+      textarea {
+        background-color: $input-background;
+        border: none;
+      }
+    }
+
+    .select-trainer {
+      width: 100%;
+      position: absolute;
+      top: 10%;
+      right: -150%;
+    }
+  }
+  &__btns {
+    align-self: flex-end;
+    @include flex-type();
+    button:first-child {
+      @include button-styles($background: transparent, $text: $footer-input);
+      padding: 3%;
+      &:hover {
+        background-color: $modal-btn-hovered;
+      }
+      &:active {
+        background-color: $modal-btn-pressed;
+      }
+    }
+    button:last-child {
+      @include button-styles($background: $primary-btn);
+      padding: 5% 15px;
+      &:hover {
+        background-color: $primary-btn-hovered;
+      }
+      &:active {
+        background-color: $primary-btn-pressed;
+      }
+    }
+  }
+}

@@ -1,0 +1,64 @@
+.add-trainer {
+  @include centerise();
+  h2 {
+    text-align: center;
+  }
+  &__caption {
+    font-size: 1.14em;
+    line-height: 1.18em;
+  }
+  &__wrapper {
+    @include flex-type($align: flex-start);
+  }
+  .table {
+    width: 40%;
+    tbody {
+      tr {
+        td:first-child {
+          font-weight: 700;
+        }
+      }
+    }
+  }
+  form {
+    width: 40%;
+    @include flex-type($direction: column);
+    .table {
+      width: 100%;
+      tr {
+        td:nth-child(2) {
+          font-weight: 700;
+        }
+      }
+    }
+  }
+  &__btns {
+    margin-top: 2%;
+    align-self: flex-start;
+    @include flex-type($justify: flex-start);
+    button:first-child {
+      @include button-styles(
+        $background: #fff,
+        $text: $primary-btn,
+        $size: 1.14em,
+        $padding: 12px,
+        $line: 26px
+      );
+      &:hover {
+        background-color: $sign-btn-hovered;
+      }
+      &:active {
+        background-color: $sign-btn-pressed;
+      }
+    }
+    button:last-child {
+      @include button-styles($background: $primary-btn, $padding: 12px);
+      &:hover {
+        background-color: $primary-btn-hovered;
+      }
+      &:active {
+        background-color: $primary-btn-pressed;
+      }
+    }
+  }
+}

@@ -1,0 +1,113 @@
+.edit {
+  @include centerise();
+  h2 {
+    text-align: center;
+  }
+
+  &__header {
+    width: 40%;
+    display: grid;
+    grid-template-areas:
+      "image title "
+      "image text "
+      "image form ";
+    gap: 15px;
+    margin-top: 2%;
+    img {
+      border-radius: 12px;
+      grid-area: image;
+    }
+    h5 {
+      grid-area: title;
+    }
+    form {
+      grid-area: form;
+      input[type="file"] {
+        display: none;
+      }
+      label {
+        @include button-styles(
+          $background: #fff,
+          $text: $primary-btn,
+          $size: 1.14em,
+          $padding: 12px,
+          $line: 26px
+        );
+        border: 1px solid $primary-btn;
+        &:hover {
+          background-color: $sign-btn-hovered;
+        }
+        &:active {
+          background-color: $sign-btn-pressed;
+        }
+      }
+      button {
+        margin-left: 5%;
+        @include button-styles($background: $primary-btn, $padding: 12px);
+        &:hover {
+          background-color: $primary-btn-hovered;
+        }
+        &:active {
+          background-color: $primary-btn-pressed;
+        }
+      }
+    }
+  }
+  &__form {
+    margin-top: 2%;
+    width: 50%;
+    @include flex-type($direction: column, $gap: 15px);
+
+    .input-block {
+      input,
+      select {
+        width: 75%;
+        border: none;
+        background-color: $input-background;
+        &:hover {
+          color: $input-hover;
+        }
+        &:focus {
+          color: $text-color;
+        }
+      }
+    }
+    &-check {
+      align-self: flex-start;
+      font-size: 1.14em;
+      line-height: 1.18em;
+      font-weight: 700;
+      display: flex;
+      gap: 10px;
+    }
+    &-btns {
+      margin-top: 2%;
+      align-self: flex-end;
+      @include flex-type();
+      button:first-child {
+        @include button-styles(
+          $background: #fff,
+          $text: $primary-btn,
+          $size: 1.14em,
+          $padding: 12px,
+          $line: 26px
+        );
+        &:hover {
+          background-color: $sign-btn-hovered;
+        }
+        &:active {
+          background-color: $sign-btn-pressed;
+        }
+      }
+      button:last-child {
+        @include button-styles($background: $primary-btn, $padding: 12px);
+        &:hover {
+          background-color: $primary-btn-hovered;
+        }
+        &:active {
+          background-color: $primary-btn-pressed;
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,79 @@
+.registration {
+  @include centerise($width: 70%);
+  padding: 5%;
+  p {
+    font-size: 1.29em;
+    line-height: 1.27em;
+    color: $footer-input;
+    text-transform: capitalize;
+  }
+  &__wrapper {
+    @include flex-type($justify: space-between, $align: normal);
+  }
+  &__image {
+    width: 45%;
+    img {
+      width: 100%;
+    }
+  }
+  &__form {
+    width: 55%;
+    @include flex-type($direction: column);
+
+    .input-block {
+      input,
+      select {
+        border: 1px $footer-input solid;
+        &:hover {
+          color: $input-hover;
+          border-color: $footer-input-hover;
+        }
+        &:focus {
+          color: $text-color;
+        }
+        &:valid {
+          border-color: $secondary-btn;
+          color: $secondary-btn-hovered;
+        }
+        &:not(:placeholder-shown):invalid {
+          border-color: $important-btn-hovered;
+          color: $important-btn;
+        }
+      }
+    }
+  }
+  &__btn {
+    @include button-styles(
+      $background: $primary-btn,
+      $size: 1.29em,
+      $line: 28px
+    );
+    width: 100%;
+    padding: 2%;
+    &:hover {
+      background-color: $primary-btn-hovered;
+    }
+    &:active {
+      background-color: $primary-btn-pressed;
+    }
+  }
+  &__verification {
+    @include flex-type($direction: column);
+    text-align: center;
+    @include centerise($width: 25%, $margin: 10%);
+    &-btn {
+      @include button-styles(
+        $background: $primary-btn,
+        $size: 1.29em,
+        $line: 28px
+      );
+      padding: 2%;
+      &:hover {
+        background-color: $primary-btn-hovered;
+      }
+      &:active {
+        background-color: $primary-btn-pressed;
+      }
+    }
+  }
+}

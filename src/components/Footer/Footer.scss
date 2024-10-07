@@ -1,0 +1,78 @@
+.footer {
+  margin-top: 10%;
+  background-color: $footer-background;
+  padding: 5%;
+  &__wrapper-top {
+    @include flex-type($align: flex-start);
+  }
+  &__wrapper-bottom {
+    @include flex-type();
+    div {
+      @include flex-type();
+    }
+    ul {
+      @include flex-type();
+    }
+  }
+  hr {
+    margin: 1% auto;
+    border-color: $footer-line;
+  }
+  ul {
+    padding: 0;
+  }
+  li {
+    margin: 5% auto;
+  }
+  &__subscribe-title {
+    color: $primary-btn;
+  }
+  form {
+    @include flex-type($justify: center, $gap: 0);
+    margin-top: 2%;
+    input {
+      width: 100%;
+      border-radius: 6px 0 0 6px;
+      border: 1px solid $footer-input;
+      padding: 5px;
+      padding-left: 25px;
+      background-color: transparent;
+      background-image: url(../../assets/images/icons/mail.svg);
+      background-repeat: no-repeat;
+      background-position: 5px 50%;
+      &:hover {
+        color: $input-hover;
+        border-color: $footer-input-hover;
+      }
+      &:focus {
+        color: $text-color;
+        border-color: $footer-input;
+      }
+      &:valid {
+        border-color: $secondary-btn;
+        color: $secondary-btn-hovered;
+        background-image: url(../../assets/images/icons/mail-valid.svg);
+      }
+      &:not(:placeholder-shown):invalid {
+        border-color: $important-btn-hovered;
+        color: $important-btn;
+        background-image: url(../../assets/images/icons/mail-invalid.svg);
+      }
+    }
+    button {
+      @include button-styles(
+        $background: $primary-btn,
+        $size: 1em,
+        $padding: 12px,
+        $line: 22px
+      );
+      border-radius: 0 6px 6px 0;
+      &:hover {
+        background-color: $primary-btn-hovered;
+      }
+      &:active {
+        background-color: $primary-btn-pressed;
+      }
+    }
+  }
+}

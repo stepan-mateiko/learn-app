@@ -1,0 +1,158 @@
+.account {
+  @include centerise();
+  h2 {
+    text-align: center;
+  }
+  &__wrapper {
+    @include flex-type($align: flex-start, $justify: space-between);
+    &-table {
+      position: relative;
+      width: 40%;
+    }
+    &-delete {
+      width: 15%;
+      align-self: flex-end;
+    }
+  }
+  .table {
+    width: 100%;
+    tbody {
+      tr {
+        td:first-child {
+          font-weight: 700;
+        }
+      }
+    }
+  }
+  &__add-btn {
+    position: absolute;
+    top: 7%;
+    right: 0;
+    @include button-styles($background: $primary-btn);
+
+    &:hover {
+      background-color: $primary-btn-hovered;
+    }
+    &:active {
+      background-color: $primary-btn-pressed;
+    }
+  }
+  &__delete-btn {
+    @include button-styles($background: $important-btn);
+    padding: 5%;
+    &:hover {
+      background-color: $important-btn-hovered;
+    }
+    &:active {
+      background-color: $important-btn-pressed;
+    }
+  }
+  &__box {
+    text-align: center;
+    width: 65%;
+    margin: 0 auto;
+    p {
+      font-size: 1.14em;
+      line-height: 1.18em;
+    }
+    &-btn {
+      @include button-styles($background: $primary-btn);
+      margin-top: 10%;
+      &:hover {
+        background-color: $primary-btn-hovered;
+      }
+      &:active {
+        background-color: $primary-btn-pressed;
+      }
+    }
+  }
+}
+
+.list {
+  width: 40%;
+  @include flex-type($direction: column, $align: flex-start);
+  padding: 2%;
+
+  &__header {
+    @include flex-type($justify: flex-start);
+    img {
+      width: 30%;
+      border-radius: 12px;
+    }
+  }
+  &__status {
+    &-active {
+      color: $secondary-btn;
+      padding-left: 20px;
+      background-image: url(./../../assets/images/icons/active.svg);
+      background-repeat: no-repeat;
+    }
+    &-notActive {
+      color: $important-btn;
+      padding-left: 20px;
+      background-image: url(./../../assets/images/icons/notActive.svg);
+      background-repeat: no-repeat;
+      background-size: contain;
+    }
+  }
+  p {
+    font-size: 1.14em;
+    line-height: 1.18em;
+  }
+  &__footer {
+    @include flex-type($justify: space-between);
+    button:first-child {
+      @include button-styles($background: $primary-btn);
+      padding: 2% 16px;
+      &:hover {
+        background-color: $primary-btn-hovered;
+      }
+      &:active {
+        background-color: $primary-btn-pressed;
+      }
+    }
+    button:last-child {
+      @include button-styles($background: $secondary-btn);
+      padding: 2% 16px;
+      &:hover {
+        background-color: $secondary-btn-hovered;
+      }
+      &:active {
+        background-color: $secondary-btn-pressed;
+      }
+    }
+  }
+}
+.delete {
+  @include centerise($width: 38%, $margin: 20%);
+  padding: 2%;
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0px 4px 9px #171a1f, 0px 0px 2px #171a1f;
+  @include flex-type($direction: column, $align: flex-start, $gap: 20px);
+
+  &__btns {
+    align-self: flex-end;
+    @include flex-type();
+    button:first-child {
+      @include button-styles($background: transparent, $text: $footer-input);
+      padding: 5%;
+      &:hover {
+        background-color: $modal-btn-hovered;
+      }
+      &:active {
+        background-color: $modal-btn-pressed;
+      }
+    }
+    button:last-child {
+      @include button-styles($background: $important-btn);
+      padding: 5%;
+      &:hover {
+        background-color: $important-btn-hovered;
+      }
+      &:active {
+        background-color: $important-btn-pressed;
+      }
+    }
+  }
+}
