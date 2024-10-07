@@ -3,7 +3,7 @@ import axios from "axios";
 import { LoginType, UserType, RegisterType } from "./users/types";
 import { TrainingsType } from "./trainings/types";
 
-export const baseURL = "http://localhost:3080";
+export const baseURL = "https://learn-app-backend.onrender.com";
 
 export const authAPI = {
   login: async (credentials: LoginType) => {
