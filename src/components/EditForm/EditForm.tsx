@@ -29,7 +29,7 @@ const EditForm: React.FC = () => {
   const notify = () => toast.success("Account info changed");
 
   const specializationOptions = useSelector<RootState, SpecializationsType[]>(
-    (state) => state.specializations
+    (state) => state.specializations,
   ).map((item: SpecializationsType) => item.specialization);
 
   const user = useSelector((state: RootState) => state.user);
@@ -51,7 +51,7 @@ const EditForm: React.FC = () => {
   const [userName, setUserName] = useState<string>(myData.userName);
   const [isActive, setIsActive] = useState<boolean>(myData.isActive);
   const [specialization, setSpecialization] = useState<string>(
-    myData.specialization
+    myData.specialization,
   );
 
   useEffect(() => {
@@ -165,7 +165,7 @@ const EditForm: React.FC = () => {
       </div>
       <ToastContainer
         position="top-right"
-        autoClose={3000}
+        autoClose={1500}
         hideProgressBar={false}
         newestOnTop={false}
         closeOnClick

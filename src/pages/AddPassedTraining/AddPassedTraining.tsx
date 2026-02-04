@@ -26,10 +26,10 @@ const AddPassedTraining: React.FC = () => {
   const user = useSelector((state: RootState) => state.user);
   const trainersList = useSelector((state: RootState) => state.trainers);
   const trainingTypesList = useSelector(
-    (state: RootState) => state.trainingTypes
+    (state: RootState) => state.trainingTypes,
   ).map((item: TrainingTypesType) => item.trainingType);
   const formattedTrainers = trainersList.map(
-    (trainer: TrainersType) => `${trainer.firstName} ${trainer.lastName}`
+    (trainer: TrainersType) => `${trainer.firstName} ${trainer.lastName}`,
   );
   const token = localStorage.getItem("token") || "";
 
@@ -39,11 +39,11 @@ const AddPassedTraining: React.FC = () => {
   const [date, setDate] = useState<string>("");
   const [duration, setDuration] = useState<string>("0");
   const [type, setType] = useState<string>(
-    trainingTypesList ? trainingTypesList[0] : ""
+    trainingTypesList ? trainingTypesList[0] : "",
   );
   const [description, setDescription] = useState<string>("");
   const [selectedTrainer, setSelectedTrainer] = useState<string>(
-    formattedTrainers ? formattedTrainers[0] : ""
+    formattedTrainers ? formattedTrainers[0] : "",
   );
   useEffect(() => {
     dispatch(fetchAllTrainers(token) as any);
@@ -56,7 +56,7 @@ const AddPassedTraining: React.FC = () => {
       duration,
       trainer: trainersList.filter(
         (trainer: TrainersType) =>
-          `${trainer.firstName} ${trainer.lastName}` === selectedTrainer
+          `${trainer.firstName} ${trainer.lastName}` === selectedTrainer,
       )[0].ID,
       type,
       date,
@@ -145,7 +145,7 @@ const AddPassedTraining: React.FC = () => {
       </form>
       <ToastContainer
         position="top-right"
-        autoClose={3000}
+        autoClose={1500}
         hideProgressBar={false}
         newestOnTop={false}
         closeOnClick
