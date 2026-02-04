@@ -18,20 +18,25 @@ const MiniProfile: React.FC<MiniProfileProps> = ({
 }) => {
   const dispatch = useDispatch();
   const token = localStorage.getItem("token") || "";
+
   const handleLogOut = () => {
     dispatch(logOutUserAsync(token) as any);
+    hideMiniProfile();
   };
+
   return (
-    <div onClick={hideMiniProfile} className="header__miniProfile">
+    <div className="header__miniProfile">
       <div className="header__miniProfile-header">
-        <img src={photo ? photo : ProfilePic} alt="profile" width={50} />
+        <img src={photo || ProfilePic} alt="profile" width={50} />
         <h4>{name}</h4>
         <p>{email}</p>
       </div>
-      <Link to={RoutePaths.MY_ACCOUNT}>
+
+      <Link to={RoutePaths.MY_ACCOUNT} onClick={hideMiniProfile}>
         <AccountIcon />
         {MINI_PROFILE.account}
       </Link>
+
       <div className="header__miniProfile-footer">
         <Link to={RoutePaths.LOGIN} onClick={handleLogOut}>
           <SignOutIcon />

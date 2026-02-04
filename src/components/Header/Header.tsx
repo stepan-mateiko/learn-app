@@ -1,10 +1,9 @@
 import { Link, useLocation } from "react-router-dom";
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import { useSelector } from "react-redux";
 
 import RoutePaths, { pathsWithoutButtons } from "../../constants/routes";
 import { navigationLinks } from "../../constants/navigationLinks";
-
 import { RootState } from "../../store";
 
 import Logo from "../Logo/Logo";
@@ -17,15 +16,31 @@ const Header: React.FC = () => {
   const page = useLocation().pathname;
   const isButtons = !pathsWithoutButtons.includes(page);
   const user = useSelector((state: RootState) => state.user);
-  const [isMiniProfile, setIsMiniProfile] = useState<boolean>(false);
 
-  const showMiniProfile = () => {
-    setIsMiniProfile(true);
-  };
+  const [isMiniProfile, setIsMiniProfile] = useState(false);
+  const miniProfileRef = useRef<HTMLDivElement | null>(null);
 
-  const hideMiniProfile = () => {
-    setIsMiniProfile(false);
-  };
+  const showMiniProfile = () => setIsMiniProfile(true);
+  const hideMiniProfile = () => setIsMiniProfile(false);
+
+  useEffect(() => {
+    if (!isMiniProfile) return;
+
+    const handleClickOutside = (event: MouseEvent) => {
+      if (
+        miniProfileRef.current &&
+        !miniProfileRef.current.contains(event.target as Node)
+      ) {
+        hideMiniProfile();
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [isMiniProfile]);
 
   return (
     <header className="header">
@@ -34,40 +49,44 @@ const Header: React.FC = () => {
       </Link>
 
       <Navigation links={navigationLinks.HEADER_LINKS} />
+
       {!user.userName && isButtons && (
         <div>
           <Button
             buttonText="Sign In"
-            isLink={true}
+            isLink
             path={RoutePaths.LOGIN}
             classOfBtn="header__sign-"
           />
           <Button
             buttonText="Join Us"
-            isLink={true}
+            isLink
             path={RoutePaths.JOIN_US}
             classOfBtn="header__join-"
           />
         </div>
       )}
+
       {!isMiniProfile && user.userName && (
         <div className="header__box" onClick={showMiniProfile}>
-          {user.userName}{" "}
+          {user.userName}
           <img
-            src={user.photo ? user.photo : ProfilePic}
+            src={user.photo || ProfilePic}
             alt={`${user.userName}'s profile`}
             width={50}
           />
         </div>
       )}
+
       {isMiniProfile && (
-        <MiniProfile
-          name={user.userName}
-          email={user.email}
-          photo={user.photo}
-          isMiniProfile={isMiniProfile}
-          hideMiniProfile={hideMiniProfile}
-        />
+        <div ref={miniProfileRef}>
+          <MiniProfile
+            name={user.userName}
+            email={user.email}
+            photo={user.photo}
+            hideMiniProfile={hideMiniProfile}
+          />
+        </div>
       )}
     </header>
   );

@@ -56,7 +56,6 @@ export interface MiniProfileProps {
   name: string;
   email: string | undefined;
   photo: string;
-  isMiniProfile: boolean;
   hideMiniProfile: () => void;
 }
 
