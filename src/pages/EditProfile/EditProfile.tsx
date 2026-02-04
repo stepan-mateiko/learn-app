@@ -8,6 +8,7 @@ import Breadcrumb from "../../components/Breadcrumbs/Breadcrumbs";
 import studentImg from "../../assets/images/student-profile-img.png";
 
 import RoutePaths from "../../constants/routes";
+import { EDIT_PROFILE } from "../../constants/text-constants";
 
 const EditProfile: React.FC = () => {
   const user = useSelector((state: RootState) => state.user);
@@ -17,12 +18,12 @@ const EditProfile: React.FC = () => {
         links={[RoutePaths.MY_ACCOUNT, RoutePaths.EDIT_PROFILE]}
         labels={["My Account", "Edit Profile"]}
       />
-      <h2>My Account</h2>
-      <h3>Edit Profile</h3>
+      <h2>{EDIT_PROFILE.heading}</h2>
+      <h3>{EDIT_PROFILE.subheading}</h3>
       <div className="edit__header">
         <img src={user.photo ? user.photo : studentImg} alt="" width={100} />
-        <h5>Upload your photo</h5>
-        <p>Your photo must be in JPG and PNG format with Latin name</p>
+        <h5>{EDIT_PROFILE.upload}</h5>
+        <p>{EDIT_PROFILE.text}</p>
         <ImageUpload />
       </div>
       <EditForm />

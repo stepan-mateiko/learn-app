@@ -9,6 +9,7 @@ import { articles } from "../../constants/articles";
 import homeImg from "../../assets/images/home-img.png";
 
 import { RootState } from "../../store";
+import { HOME_PAGE } from "../../constants/text-constants";
 
 const HomePage: React.FC = () => {
   const user = useSelector((state: RootState) => state.user);
@@ -16,13 +17,9 @@ const HomePage: React.FC = () => {
   const renderWelcomeSection = () => {
     return (
       <div className="home__welcome">
-        {!user.firstName && <h1>Let's start learning</h1>}
+        {!user.firstName && <h1>{HOME_PAGE.welcome.heading}</h1>}
         {user.firstName && <h1>{`Hi, ${user.firstName}`}</h1>}
-        <p>
-          Welcome to Learn Platform - where every day is a day to learn. Dive
-          into the vast ocean of knowledge and empower yourself with the tools
-          for a successful tomorrow. Happy learning!
-        </p>
+        <p>{HOME_PAGE.welcome.text}</p>
       </div>
     );
   };
@@ -30,11 +27,8 @@ const HomePage: React.FC = () => {
   const renderJoinUsSection = () => {
     return (
       <div className="home__join">
-        <h2>Join Us</h2>
-        <p>
-          Qui ut exercitation officia proident enim non tempor tempor ipsum ex
-          nulla ea adipisicing sit consequat enim elit cupidatat o
-        </p>
+        <h2>{HOME_PAGE.joinUs.heading}</h2>
+        <p>{HOME_PAGE.joinUs.text}</p>
         <Button
           buttonText="Join Us"
           isLink={true}
@@ -48,11 +42,8 @@ const HomePage: React.FC = () => {
   const renderWhatsNewSection = () => {
     return (
       <div className="home__new">
-        <h2>What's new?</h2>
-        <p className="home__new-tag">
-          Do consectetur proident proident id eiusmod deserunt consequat
-          pariatur ad ex velit do Lorem reprehenderit.
-        </p>
+        <h2>{HOME_PAGE.whatsNew.heading}</h2>
+        <p className="home__new-tag">{HOME_PAGE.whatsNew.text}</p>
         <div className="home__new-wrapper">
           {articles.map((item, index) => (
             <Box

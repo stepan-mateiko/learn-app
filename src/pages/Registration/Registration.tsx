@@ -4,13 +4,14 @@ import RegistrationForm from "../../components/RegistrationForm/RegistrationForm
 
 import registrationTrainerImg from "../../assets/images/registration-trainer.png";
 import registrationStudentImg from "../../assets/images/registration-student.png";
+import { REGISTRATION } from "../../constants/text-constants";
 
 const Registration: React.FC = () => {
   const { role = "student" } = useParams<{ role?: string }>();
 
   return (
     <div className="registration">
-      <h2>Registration</h2>
+      <h2>{REGISTRATION.heading}</h2>
       <p>{role}</p>
       <div className="registration__wrapper">
         <div className="registration__image">

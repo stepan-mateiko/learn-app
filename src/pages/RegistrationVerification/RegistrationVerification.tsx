@@ -6,6 +6,7 @@ import { loginUserAsync } from "../../store/users/thunk";
 
 import { RegistrationSuccess } from "../../components/Icon/Icon";
 import Button from "../../components/Button/Button";
+import { REGISTRATION_VERIFICATION } from "../../constants/text-constants";
 
 const RegistrationVerification: React.FC = () => {
   const dispatch = useDispatch();
@@ -13,17 +14,14 @@ const RegistrationVerification: React.FC = () => {
   const { userName, password } = user;
   return (
     <div className="registration__verification">
-      <h2>Registration</h2>
+      <h2>{REGISTRATION_VERIFICATION.heading}</h2>
       <div>
         <RegistrationSuccess />
       </div>
-      <p>
-        Congratulations, you have successfully registered with Learn Platform!
-        Here is your credentials that you can change in your account
-      </p>
-      <h4>User Name</h4>
+      <p>{REGISTRATION_VERIFICATION.text}</p>
+      <h4>{REGISTRATION_VERIFICATION.userName}</h4>
       <p>{userName}</p>
-      <h4>Password</h4>
+      <h4>{REGISTRATION_VERIFICATION.password}</h4>
       <p>{password}</p>
       <Button
         buttonText="My account"

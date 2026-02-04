@@ -15,6 +15,7 @@ import { fetchAllTrainers } from "../../store/trainers/thunk";
 import { StudentsType } from "../../store/students/types";
 import { TrainersType } from "../../store/trainers/types";
 import { fetchAllStudents } from "../../store/students/thunk";
+import { MY_ACCOUNT } from "../../constants/text-constants";
 
 const MyAccount: React.FC = () => {
   const dispatch = useDispatch();
@@ -40,13 +41,13 @@ const MyAccount: React.FC = () => {
       ? {
           ...user,
           ...students.filter(
-            (student: StudentsType) => student.ID === user.ID
+            (student: StudentsType) => student.ID === user.ID,
           )[0],
         }
       : {
           ...user,
           ...trainers.filter(
-            (trainer: TrainersType) => trainer.ID === user.ID
+            (trainer: TrainersType) => trainer.ID === user.ID,
           )[0],
         };
 
@@ -57,7 +58,7 @@ const MyAccount: React.FC = () => {
         formattedData = myData.trainers
           .map((trainerId: string) => {
             const trainer = trainers.find(
-              (t: TrainersType) => t.ID === trainerId
+              (t: TrainersType) => t.ID === trainerId,
             );
             return trainer
               ? [
@@ -74,7 +75,7 @@ const MyAccount: React.FC = () => {
         formattedData = myData.students
           .map((studentId: string) => {
             const student = students.find(
-              (s: StudentsType) => s.ID === studentId
+              (s: StudentsType) => s.ID === studentId,
             );
             return student
               ? [
@@ -98,7 +99,7 @@ const MyAccount: React.FC = () => {
   return (
     <div className="account">
       <Breadcrumb links={[RoutePaths.MY_ACCOUNT]} labels={["My Account"]} />
-      <h2>My Account</h2>
+      <h2>{MY_ACCOUNT.heading}</h2>
       <div className="account__wrapper">
         {myData && <MyAccountList user={myData} />}
         <div className="account__wrapper-table">

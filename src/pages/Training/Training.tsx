@@ -16,6 +16,7 @@ import { TrainingsType } from "../../store/trainings/types";
 import { fetchAllStudents } from "../../store/students/thunk";
 import { fetchAllTrainers } from "../../store/trainers/thunk";
 import { fetchAllTrainings } from "../../store/trainings/thunk";
+import { TRAINING } from "../../constants/text-constants";
 
 const Training: React.FC = () => {
   const dispatch = useDispatch();
@@ -44,11 +45,11 @@ const Training: React.FC = () => {
         role,
         trainings.filter(
           (item: TrainingsType) =>
-            item.student === user.ID || item.trainer === user.ID
+            item.student === user.ID || item.trainer === user.ID,
         ),
         trainers,
-        students
-      )
+        students,
+      ),
     );
   }, [dispatch]);
 
@@ -63,7 +64,7 @@ const Training: React.FC = () => {
     const filteredByDate = trainings
       .filter(
         (item: TrainingsType) =>
-          item.student === user.ID || item.trainer === user.ID
+          item.student === user.ID || item.trainer === user.ID,
       )
       .filter((training: TrainingsType) => {
         const trainingDate = new Date(training.date);
@@ -77,7 +78,7 @@ const Training: React.FC = () => {
       role,
       filteredByDate,
       trainers,
-      students
+      students,
     );
 
     setFilteredTrainings(formattedFilteredData);
@@ -89,7 +90,7 @@ const Training: React.FC = () => {
         links={[RoutePaths.MY_ACCOUNT, RoutePaths.TRAINING]}
         labels={["My Account", "Trainings"]}
       />
-      <h2>Trainings</h2>
+      <h2>{TRAINING.heading}</h2>
       {role === "student" && (
         <Button
           buttonText="Add training"
@@ -98,7 +99,7 @@ const Training: React.FC = () => {
           classOfBtn="training__add-"
         />
       )}
-      <h3>Search Trainings</h3>
+      <h3>{TRAINING.subheading}</h3>
       <div className="training__wrapper">
         <Search
           role={role}

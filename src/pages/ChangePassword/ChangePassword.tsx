@@ -6,6 +6,7 @@ import { Lock } from "../../components/Icon/Icon";
 import Breadcrumb from "../../components/Breadcrumbs/Breadcrumbs";
 
 import RoutePaths from "../../constants/routes";
+import { CHANGE_PASSWORD } from "../../constants/text-constants";
 
 const ChangePassword: React.FC = () => {
   const [isSuccess, setIsSuccess] = useState<boolean>(false);
@@ -18,10 +19,10 @@ const ChangePassword: React.FC = () => {
             links={[RoutePaths.MY_ACCOUNT, RoutePaths.CHANGE_PASSWORD]}
             labels={["My Account", "Change Password"]}
           />
-          <h3>Security</h3>
+          <h3>{CHANGE_PASSWORD.heading}</h3>
           <div className="change-password__wrapper">
             <h4>
-              <Lock /> Change password
+              <Lock /> {CHANGE_PASSWORD.text}
             </h4>
             <PasswordForm setIsSuccess={setIsSuccess} />
           </div>

@@ -8,6 +8,7 @@ import RoutePaths from "../../constants/routes";
 import { ModalBoxProps } from "../../constants/props";
 
 import { deleteUserAsync } from "../../store/users/thunk";
+import { MODAL_BOX } from "../../constants/text-constants";
 
 const ModalBox: React.FC<ModalBoxProps> = ({
   isModalOpen,
@@ -29,22 +30,10 @@ const ModalBox: React.FC<ModalBoxProps> = ({
       style={{ overlay: { zIndex: 10 } }}
       className="delete"
     >
-      <h3>Profile Deletion Confirmation</h3>
-      <p>
-        We're truly sorry to see you go. Before you proceed with deleting your
-        profile, we want you to know that this action is permanent and
-        irreversible. You'll lose access to all your account information, course
-        progress, certificates, and any learning communities you're a part of.
-      </p>
-      <p>
-        If there's anything we can do to improve your experience or if you need
-        assistance with any issues you've encountered, please reach out to our
-        support team. We're always here to help.
-      </p>
-      <p>
-        If you still wish to delete your account, please click on the 'Confirm'
-        button below.
-      </p>
+      <h3>{MODAL_BOX.heading}</h3>
+      <p>{MODAL_BOX.paragraph1} </p>
+      <p>{MODAL_BOX.paragraph2}</p>
+      <p>{MODAL_BOX.paragraph3}</p>
       <div className="delete__btns">
         <Button onClick={handleModalClose} buttonText="Cancel" />
         <Button buttonText="Confirm" onClick={deleteAccount} />

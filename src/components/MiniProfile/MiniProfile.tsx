@@ -8,6 +8,7 @@ import ProfilePic from "../../assets/images/student-profile-img.png";
 import { AccountIcon, SignOutIcon } from "../Icon/Icon";
 
 import { logOutUserAsync } from "../../store/users/thunk";
+import { MINI_PROFILE } from "../../constants/text-constants";
 
 const MiniProfile: React.FC<MiniProfileProps> = ({
   name,
@@ -29,12 +30,12 @@ const MiniProfile: React.FC<MiniProfileProps> = ({
       </div>
       <Link to={RoutePaths.MY_ACCOUNT}>
         <AccountIcon />
-        My Account
+        {MINI_PROFILE.account}
       </Link>
       <div className="header__miniProfile-footer">
         <Link to={RoutePaths.LOGIN} onClick={handleLogOut}>
           <SignOutIcon />
-          Sign Out
+          {MINI_PROFILE.signOut}
         </Link>
       </div>
     </div>

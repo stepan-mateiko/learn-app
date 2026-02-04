@@ -5,17 +5,18 @@ import { RegistrationSuccess } from "../Icon/Icon";
 import Button from "../Button/Button";
 
 import { logoutUser } from "../../store/users/actions";
+import { CHANGE_PASSWORD_SUCCESS } from "../../constants/text-constants";
 
 const ChangePasswordSuccess: React.FC = () => {
   const dispatch = useDispatch();
 
   return (
     <div className="change-password__success">
-      <h2>Password changed</h2>
+      <h2>{CHANGE_PASSWORD_SUCCESS.heading}</h2>
       <div>
         <RegistrationSuccess />
       </div>
-      <p>Please proceed sign in with new password</p>
+      <p>{CHANGE_PASSWORD_SUCCESS.text}</p>
 
       <Button
         buttonText="Sign In"

@@ -5,16 +5,16 @@ import JoinUsImage1 from "../../assets/images/join-us-img-1.png";
 import JoinUsImage2 from "../../assets/images/join-us-img-2.png";
 
 import { JoinUsBoxProps } from "../../constants/props";
+import { JOIN_US } from "../../constants/text-constants";
 
 const JoinUsBox: React.FC<JoinUsBoxProps> = ({ role }) => {
   return (
     <div className="join__box">
       <div className="join__box-info">
-        <h3>Register as {role}</h3>
-        <p>
-          Do consectetur proident proident id eiusmod deserunt consequat
-          pariatur ad ex velit do Lorem reprehenderit.
-        </p>
+        <h3>
+          {JOIN_US.heading} {role}
+        </h3>
+        <p>{JOIN_US.text}</p>
         <Button
           buttonText="Join Us"
           isLink={true}

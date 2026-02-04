@@ -19,6 +19,7 @@ import {
 } from "../../store/students/thunk";
 import { StudentsType } from "../../store/students/types";
 import { TrainersType } from "../../store/trainers/types";
+import { ADD_TRAINER } from "../../constants/text-constants";
 
 const AddTrainer: React.FC = () => {
   const dispatch = useDispatch();
@@ -28,7 +29,7 @@ const AddTrainer: React.FC = () => {
   const token = localStorage.getItem("token") || "";
 
   const myData = students.filter(
-    (student: StudentsType) => student.ID === user.ID
+    (student: StudentsType) => student.ID === user.ID,
   )[0];
 
   const [myTrainers, setMyTrainers] = useState<string[][]>([]);
@@ -67,7 +68,7 @@ const AddTrainer: React.FC = () => {
         .map((trainer: TrainersType) => [
           `${trainer.firstName} ${trainer.lastName}`,
           trainer.specialization,
-        ])
+        ]),
     );
   }, [trainers]);
 
@@ -76,13 +77,13 @@ const AddTrainer: React.FC = () => {
 
     const selectedIds = trainers
       .filter((item: TrainersType) =>
-        Object.keys(checkedTrainers).includes(item.ID)
+        Object.keys(checkedTrainers).includes(item.ID),
       )
       .map((item: TrainersType) => item.ID);
 
     const selectedTrainers = trainers
       .filter((item: TrainersType) =>
-        Object.keys(checkedTrainers).includes(item.ID)
+        Object.keys(checkedTrainers).includes(item.ID),
       )
       .map((trainer: TrainersType) => [
         `${trainer.firstName} ${trainer.lastName}`,
@@ -91,7 +92,7 @@ const AddTrainer: React.FC = () => {
     const myOldtrainers = myData.trainers;
     const trainersOldStudents = trainers
       .filter((item: TrainersType) =>
-        Object.keys(checkedTrainers).includes(item.ID)
+        Object.keys(checkedTrainers).includes(item.ID),
       )
       .map((item: TrainersType) => [item.ID, item.students]);
     dispatch(
@@ -100,8 +101,8 @@ const AddTrainer: React.FC = () => {
         {
           trainers: myOldtrainers.concat(selectedIds),
         },
-        token
-      ) as any
+        token,
+      ) as any,
     );
 
     selectedIds.map(async (trainerId: string) => {
@@ -111,7 +112,7 @@ const AddTrainer: React.FC = () => {
           .map((e: string[]) => e[1])[0] || [];
 
       const updatedStudents = Array.from(
-        new Set([...existingStudents, user.ID])
+        new Set([...existingStudents, user.ID]),
       );
       dispatch(
         updateTrainerOnServer(
@@ -119,18 +120,18 @@ const AddTrainer: React.FC = () => {
           {
             students: updatedStudents,
           },
-          token
-        ) as any
+          token,
+        ) as any,
       );
     });
 
     setMyTrainers((prevMyTrainers) => {
       const existingTrainersSet = new Set(
-        prevMyTrainers.map((trainer) => trainer[0])
+        prevMyTrainers.map((trainer) => trainer[0]),
       );
 
       const uniqueSelectedTrainers = selectedTrainers.filter(
-        (trainer: string) => !existingTrainersSet.has(trainer[0])
+        (trainer: string) => !existingTrainersSet.has(trainer[0]),
       );
       setCheckedTrainers({});
       return [...prevMyTrainers, ...uniqueSelectedTrainers];
@@ -143,10 +144,10 @@ const AddTrainer: React.FC = () => {
         links={[RoutePaths.MY_ACCOUNT, RoutePaths.ADD_TRAINER]}
         labels={["My Account", "Add Trainer"]}
       />
-      <h2>Add Trainer</h2>
+      <h2>{ADD_TRAINER.heading}</h2>
       <div className="add-trainer__caption">
-        <p>Please select trainers for adding them into your trainers list</p>
-        <p>* - There is no possibility to remove the trainer.</p>
+        <p>{ADD_TRAINER.text1}</p>
+        <p>{ADD_TRAINER.text2}</p>
       </div>
       <div className="add-trainer__wrapper">
         <form action="#" method="post" onSubmit={handleSubmit}>

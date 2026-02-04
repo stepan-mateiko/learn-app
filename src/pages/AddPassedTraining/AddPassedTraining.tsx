@@ -18,6 +18,7 @@ import { TrainersType } from "../../store/trainers/types";
 import { TrainingTypesType } from "../../store/trainingTypes/types";
 import { addTrainingOnServer } from "../../store/trainings/thunk";
 import { TrainingsType } from "../../store/trainings/types";
+import { ADD_PASSED_TRAINING } from "../../constants/text-constants";
 
 const AddPassedTraining: React.FC = () => {
   const dispatch = useDispatch();
@@ -78,14 +79,14 @@ const AddPassedTraining: React.FC = () => {
         ]}
         labels={["My Account", "Trainings", "Add Passed Training"]}
       />
-      <h2>Add passed training</h2>
+      <h2>{ADD_PASSED_TRAINING.heading}</h2>
       <form
         action="#"
         method="post"
         className="add-training__form"
         onSubmit={handleSubmit}
       >
-        <h3>Training</h3>
+        <h3>{ADD_PASSED_TRAINING.text}</h3>
         <Input
           type="text"
           value={name}
