@@ -43,15 +43,15 @@ const EditForm: React.FC = () => {
       ? students.filter((item: StudentsType) => item.ID === user.ID)[0]
       : trainers.filter((item: TrainersType) => item.ID === user.ID)[0];
 
-  const [firstName, setFirstName] = useState<string>(myData.firstName);
-  const [lastName, setLastName] = useState<string>(myData.lastName);
-  const [email, setEmail] = useState<string>(myData.email);
-  const [dob, setDob] = useState<string>(myData.dob);
-  const [address, setAddress] = useState<string>(myData.address);
-  const [userName, setUserName] = useState<string>(myData.userName);
-  const [isActive, setIsActive] = useState<boolean>(myData.isActive);
+  const [firstName, setFirstName] = useState<string>(myData.firstName || "");
+  const [lastName, setLastName] = useState<string>(myData.lastName || "");
+  const [email, setEmail] = useState<string>(myData.email || "");
+  const [dob, setDob] = useState<string>(myData.dob || "");
+  const [address, setAddress] = useState<string>(myData.address || "");
+  const [userName, setUserName] = useState<string>(myData.userName || "");
+  const [isActive, setIsActive] = useState<boolean>(myData.isActive || false);
   const [specialization, setSpecialization] = useState<string>(
-    myData.specialization,
+    myData.specialization || "",
   );
 
   useEffect(() => {

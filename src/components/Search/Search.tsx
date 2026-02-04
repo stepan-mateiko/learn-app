@@ -35,7 +35,7 @@ const Search: React.FC<SearchProps> = ({ role, data, update }) => {
     event.preventDefault();
 
     const filteredData = data.filter((item: string[]) =>
-      item.includes(student)
+      item.includes(student),
     );
 
     update(filteredData);
