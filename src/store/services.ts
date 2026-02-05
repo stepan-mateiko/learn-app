@@ -31,7 +31,7 @@ export const authAPI = {
           headers: {
             Authorization: token,
           },
-        }
+        },
       );
     } catch (error) {
       console.error("Logout error:", error);
@@ -56,7 +56,7 @@ export const userAPI = {
   updateUserOnServer: async (
     ID: string,
     credentials: UserType,
-    token: string
+    token: string,
   ) => {
     try {
       return await axios.put(`${baseURL}/api/users/${ID}`, credentials, {
@@ -70,12 +70,14 @@ export const userAPI = {
   },
   addPhotoOnServer: async (formData: FormData, token: string) => {
     try {
-      await axios.post(`${baseURL}/upload`, formData, {
+      const res = await axios.post(`${baseURL}/api/upload`, formData, {
         headers: {
           Authorization: token,
+          "Content-Type": "multipart/form-data",
         },
       });
-      console.log("File uploaded successfully");
+
+      return res.data.url;
     } catch (error) {
       console.error("Error uploading file: ", error);
     }
@@ -111,7 +113,7 @@ export const studentsAPI = {
   updateStudentOnServer: async (
     ID: string,
     credentials: any,
-    token: string
+    token: string,
   ) => {
     try {
       return await axios.put(`${baseURL}/api/students/${ID}`, credentials, {
@@ -142,7 +144,7 @@ export const trainersAPI = {
   updateTrainerOnServer: async (
     ID: string,
     credentials: any,
-    token: string
+    token: string,
   ) => {
     try {
       return await axios.put(`${baseURL}/api/trainers/${ID}`, credentials, {

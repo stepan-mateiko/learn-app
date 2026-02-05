@@ -103,3 +103,8 @@ export interface TableProps {
   headings: string[];
   data: string[][];
 }
+
+export interface ImageUploadProps {
+  preview: string | null;
+  setPreview: React.Dispatch<React.SetStateAction<string | null>>;
+}

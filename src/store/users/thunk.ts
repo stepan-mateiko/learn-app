@@ -13,7 +13,7 @@ import {
 
 export const registerUserAsync =
   (
-    credentials: RegisterType
+    credentials: RegisterType,
   ): ThunkAction<void, RootState, null, UsersActions> =>
   async (dispatch) => {
     try {
@@ -35,7 +35,7 @@ export const loginUserAsync =
       console.error(
         "Error logging in:",
         error.response.status,
-        error.response.data.message
+        error.response.data.message,
       );
       alert(error.response.data.message);
     }
@@ -56,7 +56,7 @@ export const logOutUserAsync =
 export const fetchUser =
   (
     userName: string,
-    token: string
+    token: string,
   ): ThunkAction<void, RootState, null, UsersActions> =>
   async (dispatch) => {
     try {
@@ -72,7 +72,7 @@ export const updateUserAsync =
   (
     ID: string,
     credentials: UserType,
-    token: string
+    token: string,
   ): ThunkAction<void, RootState, null, UsersActions> =>
   async (dispatch) => {
     try {
@@ -89,12 +89,18 @@ export const addPhotoAsync =
     ID: string,
     credentials: UserType,
     formData: FormData,
-    token: string
+    token: string,
   ): ThunkAction<void, RootState, null, UsersActions> =>
   async (dispatch) => {
     try {
-      await userAPI.addPhotoOnServer(formData, token);
-      const res = await userAPI.updateUserOnServer(ID, credentials, token);
+      const photoUrl = await userAPI.addPhotoOnServer(formData, token);
+
+      const res = await userAPI.updateUserOnServer(
+        ID,
+        { ...credentials, photo: photoUrl },
+        token,
+      );
+
       dispatch(updateUser(res?.data));
     } catch (error) {
       console.error("Error adding photo", error);
@@ -104,7 +110,7 @@ export const addPhotoAsync =
 export const deleteUserAsync =
   (
     id: string,
-    token: string
+    token: string,
   ): ThunkAction<void, RootState, null, UsersActions> =>
   async (dispatch) => {
     try {

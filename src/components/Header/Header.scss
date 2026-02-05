@@ -74,7 +74,7 @@
     @include flex-type();
     font-weight: 700;
     img {
-      border-radius: 50%;
+      border-radius: 20px;
       @media (max-width: 768px) {
         display: none;
       }

@@ -1,22 +1,32 @@
-import React, { useState, ChangeEvent, FormEvent } from "react";
+import React, { useState, ChangeEvent, FormEvent, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
-import { baseURL } from "../../store/services";
 import { RootState } from "../../store";
 import { addPhotoAsync } from "../../store/users/thunk";
 import { IMAGE_UPLOAD } from "../../constants/text-constants";
+import { ImageUploadProps } from "../../constants/props";
 
-const ImageUpload: React.FC = () => {
+const ImageUpload: React.FC<ImageUploadProps> = ({ preview, setPreview }) => {
   const dispatch = useDispatch();
   const user = useSelector((state: RootState) => state.user);
-  const [selectedFile, setSelectedFile] = useState<File | null>(null);
   const token = localStorage.getItem("token") || "";
 
+  const [selectedFile, setSelectedFile] = useState<File | null>(null);
+
   const handleFileChange = (event: ChangeEvent<HTMLInputElement>) => {
-    if (event.target.files) {
-      setSelectedFile(event.target.files[0]);
+    if (event.target.files && event.target.files[0]) {
+      const file = event.target.files[0];
+      setSelectedFile(file);
+      setPreview(URL.createObjectURL(file));
     }
   };
+
+  useEffect(() => {
+    return () => {
+      if (preview) URL.revokeObjectURL(preview);
+    };
+  }, [preview]);
+
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
@@ -27,14 +37,8 @@ const ImageUpload: React.FC = () => {
 
     const formData = new FormData();
     formData.append("file", selectedFile);
-    dispatch(
-      addPhotoAsync(
-        user.ID,
-        { ...user, photo: `${baseURL}/uploads/${selectedFile.name}` },
-        formData,
-        token,
-      ) as any,
-    );
+    dispatch(addPhotoAsync(user.ID, user, formData, token) as any);
+    setPreview(null);
   };
 
   return (
