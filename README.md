@@ -1,46 +1,230 @@
-# Getting Started with Create React App
+# 📚 Learn App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Learn App is a role-based learning platform that allows **students** and **trainers** to manage trainings, track progress, and collaborate in a structured learning environment.
+The application is built with **React + TypeScript**, uses **Redux Toolkit** for state management, and communicates with a RESTful backend via **Axios**.
 
-## Available Scripts
+---
 
-In the project directory, you can run:
+## 🚀 Features
 
-### `npm start`
+### 🔐 Authentication & Authorization
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+- User registration and login
+- JWT-based authentication
+- Protected routes for authenticated users
+- Role-based access (`student`, `trainer`)
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+### 👤 User Roles
 
-### `npm test`
+#### Student
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+- View and manage personal profile
+- Add passed trainings
+- Assign trainers
+- View training history
+- Track completed trainings
 
-### `npm run build`
+#### Trainer
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+- View assigned students
+- See training results
+- Manage profile information
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+---
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### 🎓 Trainings
 
-### `npm run eject`
+- Add new passed trainings (students)
+- Filter trainings by date range
+- Search trainings
+- View trainings in table format
+- Role-based table views (student vs trainer)
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+---
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+### 🧑‍🤝‍🧑 Trainer & Student Management
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+- Students can add trainers
+- Trainers automatically receive assigned students
+- One-way assignment (trainers cannot be removed by students)
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+---
 
-## Learn More
+### 🗂️ Pages
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+- Home
+- About Us
+- Blog
+- Features
+- Registration & Login
+- My Account
+- Edit Profile
+- Trainings
+- Add Trainer
+- Add Passed Training
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+---
+
+### 🧭 Navigation & UX
+
+- Breadcrumb navigation
+- Modal confirmations (account deletion)
+- Toast notifications
+- Responsive layout
+- Protected and non-protected routes
+
+---
+
+## 🛠 Tech Stack
+
+### Frontend
+
+- **React 18**
+- **TypeScript**
+- **Redux Toolkit**
+- **React Router v6**
+- **Axios**
+- **Material UI**
+- **Tailwind CSS (forms plugin)**
+- **SCSS**
+- **React Toastify**
+- **React Modal**
+- **React Datepicker**
+
+### Backend (Also done by me)
+
+- **Node.js**
+- **Express.js**
+- **MongoDB**
+- **JWT (Authentication)**
+- **Multer (file uploads)**
+- **fs (file system operations)**
+- **dotenv (environment configuration)**
+
+The backend is a RESTful API hosted on Render.
+
+- Base URL:
+
+  ```
+  https://learn-app-backend.onrender.com
+  ```
+
+---
+
+## 📁 Project Structure (Simplified)
+
+```
+src/
+├── api/                 # API service definitions
+├── assets/              # Images & static assets
+├── components/          # Reusable UI components
+├── constants/           # Routes, texts, headings
+├── helpers/             # Utility functions
+├── pages/               # Application pages
+├── store/               # Redux store, slices, thunks
+├── styles/              # SCSS styles
+├── App.tsx              # App routes
+└── index.tsx            # Entry point
+```
+
+---
+
+## 🔐 Routing Logic
+
+The app uses **route guards** to control access:
+
+- `NonAuthRoute` – pages accessible only for guests
+- `AuthRoute` – pages accessible only for logged-in users
+- `StudentRoute` – pages restricted to students
+
+---
+
+## 🧠 State Management
+
+State is managed using **Redux Toolkit** with async logic handled via **thunks**.
+
+### Main slices:
+
+- `user`
+- `students`
+- `trainers`
+- `trainings`
+- `trainingTypes`
+
+---
+
+## 🌐 API Communication
+
+All API requests are handled via **Axios** and centralized in service modules.
+
+### Example:
+
+```ts
+export const trainingsAPI = {
+  fetchAllTrainings: async (token: string) => {
+    return axios.get(`${baseURL}/api/trainings`, {
+      headers: { Authorization: token },
+    });
+  },
+};
+```
+
+Authentication token is stored in `localStorage` and passed via headers.
+
+---
+
+## 📦 Installation & Setup
+
+### 1️⃣ Clone the repository
+
+```bash
+git clone https://github.com/your-username/learn-app.git
+cd learn-app
+```
+
+### 2️⃣ Install dependencies
+
+```bash
+npm install
+```
+
+### 3️⃣ Start development server
+
+```bash
+npm start
+```
+
+App will be available at:
+
+```
+http://localhost:3000
+```
+
+---
+
+## ⚠️ Notes & Limitations
+
+- Backend is hosted externally
+- Trainer removal is intentionally disabled
+- Role switching is not supported after registration
+- Designed primarily as a learning / portfolio project
+
+---
+
+## 📌 Future Improvements
+
+- Pagination for tables
+- Trainer removal workflow
+- Admin role
+- File validation for uploads
+- Better error handling
+- Unit & integration tests
+- Internationalization (i18n)
+
+---
+
+## 👨‍💻 Author
+
+**Stepan Mateiko**
+Frontend Developer
+Built as a learning and portfolio project using modern React practices.
