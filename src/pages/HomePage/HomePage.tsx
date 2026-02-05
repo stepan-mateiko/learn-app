@@ -4,7 +4,6 @@ import Box from "../../components/Box/Box";
 import Button from "../../components/Button/Button";
 
 import RoutePaths from "../../constants/routes";
-import { articles } from "../../constants/articles";
 
 import homeImg from "../../assets/images/home-img.png";
 
@@ -45,7 +44,7 @@ const HomePage: React.FC = () => {
         <h2>{HOME_PAGE.whatsNew.heading}</h2>
         <p className="home__new-tag">{HOME_PAGE.whatsNew.text}</p>
         <div className="home__new-wrapper">
-          {articles.map((item, index) => (
+          {HOME_PAGE.articles.map((item, index) => (
             <Box
               key={index}
               imgSrc={item.imgSrc}

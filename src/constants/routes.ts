@@ -11,6 +11,9 @@ const RoutePaths = {
   ADD_TRAINER: "/my-account/add-trainer",
   ADD_PASSED_TRAINING: "/my-account/trainings/add-passed-training",
   NOT_FOUND: "*",
+  ABOUT_US: "/about-us",
+  BLOG: "/blog",
+  FEATURES: "/features",
 };
 export default RoutePaths;
 

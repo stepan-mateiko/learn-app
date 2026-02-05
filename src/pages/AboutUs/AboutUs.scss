@@ -1,0 +1,58 @@
+@import "../../styles/mixins";
+@import "../../styles/variables";
+
+.about-us {
+  @include centerise($width: 80%);
+  @include flex-type($direction: column);
+  h2 {
+    @media (max-width: 768px) {
+      font-size: 2em;
+    }
+  }
+  p {
+    color: $subheading-color;
+  }
+  &__text {
+    width: 75%;
+    text-align: center;
+  }
+
+  &__img {
+    width: 100%;
+    margin: 5% 0;
+    img {
+      width: 100%;
+      border-radius: 1%;
+    }
+  }
+
+  &__wrapper {
+    @include flex-type();
+    @media (max-width: 768px) {
+      flex-direction: column;
+    }
+    div {
+      @media (max-width: 768px) {
+        width: 80%;
+      }
+    }
+  }
+  &__team-header {
+    width: 25%;
+    text-align: center;
+  }
+  &__team-card {
+    width: 20%;
+    text-align: center;
+    &:hover {
+      @include mousehover();
+    }
+    p:first-of-type {
+      color: $primary-btn;
+    }
+    img {
+      width: 70%;
+      border-radius: 50%;
+    }
+  }
+}

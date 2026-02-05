@@ -17,6 +17,9 @@ import AddPassedTraining from "./pages/AddPassedTraining/AddPassedTraining";
 import AuthRoute from "./components/AuthRoute/AuthRoute";
 import NonAuthRoute from "./components/NonAuthRoute/NonAuthRoute";
 import StudentRoute from "./components/StudentRoute/StudentRoute";
+import AboutUs from "./pages/AboutUs/AboutUs";
+import Blog from "./pages/Blog/Blog";
+import Features from "./pages/Features/Features";
 
 const App: React.FC = () => {
   return (
@@ -25,6 +28,9 @@ const App: React.FC = () => {
         <Header />
         <Routes>
           <Route path={RoutePaths.HOME} element={<HomePage />} />
+          <Route path={RoutePaths.ABOUT_US} element={<AboutUs />} />
+          <Route path={RoutePaths.BLOG} element={<Blog />} />
+          <Route path={RoutePaths.FEATURES} element={<Features />} />
           <Route
             path={RoutePaths.NOT_FOUND}
             element={<Navigate to={RoutePaths.HOME} />}

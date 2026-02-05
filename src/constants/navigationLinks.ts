@@ -2,11 +2,12 @@ import RoutePaths from "./routes";
 
 export const navigationLinks = {
   HEADER_LINKS: [
+    { to: RoutePaths.HOME, label: "Home" },
     { to: RoutePaths.TRAINING, label: "Training" },
     { to: RoutePaths.MY_ACCOUNT, label: "My Account" },
-    { to: RoutePaths.NOT_FOUND, label: "Blog" },
-    { to: RoutePaths.NOT_FOUND, label: "Pricing" },
-    { to: RoutePaths.NOT_FOUND, label: "About Us" },
+    { to: RoutePaths.BLOG, label: "Blog" },
+    { to: RoutePaths.FEATURES, label: "Features" },
+    { to: RoutePaths.ABOUT_US, label: "About Us" },
   ],
   FOOTER_LINKS_PRODUCTS: [
     { to: "/features", label: "Features" },

@@ -1,0 +1,62 @@
+@import "../../styles/variables";
+@import "../../styles/mixins";
+
+.features {
+  @include centerise();
+  @include flex-type($direction: column);
+
+  text-align: center;
+  h2 {
+    line-height: 2em;
+  }
+  p {
+    color: $subheading-color;
+  }
+  &__text {
+    width: 50%;
+    @media (max-width: 768px) {
+      width: 80%;
+    }
+  }
+
+  &__wrapper {
+    @include flex-type($direction: column);
+    width: 80%;
+  }
+  &__box {
+    @include flex-type();
+    @media (max-width: 768px) {
+      flex-direction: column;
+    }
+    &-info {
+      width: 50%;
+      @include flex-type($direction: column, $align: start);
+      @media (max-width: 768px) {
+        width: 100%;
+      }
+    }
+    p {
+      text-align: start;
+      width: 65%;
+      @media (max-width: 768px) {
+        width: 100%;
+      }
+    }
+    img {
+      width: 90%;
+    }
+    button {
+      @include button-styles(
+        $background: $primary-btn,
+        $size: 1.14em,
+        $line: 26px
+      );
+    }
+    &:last-of-type {
+      flex-direction: row-reverse;
+      @media (max-width: 768px) {
+        flex-direction: column;
+      }
+    }
+  }
+}
