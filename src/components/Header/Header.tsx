@@ -44,7 +44,7 @@ const Header: React.FC = () => {
 
   return (
     <header className="header">
-      <Link to={RoutePaths.HOME}>
+      <Link className="header__logo" to={RoutePaths.HOME}>
         <Logo />
       </Link>
 

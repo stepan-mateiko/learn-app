@@ -1,9 +1,16 @@
 .login {
   @include centerise($width: 25%, $margin: 10%);
   text-align: center;
-
+  @media (max-width: 768px) {
+    width: 80%;
+  }
   &__header {
     font-family: $montserrat;
+    h2 {
+      @media (max-width: 768px) {
+        font-size: 2em;
+      }
+    }
     p {
       font-size: 1.43em;
       line-height: 1.36em;

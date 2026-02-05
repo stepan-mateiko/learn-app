@@ -1,6 +1,15 @@
 .registration {
   @include centerise($width: 70%);
   padding: 5%;
+  @media (max-width: 768px) {
+    width: 100%;
+  }
+  h2 {
+    @media (max-width: 768px) {
+      font-size: 2em;
+      text-align: center;
+    }
+  }
   p {
     font-size: 1.29em;
     line-height: 1.27em;
@@ -61,6 +70,14 @@
     @include flex-type($direction: column);
     text-align: center;
     @include centerise($width: 25%, $margin: 10%);
+    @media (max-width: 768px) {
+      width: 80%;
+    }
+    h2 {
+      @media (max-width: 768px) {
+        font-size: 2em;
+      }
+    }
     &-btn {
       @include button-styles(
         $background: $primary-btn,

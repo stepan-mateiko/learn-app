@@ -3,14 +3,24 @@
 
 .home {
   @include centerise();
+  @media (max-width: 768px) {
+  }
   text-align: center;
   &__welcome {
     @include flex-type($direction: column);
+    h1 {
+      @media (max-width: 768px) {
+        font-size: 2em;
+      }
+    }
     p {
       width: 50%;
       font-size: 1.43em;
       line-height: 1.36em;
       color: $footer-input;
+      @media (max-width: 768px) {
+        width: 80%;
+      }
     }
   }
   &__join {
@@ -44,18 +54,36 @@
   }
   &__image {
     margin: 10% auto;
+    img {
+      @media (max-width: 768px) {
+        width: 80%;
+      }
+    }
   }
   &__new {
     @include flex-type($direction: column);
+    h2 {
+      @media (max-width: 768px) {
+        font-size: 2em;
+      }
+    }
 
     &-tag {
       width: 40%;
       font-size: 1.29em;
       line-height: 1.27em;
       color: $footer-input;
+      @media (max-width: 768px) {
+        width: 80%;
+      }
     }
     &-wrapper {
       @include flex-type();
+      @media (max-width: 768px) {
+        flex-direction: column;
+        align-items: center;
+        width: 80%;
+      }
     }
     &-btn {
       margin-top: 5%;
@@ -78,6 +106,13 @@
 .box {
   text-align: left;
   padding-right: 5%;
+  @media (max-width: 768px) {
+    padding: 0;
+    width: 80%;
+  }
+  img {
+    width: 90%;
+  }
   &__tag {
     color: $primary-btn;
     font-size: 1.14em;

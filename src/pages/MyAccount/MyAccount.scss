@@ -2,16 +2,30 @@
   @include centerise();
   h2 {
     text-align: center;
+    @media (max-width: 768px) {
+      font-size: 2em;
+    }
   }
   &__wrapper {
     @include flex-type($align: flex-start, $justify: space-between);
+    @media (max-width: 768px) {
+      flex-direction: column;
+      align-items: center;
+    }
     &-table {
       position: relative;
       width: 40%;
+      @media (max-width: 768px) {
+        width: 100%;
+      }
     }
     &-delete {
       width: 15%;
       align-self: flex-end;
+      @media (max-width: 768px) {
+        width: 30%;
+        align-self: center;
+      }
     }
   }
   .table {
@@ -51,6 +65,9 @@
     text-align: center;
     width: 65%;
     margin: 0 auto;
+    @media (max-width: 768px) {
+      width: 90%;
+    }
     p {
       font-size: 1.14em;
       line-height: 1.18em;
@@ -72,6 +89,15 @@
   width: 40%;
   @include flex-type($direction: column, $align: flex-start);
   padding: 2%;
+
+  @media (max-width: 768px) {
+    width: 100%;
+  }
+  h3 {
+    @media (max-width: 768px) {
+      font-size: 1.5em;
+    }
+  }
 
   &__header {
     @include flex-type($justify: flex-start);
@@ -128,11 +154,19 @@
   padding: 2%;
   background: #fff;
   border-radius: 8px;
-  box-shadow: 0px 4px 9px #171a1f, 0px 0px 2px #171a1f;
+  box-shadow:
+    0px 4px 9px #171a1f,
+    0px 0px 2px #171a1f;
   @include flex-type($direction: column, $align: flex-start, $gap: 20px);
+  @media (max-width: 768px) {
+    width: 80%;
+  }
 
   &__btns {
     align-self: flex-end;
+    @media (max-width: 768px) {
+      align-self: center;
+    }
     @include flex-type();
     button:first-child {
       @include button-styles($background: transparent, $text: $footer-input);

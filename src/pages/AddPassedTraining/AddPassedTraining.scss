@@ -1,11 +1,22 @@
 .add-training {
   @include centerise();
+  h2 {
+    @media (max-width: 768px) {
+      font-size: 2em;
+    }
+  }
   &__form {
     @include flex-type($direction: column);
     width: 35%;
     position: relative;
+    @media (max-width: 768px) {
+      width: 80%;
+    }
     h3 {
       align-self: flex-start;
+      @media (max-width: 768px) {
+        font-size: 1.5em;
+      }
     }
 
     .input-block {
@@ -32,10 +43,16 @@
       position: absolute;
       top: 10%;
       right: -150%;
+      @media (max-width: 768px) {
+        position: static;
+      }
     }
   }
   &__btns {
     align-self: flex-end;
+    @media (max-width: 768px) {
+      align-self: baseline;
+    }
     @include flex-type();
     button:first-child {
       @include button-styles($background: transparent, $text: $footer-input);

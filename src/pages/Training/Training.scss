@@ -2,6 +2,14 @@
   @include centerise();
   h2 {
     text-align: center;
+    @media (max-width: 768px) {
+      font-size: 2em;
+    }
+  }
+  h3 {
+    @media (max-width: 768px) {
+      font-size: 1.5em;
+    }
   }
   &__add-btn {
     @include button-styles($background: $secondary-btn, $padding: 20px);
@@ -15,11 +23,20 @@
   &__wrapper {
     @include flex-type($justify: space-between, $align: flex-start);
     margin: 2% 0;
+    @media (max-width: 768px) {
+      flex-direction: column;
+    }
   }
   .search {
     width: 60%;
     &__inputs {
       @include flex-type();
+      @media (max-width: 768px) {
+        flex-direction: column;
+      }
+    }
+    @media (max-width: 768px) {
+      width: 90%;
     }
     .input-block {
       input {
@@ -45,6 +62,9 @@
     }
     button {
       margin-top: 2%;
+      @media (max-width: 768px) {
+        margin-top: 10%;
+      }
       @include button-styles($background: $primary-btn);
       &:hover {
         background-color: $primary-btn-hovered;
@@ -60,9 +80,17 @@
   .date-picker {
     width: 40%;
     @include flex-type();
+    @media (max-width: 768px) {
+      width: 80%;
+      flex-direction: column;
+      align-items: baseline;
+    }
   }
   .table {
     width: 100%;
+    @media (max-width: 768px) {
+      text-align: center;
+    }
     tbody {
       tr {
         td:nth-child(2) {

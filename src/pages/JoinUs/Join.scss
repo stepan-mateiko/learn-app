@@ -4,22 +4,44 @@
 .join {
   @include centerise();
   @include flex-type($direction: column);
+  h2 {
+    @media (max-width: 768px) {
+      font-size: 2em;
+    }
+  }
 
   &__box {
     @include centerise($width: 82%);
     @include flex-type();
     background-color: $footer-background;
     border-radius: 12px;
+    @media (max-width: 768px) {
+      flex-direction: column;
+    }
+    h3 {
+      @media (max-width: 768px) {
+        font-size: 1.5em;
+      }
+    }
     p {
       font-size: 1.29em;
       line-height: 1.27em;
+      @media (max-width: 768px) {
+        font-size: 1em;
+      }
     }
     &-info {
       width: 50%;
       padding-left: 5%;
+      @media (max-width: 768px) {
+        width: 100%;
+      }
     }
     &-image {
       width: 50%;
+      @media (max-width: 768px) {
+        width: 80%;
+      }
       img {
         width: 100%;
       }
