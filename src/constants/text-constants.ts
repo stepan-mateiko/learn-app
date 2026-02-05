@@ -16,23 +16,24 @@ import featureImg2 from "../assets/images/feature-img-2.png";
 
 export const ACCOUNT_BOX = {
   heading: "My Trainings",
-  text: " The Training Section is interactive, allowing you to engage with trainers and fellow learners, participate in quizzes, and track your progress. All our courses are flexible and adaptable to your schedule and learning speed.",
+  text: "Access all your enrolled trainings in one place. Track your progress, continue where you left off, and review completed courses at any time.",
 };
 
 export const CHANGE_PASSWORD_SUCCESS = {
   heading: "Password changed",
-  text: "Please proceed sign in with new password",
+  text: "Your password has been updated successfully. Please sign in using your new password.",
 };
 
 export const FOOTER = {
   product: "Product",
-  resourses: "Resourses",
+  resourses: "Resources",
   company: "Company",
   subscribeHeading: "Subscribe to our Newsletter",
-  subscribeText: "For product announcements and exclusive insights",
+  subscribeText:
+    "Get the latest updates, new courses, and exclusive insights delivered to your inbox.",
   subscribeButton: "Subscribe",
   language: "English",
-  copyright: " © 2023 Learn, Inc.",
+  copyright: "© 2023 Stepan Mateiko, Inc.",
 };
 
 export const IMAGE_UPLOAD = {
@@ -42,7 +43,7 @@ export const IMAGE_UPLOAD = {
 
 export const JOIN_US = {
   heading: "Register as",
-  text: "Do consectetur proident proident id eiusmod deserunt consequat pariatur ad ex velit do Lorem reprehenderit.",
+  text: "Create your account to start learning, track your progress, and gain access to all platform features.",
 };
 
 export const MINI_PROFILE = {
@@ -53,11 +54,11 @@ export const MINI_PROFILE = {
 export const MODAL_BOX = {
   heading: "Profile Deletion Confirmation",
   paragraph1:
-    "We're truly sorry to see you go. Before you proceed with deleting your profile, we want you to know that this action is permanent and irreversible. You'll lose access to all your account information, course progress, certificates, and any learning communities you're a part of.",
+    "We're sorry to see you go. Deleting your profile is a permanent action and cannot be undone. You will lose access to your account data, training history, certificates, and progress.",
   paragraph2:
-    "If there's anything we can do to improve your experience or if you need assistance with any issues you've encountered, please reach out to our support team. We're always here to help.",
+    "If you're experiencing issues or have feedback, our support team is always ready to help and improve your experience.",
   paragraph3:
-    "If you still wish to delete your account, please click on the 'Confirm' button below.",
+    "If you are sure you want to proceed, please confirm your decision below.",
 };
 
 export const MY_ACCOUNT_LIST = {
@@ -72,13 +73,13 @@ export const MY_ACCOUNT_LIST = {
 
 export const ADD_PASSED_TRAINING = {
   heading: "Add passed training",
-  text: "Training",
+  text: "Select a training you have successfully completed",
 };
 
 export const ADD_TRAINER = {
   heading: "Add Trainer",
-  text1: "Please select trainers for adding them into your trainers list",
-  text2: "* - There is no possibility to remove the trainer.",
+  text1: "Choose trainers you want to follow and learn from.",
+  text2: "* Once added, trainers cannot be removed from your list.",
 };
 
 export const CHANGE_PASSWORD = {
@@ -90,42 +91,42 @@ export const EDIT_PROFILE = {
   heading: "My Account",
   subheading: "Edit Profile",
   upload: "Upload your photo",
-  text: "Your photo must be in JPG and PNG format with Latin name",
+  text: "Supported formats: JPG and PNG. File name must contain Latin characters only.",
 };
 
 export const HOME_PAGE = {
   welcome: {
     heading: "Let's start learning",
-    text: "  Welcome to Learn Platform - where every day is a day to learn. Dive into the vast ocean of knowledge and empower yourself with the tools for a successful tomorrow. Happy learning!",
+    text: "Welcome to Learn Platform — a place where you can grow your skills every day. Explore courses, learn from experts, and move toward your goals at your own pace.",
   },
   joinUs: {
     heading: "Join Us",
-    text: "  Qui ut exercitation officia proident enim non tempor tempor ipsum ex nulla ea adipisicing sit consequat enim elit cupidatat o",
+    text: "Become part of our learning community and get access to structured courses, expert trainers, and practical knowledge.",
   },
   whatsNew: {
     heading: "What's new?",
-    text: "Do consectetur proident proident id eiusmod deserunt consequat pariatur ad ex velit do Lorem reprehenderit.",
+    text: "Discover the latest courses, platform updates, and learning materials added just for you.",
   },
   articles: [
     {
       imgSrc: boxImg1,
-      tag: "Do consectetur",
-      title: "Aliqua Irure Tempor Lorem Occaecat Volup",
-      date: "Dec 24, 2022",
+      tag: "New Course",
+      title: "Mastering Modern Web Development",
+      date: "Dec 24, 2023",
       time: 5,
     },
     {
       imgSrc: boxImg2,
-      tag: "Consequat labore",
-      title: "Commodo Deserunt Ipsum Occaecat Qui",
-      date: "Dec 12, 2022",
+      tag: "Update",
+      title: "New Features to Improve Your Learning Experience",
+      date: "Oct 12, 2022",
       time: 10,
     },
     {
       imgSrc: boxImg3,
-      tag: "Laboris nulla",
-      title: "Deserunt Cccaecat Qui Amet Tempor Dolore",
-      date: "Nov 20, 2022",
+      tag: "Tips",
+      title: "How to Stay Consistent While Learning Online",
+      date: "Jun 20, 2024",
       time: 3,
     },
   ],
@@ -138,7 +139,7 @@ export const JOIN_US_PAGE = {
 export const LOGIN_PAGE = {
   heading: "Sign in",
   welcome: "Welcome back",
-  question: "Don't have account?",
+  question: "Don't have an account?",
   signUp: "Sign up",
 };
 
@@ -152,41 +153,41 @@ export const REGISTRATION = {
 
 export const REGISTRATION_VERIFICATION = {
   heading: "Registration",
-  text: " Congratulations, you have successfully registered with Learn Platform! Here is your credentials that you can change in your account",
+  text: "Congratulations! Your account has been successfully created. Below are your credentials, which you can change later in your account settings.",
   userName: "User Name",
   password: "Password",
 };
 
 export const TRAINING = {
   heading: "Trainings",
-  subheading: "Search Trainings",
+  subheading: "Search trainings",
 };
 
 export const ABOUT_US = {
   heading: "About Us",
-  text: "Welcome to the 'About Us' section of Learn Platform, where we aim to provide you with a deeper understanding of our philosophy, values, and mission. Established in 2023, Learn Platform was born out of a passion for learning and a belief in the power of knowledge to transform lives. ",
+  text: "Learn Platform was created to make high-quality education accessible and flexible. Our mission is to help learners grow their skills, advance their careers, and achieve personal goals through structured and practical learning.",
   image: aboutUsImg,
   team: {
     heading: "Our team",
-    text: "Aliqua ipsum tempor aliqua eiusmod lorem ad labore culpa aliquip",
+    text: "A passionate group of professionals dedicated to building meaningful learning experiences.",
     members: [
       {
         image: teamCard1,
         name: "Harry Potter",
-        title: "Wizard",
-        text: "Expecto Patronum",
+        title: "Instructor",
+        text: "Specializes in advanced problem-solving and creative thinking.",
       },
       {
         image: teamCard2,
         name: "Frodo Baggins",
-        title: "Hobbit",
-        text: "My precious",
+        title: "Content Manager",
+        text: "Ensures all courses are structured, clear, and engaging.",
       },
       {
         image: teamCard3,
         name: "Luke Skywalker",
-        title: "Jedi",
-        text: "May the force be with you",
+        title: "Mentor",
+        text: "Guides learners through complex topics step by step.",
       },
     ],
   },
@@ -197,43 +198,43 @@ export const BLOG = {
   articles: [
     {
       imgSrc: blogImg1,
-      tag: "Do consectetur",
-      title: "Blog title",
+      tag: "Learning",
+      title: "How Online Learning Can Boost Your Career",
       date: "Dec 24, 2022",
       time: 5,
     },
     {
       imgSrc: blogImg2,
-      tag: "Consequat labore",
-      title: "Blog title",
+      tag: "Productivity",
+      title: "Tips for Staying Focused While Studying",
       date: "Dec 12, 2022",
       time: 10,
     },
     {
       imgSrc: blogImg3,
-      tag: "Laboris nulla",
-      title: "Blog title",
+      tag: "Guides",
+      title: "Choosing the Right Course for Your Goals",
       date: "Nov 20, 2022",
       time: 3,
     },
     {
       imgSrc: blogImg4,
-      tag: "Do consectetur",
-      title: "Blog title",
+      tag: "Updates",
+      title: "What’s New on Learn Platform",
       date: "Dec 24, 2022",
       time: 5,
     },
     {
       imgSrc: blogImg5,
-      tag: "Consequat labore",
-      title: "Blog title",
+      tag: "Career",
+      title: "Skills That Matter in Today’s Job Market",
       date: "Dec 12, 2022",
       time: 10,
     },
     {
       imgSrc: blogImg6,
-      tag: "Laboris nulla",
-      title: "Blog title",
+      tag: "Learning",
+      title: "How to Build a Consistent Study Habit",
       date: "Nov 20, 2022",
       time: 3,
     },
@@ -243,16 +244,16 @@ export const BLOG = {
 export const FEATURES = {
   heading: "Features",
   subheading: "Learning",
-  text: "Nisi irure nisi mollit exercitation cupidatat excepteur. Lorem in ullamco reprehenderit exercitation sunt non tempor exercitation exercitation ",
+  text: "Our platform is designed to make learning simple, flexible, and effective for everyone.",
   articles: [
     {
-      heading: "Feature",
-      text: "Do consectetur proident proident id eiusmod deserunt consequat pariatur ad ex velit do Lorem reprehenderit. id eiusmod deserunt consequat pariatur ad ex velit do Lorem reprehenderit.",
+      heading: "Structured Courses",
+      text: "Learn with clearly organized lessons, practical examples, and step-by-step guidance from experienced trainers.",
       image: featureImg1,
     },
     {
-      heading: "Feature",
-      text: "Do consectetur proident proident id eiusmod deserunt consequat pariatur ad ex velit do Lorem reprehenderit. id eiusmod deserunt consequat pariatur ad ex velit do Lorem reprehenderit.",
+      heading: "Progress Tracking",
+      text: "Monitor your learning progress, track completed trainings, and stay motivated as you move toward your goals.",
       image: featureImg2,
     },
   ],
